@@ -1,6 +1,6 @@
 # 改动日志
 
-## Unreleased
+## 0.11.0 (2022-11-16)
 
 - feat!: 迁移到 `@uni-helper/uni-network`，`Uan` 前缀调整为 `Un`
 - perf: 移除 `lodash-es`
