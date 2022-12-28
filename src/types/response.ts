@@ -25,19 +25,24 @@ export interface UnResponse<T = UnData, D = UnData> {
   data?: T;
 
   /**
-   * request 特有
+   * Request 特有
+   *
    * 服务器提供的 cookies 数据
    */
   cookies?: string[];
   /**
-   * download 特有
+   * Download 特有
+   *
    * 临时本地文件路径
+   *
    * 没传入 filePath 指定文件存储路径时会返回，下载后的文件会存储到一个临时文件
    */
   tempFilePath?: string;
   /**
-   * download 特有
+   * Download 特有
+   *
    * 用户本地文件路径
+   *
    * 传入 filePath 时会返回，跟传入的 filePath 一致
    */
   filePath?: string;

@@ -1,7 +1,9 @@
 import { forEach } from './forEach';
 
 /**
- * Extends object a by mutably adding to it the properties of object b.
+ * 向对象 a 添加对象 b 的属性
+ *
+ * 直接改变对象 a
  */
 export const extend = (
   a: Record<string, any>,

@@ -1,11 +1,9 @@
 /**
- * Iterate over an Array or an Object invoking a function for each item.
+ * 遍历数组或对象，为每项调用方法
  *
- * If `obj` is an Array callback will be called passing
- * the value, index, and complete array for each item.
+ * 如果 obj 是一个数组，传递每项的值、索引和完整的数组
  *
- * If 'obj' is an Object callback will be called passing
- * the value, key, and complete object for each property.
+ * 如果 obj 是一个对象，为每个属性传递值、键和完整的对象
  */
 export function forEach(
   obj: Record<string, any> | Array<any> | undefined,
