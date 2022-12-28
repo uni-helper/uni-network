@@ -1,9 +1,11 @@
 # 改动日志
 
-## Unreleased
+## 0.12.0 (2022-12-28)
 
 - feat!: 要求 `node >= 14.18`
 - feat: esm 优先，但仍然提供 cjs 支持
+- fix: 修复导出
+- perf: 构建包含 `ramda`、`statuses` 和 `qs` 相关代码
 
 ## 0.11.1 (2022-11-16)
 
