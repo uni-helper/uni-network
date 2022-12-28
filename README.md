@@ -42,17 +42,7 @@ npm install @uni-helper/uni-network
 yarn install @uni-helper/uni-network
 ```
 
-使用 `pnpm`：
-
-```shell
-pnpm install @uni-helper/uni-network
-```
-
-使用 `cnpm`：
-
-```shell
-cnpm install @uni-helper/uni-network
-```
+`uni-app` 和 `pnpm` 结合使用存在问题，不建议使用 `pnpm` 安装依赖。
 
 不考虑支持 `uni_modules`。
 
