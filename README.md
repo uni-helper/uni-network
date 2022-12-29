@@ -621,7 +621,7 @@ un.get('/user/12345', {
 });
 ```
 
-如果你追求语义化，可以使用导出的状态码、[statuses](https://github.com/jshttp/statuses)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
+如果你追求语义化，可以使用导出的和挂载的状态码、[statuses](https://github.com/jshttp/statuses)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
 
 ```typescript
 import { HttpStatusCode } from '@uni-helper/uni-network';
@@ -629,6 +629,7 @@ import { HttpStatusCode } from '@uni-helper/uni-network';
 un.get('/user/12345', {
   validateStatus: (status) => {
     return status < HttpStatusCode.InternalServerError; // 处理状态码小于 500 的情况
+    // return status < un.HttpStatusCode.InternalServerError; // 也可以使用挂载在 un 上的状态码
   },
 });
 ```
@@ -737,7 +738,7 @@ module.exports = {
 
 ### 高级功能
 
-对于缓存、去重的高级功能，建议结合 `@tanstack/vue-query`、`swrv`、`vue-request` 等库使用。
+对于缓存、去重的高级功能，建议结合 [@tanstack/query](https://tanstack.com/query/)、[swrv](https://docs-swrv.netlify.app/)、[vue-request](https://www.attojs.com/) 等库使用。
 
 ### 为什么不是 `axios`？
 
