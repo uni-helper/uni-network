@@ -1,5 +1,6 @@
 import { version } from '../package.json';
 import {
+  HttpStatusCode,
   isUnError,
   Un,
   UnCancel,
@@ -35,6 +36,10 @@ export interface UnStatic<T = UnData, D = UnData> extends UnInstance<T, D> {
   isUnError<T = any, D = any>(value: any): value is UnError<T, D>;
 
   all(values: Array<T | Promise<T>>): Promise<T[]>;
+
+  mergeConfig: typeof mergeConfig;
+
+  HttpStatusCode: typeof HttpStatusCode;
 }
 
 const createInstance = <T = UnData, D = UnData>(defaultConfig: UnConfig<T, D>) => {
@@ -73,6 +78,12 @@ un.isUnError = isUnError;
 
 // Expose all/spread
 un.all = (promises) => Promise.all(promises);
+
+// Expose mergeConfig
+un.mergeConfig = mergeConfig;
+
+// Expose HttpStatusCode
+un.HttpStatusCode = HttpStatusCode;
 
 export * from './adapters';
 export * from './core';
