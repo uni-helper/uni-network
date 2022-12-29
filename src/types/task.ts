@@ -1,4 +1,4 @@
-import { UnOnProgress } from './common';
+import type { UnOnProgress } from './common';
 
 export interface UnTask
   extends Partial<UniApp.RequestTask>,

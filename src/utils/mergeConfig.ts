@@ -1,5 +1,5 @@
 import { mergeDeepRight } from 'ramda';
-import { UnConfig, UnData } from '../types';
+import type { UnConfig, UnData } from '../types';
 
 export function mergeConfig<T = UnData, D = UnData>(
   config1?: UnConfig<T, D>,

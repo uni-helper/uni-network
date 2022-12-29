@@ -1,11 +1,11 @@
 import { buildFullPath, buildUrl, mergeConfig } from '../utils';
-import { UnConfig, UnData, UnResponse } from '../types';
 import {
   UnInterceptorManager,
   UnInterceptorManagerHandlerFulfilled,
   UnInterceptorManagerHandlerRejected,
 } from './UnInterceptorManager';
 import { dispatchRequest } from './dispatchRequest';
+import type { UnConfig, UnData, UnResponse } from '../types';
 
 export class Un<T = UnData, D = UnData> {
   defaults: UnConfig<T, D>;

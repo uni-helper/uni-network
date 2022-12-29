@@ -1,6 +1,6 @@
-import { UnData, UnConfig } from '../types';
 import { buildFullPath } from './buildFullPath';
 import { buildUrl } from './buildUrl';
+import type { UnData, UnConfig } from '../types';
 
 export const buildUploadConfig = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
   ({

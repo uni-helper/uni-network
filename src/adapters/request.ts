@@ -3,7 +3,7 @@ import { settle } from '../core/settle';
 import { UnCanceledError } from '../core/UnCanceledError';
 import { buildRequestConfig } from '../utils';
 import { UnCancelTokenListener } from '../core/UnCancelToken';
-import { UnData, UnConfig, UnResponse } from '../types';
+import type { UnData, UnConfig, UnResponse } from '../types';
 
 export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {

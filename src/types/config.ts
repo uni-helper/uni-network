@@ -1,5 +1,5 @@
 import { UnCancelToken } from '../core/UnCancelToken';
-import {
+import type {
   UnData,
   UnHeaders,
   UnMethod,
@@ -13,7 +13,7 @@ import {
   UnFile,
   UnParams,
 } from './common';
-import { UnAdapter } from './adapter';
+import type { UnAdapter } from './adapter';
 
 export interface UnConfig<T = UnData, D = UnData> {
   /** 用于请求的服务器 URL */

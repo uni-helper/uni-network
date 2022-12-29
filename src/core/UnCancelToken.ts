@@ -1,5 +1,5 @@
-import { UnConfig, UnData, UnTask } from '../types';
 import { UnCanceledError } from './UnCanceledError';
+import type { UnConfig, UnData, UnTask } from '../types';
 
 export interface UnCancel {
   message?: string;

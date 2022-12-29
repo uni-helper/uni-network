@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { UnResponse } from '../types';
 import { settle } from './settle';
+import type { UnResponse } from '../types';
 
 describe('core::settle', () => {
   let resolve: (value: UnResponse | PromiseLike<UnResponse>) => void;
