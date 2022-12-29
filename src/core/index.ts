@@ -1,4 +1,5 @@
 export * from './dispatchRequest';
+export * from './HttpStatusCode';
 export * from './isUnCancel';
 export * from './isUnError';
 export * from './settle';
