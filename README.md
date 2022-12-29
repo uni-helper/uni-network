@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network)
 
-为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。
+为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node >= 14.18`。
 
 ## 起步
 
