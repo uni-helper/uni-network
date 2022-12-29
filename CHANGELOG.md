@@ -1,5 +1,11 @@
 # 改动日志
 
+## 0.12.1 (2022-12-29)
+
+- perf: 明确导入类型
+- perf: 分离 `HttpStatusCode`
+- perf: 暴露 `mergeConfig` 和 `HttpStatusCode`
+
 ## 0.12.0 (2022-12-28)
 
 - feat!: 要求 `node >= 14.18`
