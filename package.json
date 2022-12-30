@@ -56,7 +56,9 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@dcloudio/types": "^3.2.7"
+    "@dcloudio/types": "^3.2.7",
+    "@types/qs": "^6.9.7",
+    "qs": "^6.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
@@ -67,7 +69,6 @@
     "@modyqyw/fabric": "^5.14.0",
     "@tsconfig/node18": "^1.0.1",
     "@types/node": "^18.11.18",
-    "@types/qs": "^6.9.7",
     "@types/ramda": "^0.28.20",
     "@types/statuses": "^2.0.0",
     "@types/ungap__url-search-params": "^0.1.0",
@@ -85,7 +86,6 @@
     "markdownlint-cli": "^0.32.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.1",
-    "qs": "^6.11.0",
     "ramda": "^0.28.0",
     "release-it": "^15.6.0",
     "statuses": "^2.0.1",
