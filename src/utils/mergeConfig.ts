@@ -1,9 +1,9 @@
-import { mergeDeepRight } from 'ramda';
+import merge from 'lodash.merge';
 import type { UnConfig, UnData } from '../types';
 
 export function mergeConfig<T = UnData, D = UnData>(
   config1?: UnConfig<T, D>,
   config2?: UnConfig<T, D>,
 ) {
-  return mergeDeepRight(config1 ?? {}, config2 ?? {}) as UnConfig<T, D>;
+  return merge({}, config1 ?? {}, config2 ?? {});
 }
