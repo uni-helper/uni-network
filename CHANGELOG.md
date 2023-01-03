@@ -1,5 +1,10 @@
 # 改动日志
 
+## Unreleased
+
+- build: 使用 `rollup` 构建
+- perf: `mergeConfig` 实现调整
+
 ## 0.12.4 (2022-12-30)
 
 - fix: 移除构建中 `qs` 相关代码以修复构建
