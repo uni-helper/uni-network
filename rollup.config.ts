@@ -24,6 +24,7 @@ const {
   peerDependencies = {},
   main = './dist/index.cjs',
   module = './dist/index.js',
+  types = './dist/index.d.ts',
 } = packageJson;
 
 const cjsFooter: AddonFunction = () => 'module.exports = Object.assign(exports.default, exports);';
@@ -77,7 +78,7 @@ export default defineConfig([
   },
   {
     input: './src/index.ts',
-    output: { file: './dist/index.d.ts', format: 'es' },
+    output: { file: types, format: 'es' },
     plugins: [
       dts({
         // https://github.com/Swatinem/rollup-plugin-dts/issues/143
