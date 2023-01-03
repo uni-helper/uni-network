@@ -40,6 +40,7 @@ const external: ExternalOption = [
   ...Object.keys(dependencies),
   ...Object.keys(peerDependencies),
   ...builtinModules,
+  ...builtinModules.map((m) => `node:${m}`),
 ];
 
 export default defineConfig([
