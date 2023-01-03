@@ -724,7 +724,7 @@ cancel();
 
 ### 构建
 
-目前 `@uni-helper/uni-network` 会使用 `tsup` 将 `uni` API 之外的部分转译到 `esnext`。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理。
+目前 `@uni-helper/uni-network` 会使用 `rollup` 将 `uni` API 之外的部分转译到 `es2017`（即 `es8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理。
 
 对于 `vue-cli`，请修改项目根目录 `vue.config.js` 如下所示。
 
