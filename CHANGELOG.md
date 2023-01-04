@@ -1,6 +1,6 @@
 # 改动日志
 
-## Unreleased
+## 0.12.5 (2023-01-04)
 
 - build: 使用 `rollup` 构建
 - perf: `mergeConfig` 实现调整
