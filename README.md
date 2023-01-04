@@ -744,6 +744,8 @@ module.exports = {
 
 `axios` 非常棒，但它面对的是浏览器和 `Node.js`，即使使用了 `adapter`，某些底层功能也可能会在小程序内报错，而且需要修改 `axios` 大部分类型定义。
 
+你可以查看 [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter) 获取 `adapter` 支持。
+
 ### 比较
 
 如果你发现这里信息已经过时，请提交 ISSUE 或 PR。
