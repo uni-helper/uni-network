@@ -11,7 +11,7 @@ importers:
       '@commitlint/prompt': ^17.3.0
       '@dcloudio/types': ^3.2.7
       '@modyqyw/fabric': ^5.14.0
-      '@modyqyw/utils': ^3.0.5
+      '@modyqyw/utils': ^3.0.7
       '@tsconfig/node18': ^1.0.1
       '@types/lodash.merge': ^4.6.7
       '@types/node': ^18.11.18
@@ -56,7 +56,7 @@ importers:
       '@commitlint/config-conventional': 17.3.0
       '@commitlint/prompt': 17.3.0
       '@modyqyw/fabric': 5.14.0_crnjwcwerrbat3mlbmrsoa543e
-      '@modyqyw/utils': 3.0.5_typescript@4.9.4
+      '@modyqyw/utils': 3.0.7_typescript@4.9.4
       '@tsconfig/node18': 1.0.1
       '@types/node': 18.11.18
       '@types/ungap__url-search-params': 0.1.0
@@ -1618,8 +1618,8 @@ packages:
       - svelte
     dev: true
 
-  /@modyqyw/utils/3.0.5_typescript@4.9.4:
-    resolution: {integrity: sha512-Ykog677FYj/eC1QQINUA0uMBhQ+GtOHL/iYE1N/J6tmjGZ70Ya48o3ZoKg65NrHGHGGyDCcKYJynPSrsIj/EdQ==}
+  /@modyqyw/utils/3.0.7_typescript@4.9.4:
+    resolution: {integrity: sha512-k1AjxXy19IYEw1sPRPh0DI0pSm/dPQ4Zy1Nw0WZCumo8ErjPG6+NFsnd9nNDYkkt66nsvhwVfelusWe85o9NzQ==}
     engines: {node: '>=14.18'}
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1

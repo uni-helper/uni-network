@@ -30,7 +30,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     },
@@ -38,7 +38,7 @@
     "./*": "./dist/*"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -72,7 +72,7 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@commitlint/prompt": "^17.3.0",
     "@modyqyw/fabric": "^5.14.0",
-    "@modyqyw/utils": "^3.0.5",
+    "@modyqyw/utils": "^3.0.7",
     "@tsconfig/node18": "^1.0.1",
     "@types/node": "^18.11.18",
     "@types/ungap__url-search-params": "^0.1.0",
