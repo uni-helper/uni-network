@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node18",
   "compilerOptions": {
     "baseUrl": ".",
     "lib": ["DOM", "ESNext"],
@@ -20,10 +20,7 @@
     "**/*.mjs",
     "**/*.ts",
     "**/*.cts",
-    "**/*.mts",
-    "**/*.jsx",
-    "**/*.tsx",
-    "**/*.vue"
+    "**/*.mts"
   ],
   "exclude": ["**/node_modules", "**/dist", "playground"]
 }
