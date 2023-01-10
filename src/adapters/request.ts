@@ -24,6 +24,12 @@ export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =
     task = uni.request({
       ...requestConfig,
       success: (res) => {
+        let statusText;
+        try {
+          statusText = statuses(res?.statusCode)?.toString();
+        } catch (error) {
+          statusText = (error as Error).toString();
+        }
         response = {
           ...response,
           // @ts-expect-error
@@ -34,7 +40,7 @@ export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =
           // @ts-expect-error
           profile: res?.profile,
           status: res?.statusCode,
-          statusText: statuses(res?.statusCode)?.toString(),
+          statusText,
           // @ts-expect-error
           headers: res?.header ?? res?.headers,
           config,
