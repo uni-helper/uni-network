@@ -14,8 +14,7 @@ export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =
     let onCanceled: UnCancelTokenListener;
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
-      // @ts-expect-error No overload matches this call.
-      signal?.removeEventListener('abort', onCanceled);
+      signal?.removeEventListener?.('abort', onCanceled);
     };
 
     let response: UnResponse<T, D>;
@@ -24,11 +23,12 @@ export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =
     task = uni.request({
       ...requestConfig,
       success: (res) => {
-        let statusText;
+        let statusText: string | undefined;
         try {
           statusText = statuses(res?.statusCode)?.toString();
-        } catch (error) {
-          statusText = (error as Error).toString();
+        } catch (_) {
+          // set statusText undefined when statuses throws error if statusCode is invalid
+          statusText = undefined;
         }
         response = {
           ...response,

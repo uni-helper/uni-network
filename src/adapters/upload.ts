@@ -30,6 +30,13 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
     task = uni.uploadFile({
       ...uploadConfig,
       success: (res) => {
+        let statusText: string | undefined;
+        try {
+          statusText = statuses(res?.statusCode)?.toString();
+        } catch (_) {
+          // set statusText undefined when statuses throws error if statusCode is invalid
+          statusText = undefined;
+        }
         response = {
           ...response,
           // @ts-expect-error
@@ -37,7 +44,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
           // @ts-expect-error
           errno: res?.errno,
           status: res?.statusCode,
-          statusText: statuses(res?.statusCode)?.toString(),
+          statusText,
           // @ts-expect-error
           headers: res?.header ?? res?.headers,
           config,
