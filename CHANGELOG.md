@@ -1,5 +1,9 @@
 # 改动日志
 
+## 0.12.6 (2032-01-10)
+
+- fix: 处理 `statuses` 可能抛出的错误，感谢 [@edazh](https://github.com/edazh) 在 [#18](https://github.com/uni-helper/uni-network/pull/18) 的贡献
+
 ## 0.12.5 (2023-01-04)
 
 - build: 使用 `rollup` 构建
