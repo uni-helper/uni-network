@@ -46,7 +46,7 @@ export default defineConfig([
     plugins: [
       json({ preferConst: true }),
       nodeResolve({ preferBuiltins: true }),
-      esbuild({ target: 'es2020' }),
+      esbuild({ target: 'es2017' }),
       commonjs(),
       isDevelopment ? null : terser({ format: { ascii_only: true } }),
       isDevelopment ? null : bundleSize(),
