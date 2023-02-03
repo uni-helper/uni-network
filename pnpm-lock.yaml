@@ -10,7 +10,7 @@ importers:
       '@commitlint/config-conventional': ^17.4.2
       '@commitlint/prompt': ^17.4.2
       '@dcloudio/types': ^3.2.11
-      '@modyqyw/fabric': ^6.0.5
+      '@modyqyw/fabric': ^6.0.6
       '@modyqyw/utils': ^4.1.0
       '@rollup/plugin-commonjs': ^24.0.1
       '@rollup/plugin-json': ^6.0.0
@@ -62,7 +62,7 @@ importers:
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
       '@commitlint/prompt': 17.4.2
-      '@modyqyw/fabric': 6.0.5_6xprzernlpxwjedpj2snzq4bpq
+      '@modyqyw/fabric': 6.0.6_6xprzernlpxwjedpj2snzq4bpq
       '@modyqyw/utils': 4.1.0
       '@rollup/plugin-commonjs': 24.0.1_rollup@3.13.0
       '@rollup/plugin-json': 6.0.0_rollup@3.13.0
@@ -493,13 +493,6 @@ packages:
 
   /@babel/runtime/7.20.13:
     resolution: {integrity: sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: true
-
-  /@babel/runtime/7.20.6:
-    resolution: {integrity: sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
@@ -1638,8 +1631,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@modyqyw/fabric/6.0.5_6xprzernlpxwjedpj2snzq4bpq:
-    resolution: {integrity: sha512-JZuN/HAjvWBQAPUoBxbOpYmdi9dGlfhCirM3No03/0LOK3ap15fMsY6VhkwXfShRlW2dMvhBLUw1WvF0ESpEdQ==}
+  /@modyqyw/fabric/6.0.6_6xprzernlpxwjedpj2snzq4bpq:
+    resolution: {integrity: sha512-+Kup5rDZAvCU5iIjXpTrNp8mMvnTdxRL54gK/ifbMWLld+UZJpC1GLqYBklXsa7GnOEEb6NYe5DNLvN63/qvUQ==}
     engines: {node: '>=14.18'}
     peerDependencies:
       eslint: ^8.0.0
@@ -1670,7 +1663,7 @@ packages:
       '@commitlint/prompt': 17.4.2
       '@intlify/eslint-plugin-vue-i18n': 2.0.0_eslint@8.33.0
       '@rushstack/eslint-patch': 1.2.0
-      '@types/eslint': 8.4.10
+      '@types/eslint': 8.21.0
       '@types/node': 18.11.18
       '@types/prettier': 2.7.2
       '@typescript-eslint/eslint-plugin': 5.50.0_go4drrxstycfikanvu45pi4vgq
@@ -2062,8 +2055,8 @@ packages:
       '@types/ms': 0.7.31
     dev: true
 
-  /@types/eslint/8.4.10:
-    resolution: {integrity: sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==}
+  /@types/eslint/8.21.0:
+    resolution: {integrity: sha512-35EhHNOXgxnUgh4XCJsGhE7zdlDhYDN/aMG6UbkByCFFNgQ7b3U+uVoqBpicFydR8JEfgdjCF7SJ7MiJfzuiTA==}
     dependencies:
       '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
@@ -4291,7 +4284,7 @@ packages:
       globby: 13.1.3
       is-core-module: 2.11.0
       is-glob: 4.0.3
-      synckit: 0.8.4
+      synckit: 0.8.5
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4478,7 +4471,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.20.6
+      '@babel/runtime': 7.20.13
       ast-types-flow: 0.0.7
       eslint: 8.33.0
       jsx-ast-utils: 3.3.3
@@ -5822,7 +5815,7 @@ packages:
   /is-language-code/3.1.0:
     resolution: {integrity: sha512-zJdQ3QTeLye+iphMeK3wks+vXSRFKh68/Pnlw7aOfApFSEIOhYa8P9vwwa6QrImNNBMJTiL1PpYF0f4BxDuEgA==}
     dependencies:
-      '@babel/runtime': 7.20.6
+      '@babel/runtime': 7.20.13
     dev: true
 
   /is-map/2.0.2:
@@ -8843,14 +8836,6 @@ packages:
 
   /svg-tags/1.0.0:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
-    dev: true
-
-  /synckit/0.8.4:
-    resolution: {integrity: sha512-Dn2ZkzMdSX827QbowGbU/4yjWuvNaCoScLLoMo/yKbu+P4GBR6cRGKZH27k6a9bRzdqcyd1DE96pQtQ6uNkmyw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    dependencies:
-      '@pkgr/utils': 2.3.1
-      tslib: 2.4.1
     dev: true
 
   /synckit/0.8.5:

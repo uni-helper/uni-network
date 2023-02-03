@@ -70,7 +70,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@commitlint/prompt": "^17.4.2",
-    "@modyqyw/fabric": "^6.0.5",
+    "@modyqyw/fabric": "^6.0.6",
     "@modyqyw/utils": "^4.1.0",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-json": "^6.0.0",
