@@ -26,7 +26,7 @@
 
 #### 设备和浏览器支持
 
-需要设备和浏览器兼容 [ECMAScript 5](https://caniuse.com/#feat=es5) 并支持 [Promise](https://caniuse.com/promises)。你可以自行补充 polyfill。
+请查看 [构建](#构建) 部分的说明。
 
 #### 安装
 
@@ -46,6 +46,12 @@ yarn add @uni-helper/uni-network
 
 不考虑支持 `uni_modules`。
 
+安装依赖之后，你可以使用 `import` 导入。
+
+```typescript
+import un, { isUnCancel, UnError } from '@uni-helper/uni-network';
+```
+
 ### 例子
 
 #### 发起一个 `GET` 请求
@@ -53,14 +59,19 @@ yarn add @uni-helper/uni-network
 ```typescript
 import un from '@uni-helper/uni-network';
 
+// 请求特定 ID 的用户数据
 un.get('user?ID=12345')
   .then((response) => {
+    // 处理响应
     console.log('response', response);
   })
   .catch((error) => {
+    // 处理错误
     console.log('error', error);
   })
-  .finally(() => {});
+  .finally(() => {
+    // 总是会执行
+  });
 
 // 上述请求和以下等同
 un.get('/user', {
@@ -74,7 +85,9 @@ un.get('/user', {
   .catch((error) => {
     console.log('error', error);
   })
-  .finally(() => {});
+  .finally(() => {
+    // 总是会执行
+  });
 
 // 支持 async/await
 async function getUser() {
@@ -122,13 +135,14 @@ Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
 
 ## API
 
-### 创建请求
+### 发起请求
 
-可以向 `un` 传递相关配置来创建请求。
+可以向 `un` 传递相关配置来发起请求。
 
 `un(config)`
 
 ```typescript
+// 发起 POST 请求
 un({
   method: 'post',
   url: '/user/12345',
@@ -142,6 +156,7 @@ un({
 `un(url[, config])`
 
 ```typescript
+// 发起 GET 请求（默认请求方法）
 un('/user/12345');
 ```
 
@@ -213,6 +228,9 @@ const instance = un.create({
   },
 
   // `params` 是与请求一起发送的 URL 参数
+  // 必须是一个普通对象或一个 URLSearchParams 对象
+  // URLSearchParams 需要使用 polyfill
+  // https://github.com/ungap/url-search-params
   params: {
     ID: 12345
   },
@@ -255,7 +273,7 @@ const instance = un.create({
 
   // request 使用
   // `data` 是作为请求体被发送的数据
-  // 必须是以下类型之一：string、ArrayBuffer、Record<string, any>
+  // 必须是以下类型之一：string、object、ArrayBuffer、ArrayBufferView、URLSearchParams
   data: {
     firstName: 'Fred'
   },
@@ -431,11 +449,17 @@ const instance = un.create({
 
 ```typescript
 un.get('/user/12345').then((response) => {
-  console.log(response.data);
-  console.log(response.status);
-  console.log(response.statusText);
-  console.log(response.headers);
-  console.log(response.config);
+  console.log('errMsg', response?.errMsg);
+  console.log('errno', response?.errno);
+  console.log('profile', response?.profile);
+  console.log('config', response?.config);
+  console.log('status', response?.status);
+  console.log('statusText', response?.statusText);
+  console.log('headers', response?.headers);
+  console.log('data', response?.data);
+  console.log('cookies', response?.cookies);
+  console.log('tmpFilePath', response?.tmpFilePath);
+  console.log('filePath', response?.filePath);
 });
 ```
 
@@ -563,7 +587,7 @@ un.interceptors.request.use(
 );
 ```
 
-如果你想根据运行时检查来执行某个拦截器，你可以在 `options` 对象中设置 `runWhen` 函数。当且仅当 `runWhen` 的返回值为 `false` 时，拦截器不会被执行。该函数将和 `config` 对象一起被调用（别忘了，你也可以绑定你自己的参数）。当你有一个只需要在特定时间运行的异步请求拦截器时，这可能会很方便。
+如果你想根据运行时检查来执行某个拦截器，你可以在 `options` 对象中设置 `runWhen` 函数。**当且仅当** `runWhen` 的返回值为 `false` 时，拦截器不会被执行。该函数将和 `config` 对象一起被调用（别忘了，你也可以绑定你自己的参数）。当你有一个只需要在特定时间运行的异步请求拦截器时，这可能会很方便。
 
 ```typescript
 const onGetCall = (config) => config.method.toUpperCase() === 'GET';
@@ -591,6 +615,8 @@ un.interceptors.request.use(
   - 一旦被捕获，后面的另一个 `fulfilled` 拦截器会被再次调用（就像在一个 `Promise` 链中一样）
 
 ### 错误处理
+
+默认把每一个返回的状态代码不在 2xx 范围内的响应视为错误。
 
 ```typescript
 un.get('/user/12345').catch((error) => {
@@ -724,17 +750,64 @@ cancel();
 
 ### 构建
 
-目前 `@uni-helper/uni-network` 会使用 `rollup` 将 `uni` API 之外的部分转译到 `es2017`（即 `es8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理。
+目前 `@uni-helper/uni-network` 会使用 `rollup` 将 `uni` API 之外的部分转译到 `ES2017`（即 `ES8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理。
 
-对于 `vue-cli`，请修改项目根目录 `vue.config.js` 如下所示。
+对于 `vue-cli + vue2`项目，请修改项目根目录 `vue.config.js` 如下所示。这会使得 `vue-cli` 处理 `@uni-helper/uni-network`，保证生成代码符合 `browserslist` 里的配置。
 
-```js
+```javascript
 module.exports = {
   transpileDependencies: ['@uni-helper/uni-network'],
 };
 ```
 
-对于 `vite`，你无需手动额外调整。
+我们建议设置如下。
+
+```shell
+chrome >= 53
+ios >= 8
+```
+
+对于 `vite + vue3`，请设置 `build.target` 为 `ES6`。
+
+```typescript
+import { defineConfig } from 'vite';
+import uni from '@dcloudio/vite-plugin-uni';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  build: {
+    target: 'es6',
+    cssTarget: 'chrome61', //
+  },
+  plugins: [
+    ...,
+    uni(),
+    ...,
+  ],
+});
+```
+
+然后在 `src/main.ts` 或 `src/main.js` 处自行添加 polyfill。以下是使用 `core-js` 的示例（需要自行安装 `core-js`），你也可以使用 [es-shims](https://github.com/es-shims)。
+
+```typescript
+import 'core-js/actual/array/iterator';
+import 'core-js/actual/promise';
+import 'core-js/actual/object/assign';
+import 'core-js/actual/promise/finally';
+// 你可以根据需要自行添加额外的 polyfills
+// import 'core-js/actual/object/values'
+import { createSSRApp } from 'vue';
+import App from './App.vue';
+
+export function createApp() {
+  const app = createSSRApp(App);
+  return {
+    app,
+  };
+}
+```
+
+微信小程序的 JavaScript 支持度见 [wechat-miniprogram/miniprogram-compat](https://github.com/wechat-miniprogram/miniprogram-compat)。微信小程序要支持 `vue3`，需设置基础库最低版本为 2.11.2 或以上，2.11.2 对应 `chrome>=53,ios>=10`。
 
 ### 高级功能
 
