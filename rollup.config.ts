@@ -5,17 +5,14 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import esbuild from 'rollup-plugin-esbuild';
 import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
-import terser from '@rollup/plugin-terser';
-// @ts-ignore
-import bundleSize from 'rollup-plugin-bundle-size';
 import clean from 'rollup-plugin-delete';
 import { getPackageJson } from '@modyqyw/utils';
 
 const isDevelopment = !!process.env.ROLLUP_WATCH;
 
 const {
-  main = './dist/index.cjs',
-  module = './dist/index.mjs',
+  main: cjs = './dist/index.cjs',
+  module: esm = './dist/index.mjs',
   types = './dist/index.d.ts',
   dependencies = {},
   peerDependencies = {},
@@ -33,14 +30,16 @@ export default defineConfig([
     input: './src/index.ts',
     output: [
       {
-        file: main,
+        file: cjs,
         format: 'cjs',
         exports: 'named',
         footer: 'module.exports = Object.assign(exports.default || {}, exports)',
+        sourcemap: true,
       },
       {
-        file: module,
+        file: esm,
         format: 'esm',
+        sourcemap: true,
       },
     ],
     plugins: [
@@ -48,10 +47,8 @@ export default defineConfig([
       nodeResolve({ preferBuiltins: true }),
       esbuild({ target: 'es2017' }),
       commonjs(),
-      isDevelopment ? null : terser({ format: { ascii_only: true } }),
-      isDevelopment ? null : bundleSize(),
       clean({
-        targets: [main, module],
+        targets: [cjs, esm, `${cjs}.map`, `${esm}.map`],
         runOnce: isDevelopment,
       }),
     ],
@@ -69,7 +66,6 @@ export default defineConfig([
         compilerOptions: { preserveSymlinks: false },
         respectExternal: true,
       }),
-      isDevelopment ? null : bundleSize(),
       clean({
         targets: [types],
         runOnce: isDevelopment,
