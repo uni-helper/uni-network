@@ -244,7 +244,7 @@ const instance = un.create({
   timeout: 1000, // 默认值是 `0` (永不超时)
 
   // `adapter` 允许自定义处理请求
-  // 可以指定为 'request'、`upload` 和 `download` 三者之一
+  // 可以指定为 'request'、'upload' 和 'download' 三者之一
   // 也可以指定为一个方法，返回一个 Promise 并提供一个有效的响应
   adapter: 'request' // 默认值
   adapter: (config) => { /* ... */ },
