@@ -34,29 +34,27 @@ export const downloadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) 
         try {
           statusText = statuses(res?.statusCode)?.toString();
         } catch (_) {
-          // set statusText undefined when statuses throws error if statusCode is invalid
+          // ↑ 为支付宝小程序保留 (_)
+          // 当 statusCode 不合法、statuses 抛出错误时，设置 statusText 为 undefined
           statusText = undefined;
         }
         response = {
           ...response,
-          // @ts-expect-error
+          // @ts-expect-error no types
           errMsg: res?.errMsg ?? res?.errmsg ?? res?.msg ?? res?.message,
-          // @ts-expect-error
+          // @ts-expect-error no types
           errno: res?.errno,
           tempFilePath: res?.tempFilePath,
-          // @ts-expect-error
           filePath: res?.filePath,
-          // @ts-expect-error
           profile: res?.profile,
           status: res?.statusCode,
           statusText,
-          // @ts-expect-error
+          // @ts-expect-error no types
           headers: res?.header ?? res?.headers,
           config,
-          // @ts-expect-error
+          // @ts-expect-error no types
           data: {
             tempFilePath: res?.tempFilePath,
-            // @ts-expect-error
             filePath: res?.filePath,
           },
           task,
@@ -102,14 +100,14 @@ export const downloadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) 
         if (!task) {
           return;
         }
-        // @ts-expect-error
+        // @ts-expect-error no types
         reject(!cancel || cancel.type ? new UnCanceledError(undefined, config, task) : cancel);
         task.abort();
         task = undefined;
       };
 
       cancelToken?.subscribe(onCanceled);
-      // @ts-expect-error
+      // @ts-expect-error no types
       signal?.aborted ? onCanceled() : signal?.addEventListener('abort', onCanceled);
     }
   });

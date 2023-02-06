@@ -1,4 +1,4 @@
-import { UnConfig, UnData, UnTask } from '../types';
+import type { UnConfig, UnData, UnTask } from '../types';
 import { UnError } from './UnError';
 
 class UnCanceledError<T = UnData, D = UnData> extends UnError<T, D> {

@@ -58,7 +58,7 @@ export class UnInterceptorManager<V, T = V, D = UnData> {
     }
   }
 
-  forEach(fn: (handler: UnInterceptorManagerHandler<V, T, D>) => any) {
+  each(fn: (handler: UnInterceptorManagerHandler<V, T, D>) => any) {
     for (const handler of this.handlers) {
       if (handler && fn) {
         fn(handler);

@@ -1,5 +1,5 @@
-import { UnError } from './UnError';
 import type { UnData, UnResponse } from '../types';
+import { UnError } from './UnError';
 
 export const settle = <T = UnData, D = UnData, R extends UnResponse<T, D> = UnResponse<T, D>>(
   resolve: (value: R | PromiseLike<R>) => void,

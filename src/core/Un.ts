@@ -1,11 +1,11 @@
 import { buildFullPath, buildUrl, mergeConfig } from '../utils';
+import type { UnConfig, UnData, UnResponse } from '../types';
 import {
   UnInterceptorManager,
   UnInterceptorManagerHandlerFulfilled,
   UnInterceptorManagerHandlerRejected,
 } from './UnInterceptorManager';
 import { dispatchRequest } from './dispatchRequest';
-import type { UnConfig, UnData, UnResponse } from '../types';
 
 export class Un<T = UnData, D = UnData> {
   defaults: UnConfig<T, D>;
@@ -35,7 +35,7 @@ export class Un<T = UnData, D = UnData> {
       | undefined
     )[] = [];
     let synchronousRequestInterceptors = true;
-    this.interceptors.request.forEach((interceptor) => {
+    this.interceptors.request.each((interceptor) => {
       if (
         typeof interceptor.runWhen === 'function' &&
         interceptor.runWhen(mergedConfig) === false
@@ -52,7 +52,7 @@ export class Un<T = UnData, D = UnData> {
       | UnInterceptorManagerHandlerRejected
       | undefined
     )[] = [];
-    this.interceptors.response.forEach((interceptor) => {
+    this.interceptors.response.each((interceptor) => {
       responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
     });
 
@@ -175,7 +175,7 @@ export interface Un<T = UnData, D = UnData> {
   ): Promise<R>;
 }
 
-(['delete', 'get', 'head', 'options', 'trace', 'connect'] as const).forEach(function (method) {
+for (const method of ['delete', 'get', 'head', 'options', 'trace', 'connect'] as const) {
   Un.prototype[method] = function (url, config) {
     return this.request({
       ...config,
@@ -183,9 +183,9 @@ export interface Un<T = UnData, D = UnData> {
       url,
     });
   };
-});
+}
 
-(['post', 'put', 'patch'] as const).forEach(function (method) {
+for (const method of ['post', 'put', 'patch'] as const) {
   Un.prototype[method] = function (url, data, config) {
     return this.request({
       ...config,
@@ -194,4 +194,4 @@ export interface Un<T = UnData, D = UnData> {
       data,
     });
   };
-});
+}

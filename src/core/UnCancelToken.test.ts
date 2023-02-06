@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { noop } from '@modyqyw/utils';
 import { UnCancelToken, UnCanceler } from './UnCancelToken';
 import { UnCanceledError } from './UnCanceledError';
 
@@ -32,8 +33,7 @@ describe('core:UnCancelToken', () => {
     });
 
     it('returns undefined if cancellation has not been requested', () => {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const token = new UnCancelToken(() => {});
+      const token = new UnCancelToken(noop);
       expect(token.reason).toBeUndefined();
     });
   });
@@ -66,15 +66,14 @@ describe('core:UnCancelToken', () => {
       cancel('Operation has been canceled.');
       try {
         token.throwIfRequested();
-      } catch (thrown) {
-        expect(thrown).toBeInstanceOf(UnCanceledError);
-        expect((thrown as UnCanceledError).message).toBe('Operation has been canceled.');
+      } catch (error) {
+        expect(error).toBeInstanceOf(UnCanceledError);
+        expect((error as UnCanceledError).message).toBe('Operation has been canceled.');
       }
     });
 
     it('does not throw if cancellation has not been requested', () => {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const token = new UnCancelToken(() => {});
+      const token = new UnCancelToken(noop);
       token.throwIfRequested();
     });
   });

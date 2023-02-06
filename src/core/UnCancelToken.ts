@@ -1,5 +1,5 @@
-import { UnCanceledError } from './UnCanceledError';
 import type { UnConfig, UnData, UnTask } from '../types';
+import { UnCanceledError } from './UnCanceledError';
 
 export interface UnCancel {
   message?: string;
@@ -48,9 +48,9 @@ export class UnCancelToken<T = UnData, D = UnData> {
     });
 
     this.promise.then((cancel) => {
-      this.listeners.forEach((listener) => {
+      for (const listener of this.listeners) {
         listener(cancel);
-      });
+      }
       this.listeners = [];
     });
 

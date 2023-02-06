@@ -10,10 +10,7 @@ export function forEach(
   fn: (...rest: any) => any,
   { allOwnKeys = false } = {},
 ) {
-  // Don't bother if no value provided
-  if (obj === null || typeof obj === 'undefined') {
-    return;
-  }
+  if (obj === null || obj === undefined) return;
 
   let i;
   let l;

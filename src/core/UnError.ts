@@ -1,4 +1,4 @@
-import { UnConfig, UnData, UnResponse, UnTask } from '../types';
+import type { UnConfig, UnData, UnResponse, UnTask } from '../types';
 
 export class UnError<T = UnData, D = UnData> extends Error {
   static ERR_FR_TOO_MANY_REDIRECTS = 'ERR_FR_TOO_MANY_REDIRECTS';
@@ -51,15 +51,15 @@ export class UnError<T = UnData, D = UnData> extends Error {
     return {
       message: this.message,
       name: this.name,
-      // @ts-ignore
+      // @ts-expect-error no types
       description: this.description,
-      // @ts-ignore
+      // @ts-expect-error no types
       number: this.number,
-      // @ts-ignore
+      // @ts-expect-error no types
       fileName: this.fileName,
-      // @ts-ignore
+      // @ts-expect-error no types
       lineNumber: this.lineNumber,
-      // @ts-ignore
+      // @ts-expect-error no types
       columnNumber: this.columnNumber,
       stack: this.stack,
       config: this.config,

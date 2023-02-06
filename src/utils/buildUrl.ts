@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { UnParams, UnParamsSerializer } from '../types';
+import type { UnParams, UnParamsSerializer } from '../types';
 
 export const buildUrl = (url: string, params?: UnParams, paramsSerializer?: UnParamsSerializer) => {
   if (!params) {

@@ -14,11 +14,7 @@ export const extend = (
   forEach(
     b,
     (val, key) => {
-      if (thisArg && typeof val === 'function') {
-        a[key] = val.bind(thisArg);
-      } else {
-        a[key] = val;
-      }
+      a[key] = thisArg && typeof val === 'function' ? val.bind(thisArg) : val;
     },
     { allOwnKeys },
   );
