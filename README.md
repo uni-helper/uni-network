@@ -754,7 +754,7 @@ cancel();
 
 目前 `@uni-helper/uni-network` 会使用 `rollup` 将 `uni` API 之外的部分转译到 `ES2017`（即 `ES8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理。
 
-对于 `vue-cli + vue2`项目，请修改项目根目录 `vue.config.js` 如下所示。这会使得 `vue-cli` 处理 `@uni-helper/uni-network`，保证生成代码符合 `browserslist` 里的配置。
+对于 `vue-cli + vue2`项目，请修改项目根目录 `vue.config.js` 如下所示。这会让 `vue-cli` 处理 `@uni-helper/uni-network`，保证生成代码符合 `browserslist` 里的配置。我们建议设置 `browserslist` 为 `chrome>=53,ios>=8`
 
 ```javascript
 module.exports = {
@@ -762,14 +762,7 @@ module.exports = {
 };
 ```
 
-我们建议设置如下。
-
-```shell
-chrome >= 53
-ios >= 8
-```
-
-对于 `vite + vue3`，请设置 `build.target` 为 `ES6`。
+对于 `vite + vue3` 项目，请先设置 `build.target` 为 `ES6`。
 
 ```typescript
 import { defineConfig } from 'vite';
@@ -779,7 +772,7 @@ import uni from '@dcloudio/vite-plugin-uni';
 export default defineConfig({
   build: {
     target: 'es6',
-    cssTarget: 'chrome61', //
+    cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
   },
   plugins: [
     ...,
@@ -789,7 +782,7 @@ export default defineConfig({
 });
 ```
 
-然后在 `src/main.ts` 或 `src/main.js` 处自行添加 polyfill。以下是使用 `core-js` 的示例（需要自行安装 `core-js`），你也可以使用 [es-shims](https://github.com/es-shims)。
+然后在 `src/main.ts` 或 `src/main.js` 处自行添加 polyfill。以下是使用 [core-js](https://github.com/zloirock/core-js) 的示例（需要自行安装 `core-js`），你也可以使用 [es-shims](https://github.com/es-shims)。
 
 ```typescript
 import 'core-js/actual/array/iterator';
