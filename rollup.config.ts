@@ -34,12 +34,10 @@ export default defineConfig([
         format: 'cjs',
         exports: 'named',
         footer: 'module.exports = Object.assign(exports.default || {}, exports)',
-        sourcemap: true,
       },
       {
         file: esm,
         format: 'esm',
-        sourcemap: true,
       },
     ],
     plugins: [
@@ -48,7 +46,7 @@ export default defineConfig([
       esbuild({ target: 'es2017' }),
       commonjs(),
       clean({
-        targets: [cjs, esm, `${cjs}.map`, `${esm}.map`],
+        targets: [cjs, esm],
         runOnce: isDevelopment,
       }),
     ],
