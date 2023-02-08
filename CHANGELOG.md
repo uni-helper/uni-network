@@ -1,5 +1,9 @@
 # 改动日志
 
+## 0.13.2 (2023-02-08)
+
+和 0.13.1 一样，但修复了一个 ci 问题。
+
 ## 0.13.1 (2023-02-08)
 
 - fix: 修复了 `un.download` 和 `un.upload` 没有正确设置 `adapter` 的问题，感谢 [@edazh](https://github.com/edazh) 在 [#25](https://github.com/uni-helper/uni-network/pull/25) 的贡献
