@@ -1,5 +1,10 @@
 # 改动日志
 
+## 0.13.1 (2023-02-08)
+
+- fix: 修复了 `un.download` 和 `un.upload` 没有正确设置 `adapter` 的问题，感谢 [@edazh](https://github.com/edazh) 在 [#25](https://github.com/uni-helper/uni-network/pull/25) 的贡献
+- build: 构建工具切换到 `unbuild`
+
 ## 0.13.0 (2023-02-06)
 
 调整了部分代码风格，同时更新了文档。
