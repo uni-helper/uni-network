@@ -1,0 +1,22 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+      - run: pnpm i
+      - run: pnpm publish --no-git-checkes
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
