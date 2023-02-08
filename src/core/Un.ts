@@ -68,7 +68,6 @@ export class Un<T = UnData, D = UnData> {
         | UnInterceptorManagerHandlerFulfilled<UnConfig<T, D>>
         | UnInterceptorManagerHandlerRejected
         | UnInterceptorManagerHandlerFulfilled<UnResponse<T, D>>
-        | UnInterceptorManagerHandlerRejected
         | undefined
       )[] = [dispatchRequest.bind(this), undefined];
       chain.unshift(...requestInterceptorChain);
