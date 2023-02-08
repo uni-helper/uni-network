@@ -24,7 +24,9 @@ export class Un<T = UnData, D = UnData> {
 
   request(configOrUrl: string | UnConfig<T, D>, config?: UnConfig<T, D>) {
     const _config =
-      typeof configOrUrl === 'string' ? { ...config, url: configOrUrl } : { ...configOrUrl };
+      typeof configOrUrl === 'string'
+        ? { ...config, url: configOrUrl }
+        : { ...configOrUrl, ...config };
 
     const mergedConfig = mergeConfig(this.defaults, _config);
 
