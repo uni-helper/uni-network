@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: ['./src/index'],
+  entries: ['./src/index', './src/composables'],
   clean: true,
   declaration: true,
   rollup: {
