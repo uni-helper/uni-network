@@ -23,6 +23,7 @@
 - 拦截请求和响应
 - 转换请求和响应数据
 - 取消请求
+- 组合式函数
 
 #### 设备和浏览器支持
 
@@ -748,6 +749,20 @@ cancel();
 > 注意：你可以用同一个 `CancelToken` / `AbortController` 取消几个请求。
 > 如果在发起请求的时候已经取消请求，那么该请求就会被立即取消，不会真正发起请求。
 
+## 组合式函数
+
+如果你还不了解组合式函数，请先阅读 [组合式 API 常见问答](https://cn.vuejs.org/guide/extras/composition-api-faq.html) 和 [组合式函数](https://cn.vuejs.org/guide/reusability/composables.html)。
+
+我们使用 [vue-demi](https://github.com/vueuse/vue-demi) 来同时支持 `vue2` 和 `vue3`。请先阅读它的使用说明。
+
+你需要从 `@uni-helper/uni-network/composables` 中导入组合式函数。
+
+```typescript
+import { useUn } from '@uni-helper/uni-network/composables';
+```
+
+`useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。这里不再赘述。
+
 ## 其它
 
 ### 构建
@@ -759,10 +774,12 @@ cancel();
 ```javascript
 module.exports = {
   transpileDependencies: ['@uni-helper/uni-network'],
+  // 如果是 vue-cli 5
+  // transpileDependencies: true,
 };
 ```
 
-对于 `vite + vue3` 项目，请先设置 `build.target` 为 `ES6`。
+对于 `vite + vue3` 项目，请设置 `build.target` 为 `ES6`、`optimizeDeps.exclude` 包含 `vue-demi`。
 
 ```typescript
 import { defineConfig } from 'vite';
@@ -773,6 +790,9 @@ export default defineConfig({
   build: {
     target: 'es6',
     cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
+  },
+  optimizeDeps: {
+    exclude: ['vue-demi'],
   },
   plugins: [
     ...,
