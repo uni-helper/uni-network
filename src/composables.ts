@@ -18,7 +18,7 @@ export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
   /** isAborted 别名 */
   isCanceled: Ref<boolean>;
   /** 发生的错误 */
-  error: ShallowRef<UnError<T, D> | undefined>;
+  error: ShallowRef<unknown | undefined>;
   /** 取消当前请求 */
   abort: (message?: string | undefined) => void;
   /** abort 别名 */
@@ -108,7 +108,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   const isFinished = ref(false);
   const isLoading = ref(false);
   const isAborted = ref(false);
-  const error = shallowRef<UnError<T, D>>();
+  const error = shallowRef<unknown>();
 
   const cancelTokenSource = un.CancelToken.source;
   let cancelToken: UnCancelTokenSource = cancelTokenSource();
