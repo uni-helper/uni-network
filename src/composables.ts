@@ -27,13 +27,13 @@ export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
 export interface StrictUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   /** 手动调用 */
   execute: (
-    url?: string | UnConfig<D>,
-    config?: UnConfig<D>,
+    url?: string | UnConfig<T, D>,
+    config?: UnConfig<T, D>,
   ) => PromiseLike<StrictUseUnReturn<T, R, D>>;
 }
 export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   /** 手动调用 */
-  execute: (url: string, config?: UnConfig<D>) => PromiseLike<EasyUseUnReturn<T, R, D>>;
+  execute: (url: string, config?: UnConfig<T, D>) => PromiseLike<EasyUseUnReturn<T, R, D>>;
 }
 export interface UseUnOptions<T = UnData> {
   /** 当 `useUn` 被调用时，是否自动发起请求 */
@@ -55,7 +55,7 @@ const isUnInstance = (val: any) => !!val?.request && !!val?.download && !!val?.u
 
 export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   url: string,
-  config?: UnConfig<D>,
+  config?: UnConfig<T, D>,
   options?: UseUnOptions<T>,
 ): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
@@ -65,18 +65,18 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
 ): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   url: string,
-  config: UnConfig<D>,
+  config: UnConfig<T, D>,
   instance: UnInstance,
   options?: UseUnOptions<T>,
 ): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
-  config?: UnConfig<D>,
+  config?: UnConfig<T, D>,
 ): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   instance?: UnInstance,
 ): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
-  config?: UnConfig<D>,
+  config?: UnConfig<T, D>,
   instance?: UnInstance,
 ): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
 
@@ -85,7 +85,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
 ): OverallUseUnReturn<T, R, D> & PromiseLike<OverallUseUnReturn<T, R, D>> {
   const url: string | undefined = typeof args[0] === 'string' ? args[0] : undefined;
   const argsPlaceholder = isString(url) ? 1 : 0;
-  let defaultConfig: UnConfig<D> = {};
+  let defaultConfig: UnConfig<T, D> = {};
   let instance: UnInstance = un;
   let options: UseUnOptions<T> = { immediate: !!argsPlaceholder, shallow: true };
 
@@ -135,8 +135,8 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   const then: PromiseLike<OverallUseUnReturn<T, R, D>>['then'] = (onFulfilled, onRejected) =>
     waitUntilFinished().then(onFulfilled, onRejected);
   const execute: OverallUseUnReturn<T, R, D>['execute'] = (
-    executeUrl: string | UnConfig<D> | undefined = url,
-    config: UnConfig<D> = {},
+    executeUrl: string | UnConfig<T, D> | undefined = url,
+    config: UnConfig<T, D> = {},
   ) => {
     error.value = undefined;
     const _url = typeof executeUrl === 'string' ? executeUrl : url ?? config.url;
