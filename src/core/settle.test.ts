@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import type { UnResponse } from '../types';
 import { settle } from './settle';
 
 describe('core::settle', () => {
-  let resolve: (value: UnResponse | PromiseLike<UnResponse>) => void;
-  let reject: (reason?: any) => void;
+  let resolve: Mock<[value: UnResponse | PromiseLike<UnResponse>], void>;
+  let reject: Mock<[reason?: any], void>;
 
   beforeEach(() => {
     resolve = vi.fn();
@@ -58,8 +58,7 @@ describe('core::settle', () => {
     settle(resolve, reject, response);
     expect(resolve).not.toHaveBeenCalled();
     expect(reject).toHaveBeenCalled();
-    // @ts-expect-error Property 'calls' does not exist on type '(reason?: any) => void'.ts(2339)
-    const reason = reject.calls[0][0];
+    const reason = reject.mock.calls[0][0];
     expect(reason instanceof Error).toBe(true);
     expect(reason.message).toBe('Request failed with status code 500');
     expect(reason.config).toBe(response.config);
