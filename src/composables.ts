@@ -29,11 +29,11 @@ export interface StrictUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   execute: (
     url?: string | UnConfig<T, D>,
     config?: UnConfig<T, D>,
-  ) => PromiseLike<StrictUseUnReturn<T, R, D>>;
+  ) => Promise<StrictUseUnReturn<T, R, D>>;
 }
 export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   /** 手动调用 */
-  execute: (url: string, config?: UnConfig<T, D>) => PromiseLike<EasyUseUnReturn<T, R, D>>;
+  execute: (url: string, config?: UnConfig<T, D>) => Promise<EasyUseUnReturn<T, R, D>>;
 }
 export interface UseUnOptions<T = UnData> {
   /** 当 `useUn` 被调用时，是否自动发起请求 */
@@ -57,32 +57,32 @@ export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   url: string,
   config?: UnConfig<T, D>,
   options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
+): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   url: string,
   instance?: UnInstance,
   options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
+): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   url: string,
   config: UnConfig<T, D>,
   instance: UnInstance,
   options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & PromiseLike<StrictUseUnReturn<T, R, D>>;
+): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   config?: UnConfig<T, D>,
-): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
+): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   instance?: UnInstance,
-): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
+): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   config?: UnConfig<T, D>,
   instance?: UnInstance,
-): EasyUseUnReturn<T, R, D> & PromiseLike<EasyUseUnReturn<T, R, D>>;
+): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
 
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   ...args: any[]
-): OverallUseUnReturn<T, R, D> & PromiseLike<OverallUseUnReturn<T, R, D>> {
+): OverallUseUnReturn<T, R, D> & Promise<OverallUseUnReturn<T, R, D>> {
   const url: string | undefined = typeof args[0] === 'string' ? args[0] : undefined;
   const argsPlaceholder = isString(url) ? 1 : 0;
   let defaultConfig: UnConfig<T, D> = {};
@@ -129,11 +129,12 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     new Promise<OverallUseUnReturn<T, R, D>>((resolve, reject) => {
       until(isFinished)
         .toBe(true)
-        .then(() => resolve(result))
-        .catch(reject);
+        .then(() => (error.value ? reject(error.value) : resolve(result)));
     });
-  const then: PromiseLike<OverallUseUnReturn<T, R, D>>['then'] = (onFulfilled, onRejected) =>
-    waitUntilFinished().then(onFulfilled, onRejected);
+  const promise = {
+    then: (...args) => waitUntilFinished().then(...args),
+    catch: (...args) => waitUntilFinished().catch(...args),
+  } as Promise<OverallUseUnReturn<T, R, D>>;
   const execute: OverallUseUnReturn<T, R, D>['execute'] = (
     executeUrl: string | UnConfig<T, D> | undefined = url,
     config: UnConfig<T, D> = {},
@@ -144,7 +145,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     if (_url === undefined) {
       error.value = new UnError(UnError.ERR_INVALID_URL);
       isFinished.value = true;
-      return { then };
+      return promise;
     }
     abort();
     loading(true);
@@ -165,7 +166,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
         options.onError?.(e);
       })
       .finally(() => loading(false));
-    return { then };
+    return promise;
   };
   if (options.immediate && url) (execute as StrictUseUnReturn<T, R, D>['execute'])();
 
@@ -188,6 +189,6 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
 
   return {
     ...result,
-    then,
+    ...promise,
   };
 }
