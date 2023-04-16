@@ -1,5 +1,13 @@
 # 改动日志
 
+## 0.15.0 (2023-04-16)
+
+- feat(composables)!: 调整返回的 `error` Ref 类型为 `unknown`，对齐 `vueuse@10` 行为，查看 [vueuse/vueuse#2807](https://github.com/vueuse/vueuse/pull/2807) 了解更多
+- feat(composables)!: 使用 `PromiseLike` 替换 `Promise`，对齐 `vueuse@10` 行为，查看 [vueuse/vueuse#2485](https://github.com/vueuse/vueuse/pull/2485) 了解更多
+- feat(composables): 增加 `onFinish` 选项，对齐 `vueuse@10` 行为，查看 [vueuse/vueuse#2829](https://github.com/vueuse/vueuse/pull/2829) 了解更多
+- feat(composables): 增加 `initialData` 和 `resetOnExecute` 选项，对齐 `vueuse@10` 行为，查看 [vueuse/vueuse#2791](https://github.com/vueuse/vueuse/pull/2791) 了解更多
+- fix(composables): 修复 `UnConfig` 类型使用
+
 ## 0.14.0 (2023-02-28)
 
 - feat: 新增组合式函数
