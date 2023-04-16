@@ -48,6 +48,8 @@ export interface UseUnOptions<T = UnData> {
   onError?: (e: unknown) => void;
   /** 成功请求时调用 */
   onSuccess?: (data: T) => void;
+  /** 请求结束时调用 */
+  onFinish?: () => void;
 }
 type OverallUseUnReturn<T, R, D> = StrictUseUnReturn<T, R, D> | EasyUseUnReturn<T, R, D>;
 
@@ -165,7 +167,10 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
         error.value = e;
         options.onError?.(e);
       })
-      .finally(() => loading(false));
+      .finally(() => {
+        options.onFinish?.();
+        loading(false);
+      });
     return promise;
   };
   if (options.immediate && url) (execute as StrictUseUnReturn<T, R, D>['execute'])();
