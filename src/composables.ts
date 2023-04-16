@@ -1,6 +1,6 @@
 import type { Ref, ShallowRef } from 'vue-demi';
 import { ref, shallowRef } from 'vue-demi';
-import { isString, until } from '@vueuse/core';
+import { until } from '@vueuse/core';
 import type { UnInstance, UnResponse, UnCancelTokenSource, UnConfig, UnData } from './index';
 import { un, UnError } from './index';
 
@@ -98,7 +98,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   ...args: any[]
 ): OverallUseUnReturn<T, R, D> & Promise<OverallUseUnReturn<T, R, D>> {
   const url: string | undefined = typeof args[0] === 'string' ? args[0] : undefined;
-  const argsPlaceholder = isString(url) ? 1 : 0;
+  const argsPlaceholder = typeof url === 'string' ? 1 : 0;
   let defaultConfig: UnConfig<T, D> = {};
   let instance: UnInstance = un;
   let options: UseUnOptions<T> = { immediate: !!argsPlaceholder, shallow: true };
