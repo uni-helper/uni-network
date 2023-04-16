@@ -36,7 +36,11 @@ export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   execute: (url: string, config?: UnConfig<T, D>) => Promise<EasyUseUnReturn<T, R, D>>;
 }
 export interface UseUnOptions<T = UnData> {
-  /** 当 `useUn` 被调用时，是否自动发起请求 */
+  /**
+   * 当 `useUn` 被调用时，是否自动发起请求
+   *
+   * 第一个参数传递字符串时默认为 true，否则默认为 false
+   */
   immediate?: boolean;
   /**
    * 是否使用 shallowRef
@@ -44,6 +48,14 @@ export interface UseUnOptions<T = UnData> {
    * @default true
    */
   shallow?: boolean;
+  /** 在请求还未响应时使用的响应数据 */
+  initialData?: T;
+  /**
+   * 是否在执行前将请求数据重置为 initialData
+   *
+   * @default false
+   */
+  resetOnExecute?: boolean;
   /** 发生错误时调用 */
   onError?: (e: unknown) => void;
   /** 成功请求时调用 */
@@ -106,7 +118,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     options = args[args.length - 1];
 
   const response = shallowRef<UnResponse<T, D>>();
-  const data = options.shallow ? shallowRef<T>() : ref<T>();
+  const data = (options.shallow ? shallowRef : ref)(options.initialData) as Ref<T | undefined>;
   const isFinished = ref(false);
   const isLoading = ref(false);
   const isAborted = ref(false);
@@ -126,6 +138,10 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   const loading = (loading: boolean) => {
     isLoading.value = loading;
     isFinished.value = !loading;
+  };
+
+  const resetData = () => {
+    if (options.resetOnExecute ?? false) data.value = options.initialData;
   };
   const waitUntilFinished = () =>
     new Promise<OverallUseUnReturn<T, R, D>>((resolve, reject) => {
@@ -149,6 +165,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
       isFinished.value = true;
       return promise;
     }
+    resetData();
     abort();
     loading(true);
     instance(_url, {
