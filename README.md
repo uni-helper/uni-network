@@ -29,29 +29,23 @@
 
 请查看 [构建](#构建) 部分的说明。
 
-#### 安装
-
-使用 `npm`：
+#### 安装依赖
 
 ```shell
 npm install @uni-helper/uni-network
 ```
 
-使用 `yarn v1`：
+<details>
+  <summary>yarn v2/v3</summary>
+  <p>请参考 <a href="https://yarnpkg.com/configuration/yarnrc/#nodeLinker">文档</a> 设置 <code>nodeLinker</code> 为 <code>node_modules</code>。</p>
+</details>
 
-```shell
-yarn add @uni-helper/uni-network
-```
-
-`uni-app` 和 `pnpm` 结合使用存在问题，不建议使用 `pnpm` 安装依赖。
+<details>
+  <summary>pnpm</summary>
+  <p>请参考 <a href="https://pnpm.io/npmrc#shamefully-hoist">文档</a> 设置 <code>shamefully-hoist</code> 为 <code>true</code>。</p>
+</details>
 
 不考虑支持 `uni_modules`。
-
-安装依赖之后，你可以使用 `import` 导入。
-
-```typescript
-import un, { isUnCancel, UnError } from '@uni-helper/uni-network';
-```
 
 ### 例子
 
