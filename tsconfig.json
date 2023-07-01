@@ -5,6 +5,7 @@
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
     "target": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "types": ["@dcloudio/types", "node"]
   },
