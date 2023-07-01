@@ -53,7 +53,7 @@
     "commit": "git-cz",
     "dev": "unbuild --stub",
     "lint": "conc \"pnpm:lint:eslint\" \"pnpm:lint:markdownlint\"",
-    "lint:eslint": "eslint ./src --fix --cache --ignore-",
+    "lint:eslint": "eslint ./src --fix --cache --ignore-path=.gitignore",
     "lint:markdownlint": "markdownlint . --fix --ignore-path=.gitignore",
     "release": "pnpm install && pnpm run lint && bumpp",
     "prepublishOnly": "pnpm run build",
