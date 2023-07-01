@@ -224,8 +224,8 @@ const instance = un.create({
 
   // `params` 是与请求一起发送的 URL 参数
   // 必须是一个普通对象或一个 URLSearchParams 对象
-  // URLSearchParams 需要使用 polyfill
-  // https://github.com/ungap/url-search-params
+  // 要使用 URLSearchParams 对象，请使用 core-js 提供的 polyfill
+  // 可参考构建部分的说明或该仓库提供的 playground
   params: {
     ID: 12345
   },
@@ -681,7 +681,7 @@ un.get('/user/12345').catch((error) => {
 
 ### 取消请求
 
-支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。在 `uni-app` 环境，你可能需要使用 [这个 polyfill](https://github.com/mysticatea/abort-controller)。
+支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 [这个 polyfill](https://github.com/mysticatea/abort-controller)。
 
 ```shell
 npm install abort-controller@^3.0.0 # 安装依赖
@@ -814,7 +814,8 @@ import 'core-js/actual/promise';
 import 'core-js/actual/object/assign';
 import 'core-js/actual/promise/finally';
 // 你可以根据需要自行添加额外的 polyfills
-// import 'core-js/actual/object/values'
+// import 'core-js/actual/object/values';
+// import 'core-js/actual/url-search-params';
 import { createSSRApp } from 'vue';
 import App from './App.vue';
 
