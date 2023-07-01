@@ -79,7 +79,7 @@
     "@commitlint/config-conventional": "^17.6.1",
     "@commitlint/prompt": "^17.6.1",
     "@modyqyw/fabric": "^7.5.0",
-    "@modyqyw/utils": "^5.0.0",
+    "@modyqyw/utils": "^7.0.0",
     "@tsconfig/node18": "^1.0.1",
     "@types/node": "^18.15.11",
     "@types/ungap__url-search-params": "^0.1.0",
