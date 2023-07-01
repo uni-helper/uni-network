@@ -681,9 +681,19 @@ un.get('/user/12345').catch((error) => {
 
 ### 取消请求
 
-支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。在 `uni-app` 环境，你可能需要使用 [polyfill](https://github.com/mysticatea/abort-controller)。
+支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。在 `uni-app` 环境，你可能需要使用 [这个 polyfill](https://github.com/mysticatea/abort-controller)。
+
+```shell
+npm install abort-controller@^3.0.0 # 安装依赖
+```
 
 ```typescript
+import AbortController from 'abort-controller/dist/abort-controller';
+// 错误做法 1
+// import AbortController from 'abort-controller';
+// 错误做法 2
+// import 'abort-controller/polyfill';
+
 const controller = new AbortController();
 
 un.get('/foo/bar', {
