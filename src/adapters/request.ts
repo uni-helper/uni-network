@@ -38,7 +38,6 @@ export const requestAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =
           // @ts-expect-error no types
           errno: res?.errno,
           cookies: res?.cookies,
-          // @ts-expect-error no types
           profile: res?.profile,
           status: res?.statusCode,
           statusText,
