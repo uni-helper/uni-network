@@ -231,7 +231,7 @@ const instance = un.create({
   },
 
   // `paramsSerializer` 是可选方法，主要用于序列化 `params`
-  // 默认使用 [qs](https://github.com/ljharb/qs) 序列化
+  // 默认使用 [query-string](https://github.com/sindresorhus/query-string) 序列化
   paramsSerializer: (params) => { /* 返回一个字符串 */ }
 
   // `timeout` 指定请求超时的毫秒数

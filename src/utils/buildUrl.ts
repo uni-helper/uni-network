@@ -1,4 +1,4 @@
-import qs from 'qs';
+import qs from 'query-string';
 import type { UnParams, UnParamsSerializer } from '../types';
 
 export const buildUrl = (url: string, params?: UnParams, paramsSerializer?: UnParamsSerializer) => {

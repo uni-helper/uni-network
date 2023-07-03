@@ -64,11 +64,10 @@
   "dependencies": {
     "@dcloudio/types": "^3.3.3",
     "@types/lodash.merge": "^4.6.7",
-    "@types/qs": "^6.9.7",
     "@types/statuses": "^2.0.1",
     "@vueuse/core": "^9.13.0",
     "lodash.merge": "^4.6.2",
-    "qs": "^6.11.2",
+    "query-string": "^8.1.0",
     "statuses": "^2.0.1",
     "vue-demi": "^0.14.5"
   },

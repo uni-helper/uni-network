@@ -33,7 +33,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 可选方法，主要用于序列化 `params`
    *
-   * 默认使用 [qs](https://github.com/ljharb/qs) 序列化
+   * 默认使用 [query-string](https://github.com/sindresorhus/query-string) 序列化
    */
   paramsSerializer?: UnParamsSerializer;
   /**
