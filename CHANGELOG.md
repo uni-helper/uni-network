@@ -1,6 +1,6 @@
 # 改动日志
 
-## Unreleased
+## 0.16.0 (2023-07-03)
 
 - feat!: 默认使用 [query-string](https://github.com/sindresorhus/query-string) 而不是 [qs](https://github.com/ljharb/qs) 序列化 `params`
   - `query-string@8.1.0` 支持 `node >= 14.16`，没有过多的历史包袱，而 `qs@6.11.2` 至今还在支持 `node >= 0.6`
