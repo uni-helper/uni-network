@@ -1,5 +1,9 @@
 # 改动日志
 
+## 0.16.1 (2023-08-08)
+
+- fix: 移除默认的 timeout 值，修复 H5 端请求立即超时的问题，关闭 [#37](https://github.com/uni-helper/uni-network/issues/37)
+
 ## 0.16.0 (2023-07-03)
 
 - feat!: 默认使用 [query-string](https://github.com/sindresorhus/query-string) 而不是 [qs](https://github.com/ljharb/qs) 序列化 `params`
