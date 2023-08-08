@@ -22,7 +22,8 @@ describe('utils::buildUrl', () => {
           bar: 'baz',
         },
       }),
-    ).toEqual('/foo?foo%5Bbar%5D=baz');
+      // ).toEqual('/foo?foo%5Bbar%5D=baz'); // qs
+    ).toEqual('/foo?foo=%5Bobject%20Object%5D'); // query-string
   });
 
   it('should support date params', () => {
@@ -32,7 +33,10 @@ describe('utils::buildUrl', () => {
       buildUrl('/foo', {
         date: date,
       }),
-    ).toEqual('/foo?date=' + encodeURIComponent(date.toISOString()));
+      // ).toEqual('/foo?date=' + encodeURIComponent(date.toISOString())); // qs
+    ).toEqual(
+      '/foo?date=' + encodeURIComponent(date.toString()).replace('(', '%28').replace(')', '%29'),
+    ); // query-string
   });
 
   it('should support array params', () => {
@@ -40,7 +44,8 @@ describe('utils::buildUrl', () => {
       buildUrl('/foo', {
         foo: ['bar', 'baz'],
       }),
-    ).toEqual('/foo?foo%5B0%5D=bar&foo%5B1%5D=baz');
+      // ).toEqual('/foo?foo%5B0%5D=bar&foo%5B1%5D=baz'); // qs
+    ).toEqual('/foo?foo=bar&foo=baz'); // query-string
   });
 
   it('should support special char params', () => {
@@ -66,7 +71,8 @@ describe('utils::buildUrl', () => {
         start: 0,
         length: 5,
       }),
-    ).toEqual('/foo?query=bar&start=0&length=5');
+      // ).toEqual('/foo?query=bar&start=0&length=5'); // qs
+    ).toEqual('/foo?length=5&query=bar&start=0'); // query-string
   });
 
   it('should correct discard url hash mark', () => {
