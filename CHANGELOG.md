@@ -9,6 +9,7 @@
 - feat!: 默认使用 [query-string](https://github.com/sindresorhus/query-string) 而不是 [qs](https://github.com/ljharb/qs) 序列化 `params`
   - `query-string@8.1.0` 支持 `node >= 14.16`，没有过多的历史包袱，而 `qs@6.11.2` 至今还在支持 `node >= 0.6`
   - `qs@6.10.0` 开始引入了 `get-intrinsic`，结合微信小程序和微信小程序插件使用时会出现报错，参考 [#31](https://github.com/uni-helper/uni-network/issues/31)，而 `query-string@8.1.0` 没有这个问题
+  - 如果你的 `params` 对象内某个键的值为对象、数组或 Date，表现行为会不一致
   - 如果你更倾向于使用该库 0.15.0 版本或更早版本的默认设置，请安装 `qs@6.9.7`，并设置 `paramsSerializer`
 
   ```typescript
