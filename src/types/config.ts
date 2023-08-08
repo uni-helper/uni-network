@@ -47,7 +47,7 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 如果请求时间超过 `timeout` 的值，则请求会被中断
    *
-   * 默认为 0，即 uni-app 和平台设置的最大超时时间
+   * 默认值是实际调用的 API 的默认值
    */
   timeout?: number;
   /**
