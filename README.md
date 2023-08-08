@@ -236,7 +236,7 @@ const instance = un.create({
 
   // `timeout` 指定请求超时的毫秒数
   // 如果请求时间超过 `timeout` 的值，则请求会被中断
-  timeout: 1000, // 默认值是 `0` (即 uni-app 和平台设置的最大超时时间)
+  timeout: 1000, // 默认值是实际调用的 API 的默认值
 
   // `adapter` 允许自定义处理请求
   // 可以指定为 'request'、'upload' 和 'download' 三者之一
