@@ -77,7 +77,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@commitlint/prompt": "^17.6.6",
-    "@modyqyw/fabric": "^8.3.2",
+    "@modyqyw/fabric": "^9.0.0",
     "@modyqyw/utils": "^7.1.0",
     "@tsconfig/node18": "^18.2.0",
     "@types/node": "^18.16.19",
