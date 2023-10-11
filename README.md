@@ -55,7 +55,7 @@ npm install @uni-helper/uni-network
 import un from '@uni-helper/uni-network';
 
 // 请求特定 ID 的用户数据
-un.get('user?ID=12345')
+un.get('/user?ID=12345')
   .then((response) => {
     // 处理响应
     console.log('response', response);
