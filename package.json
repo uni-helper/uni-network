@@ -119,7 +119,7 @@
   },
   "packageManager": "pnpm@8.10.2",
   "engines": {
-    "node": ">=14.18"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public",
