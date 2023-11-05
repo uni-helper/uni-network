@@ -1,11 +1,11 @@
 {
-  "extends": "@tsconfig/node18",
+  "extends": "@tsconfig/node20",
   "compilerOptions": {
     "baseUrl": ".",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
     "target": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "types": ["@dcloudio/types", "node"]
   },
