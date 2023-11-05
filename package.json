@@ -65,7 +65,7 @@
     "lint": "conc \"pnpm:lint:eslint\" \"pnpm:lint:markdownlint\"",
     "lint:eslint": "eslint ./src --fix --cache --ignore-path=.gitignore",
     "lint:markdownlint": "markdownlint . --fix --ignore-path=.gitignore",
-    "release": "pnpm install && pnpm run lint && bumpp",
+    "release": "pnpm install && pnpm run lint && pnpm run check:types && bumpp",
     "prepublishOnly": "pnpm run build",
     "prepare": "is-ci || simple-git-hooks",
     "test": "vitest run",
