@@ -1,5 +1,9 @@
 # 改动日志
 
+## 0.17.0 (2023-11-04)
+
+- feat!: 现在要求 `node>=18`
+
 ## 0.16.1 (2023-08-08)
 
 - fix: 移除默认的 timeout 值，修复 H5 端请求立即超时的问题，关闭 [#37](https://github.com/uni-helper/uni-network/issues/37)
