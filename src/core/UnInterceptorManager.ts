@@ -29,6 +29,7 @@ export interface UnInterceptorManager<V, T = V, D = UnData> {
   clear(): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UnInterceptorManager<V, T = V, D = UnData> {
   private handlers: (UnInterceptorManagerHandler<V, T, D> | null)[] = [];
 

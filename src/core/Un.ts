@@ -7,6 +7,7 @@ import {
 } from './UnInterceptorManager';
 import { dispatchRequest } from './dispatchRequest';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class Un<T = UnData, D = UnData> {
   defaults: UnConfig<T, D>;
   interceptors: {

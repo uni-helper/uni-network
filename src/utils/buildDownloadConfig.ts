@@ -12,4 +12,4 @@ export const buildDownloadConfig = <T = UnData, D = UnData>(config: UnConfig<T, 
     header: config.headers,
     timeout: config.timeout,
     filePath: config.filePath,
-  } as UniApp.DownloadFileOption);
+  }) as UniApp.DownloadFileOption;

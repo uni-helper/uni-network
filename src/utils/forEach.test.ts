@@ -44,7 +44,6 @@ describe('utils::forEach', function () {
     let count = 0;
 
     forEach(
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
       function () {},
       function () {
         count++;

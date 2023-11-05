@@ -17,4 +17,4 @@ export const buildUploadConfig = <T = UnData, D = UnData>(config: UnConfig<T, D>
     header: config.headers,
     timeout: config.timeout,
     formData: config.formData,
-  } as UniApp.UploadFileOption);
+  }) as UniApp.UploadFileOption;

@@ -25,4 +25,4 @@ export const buildRequestConfig = <T = UnData, D = UnData>(config: UnConfig<T, D
     sslVerify: config.sslVerify,
     withCredentials: config.withCredentials,
     firstIpv4: config.firstIpv4,
-  } as UniApp.RequestOptions);
+  }) as UniApp.RequestOptions;
