@@ -75,7 +75,7 @@
     "@dcloudio/types": "^3.4.3",
     "@types/lodash.merge": "^4.6.8",
     "@types/statuses": "^2.0.3",
-    "@vueuse/core": "^9.13.0",
+    "@vueuse/core": "^10.0.0",
     "lodash.merge": "^4.6.2",
     "query-string": "^8.1.0",
     "statuses": "^2.0.1",
