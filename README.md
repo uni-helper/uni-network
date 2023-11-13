@@ -935,7 +935,7 @@ un.interceptors.response.use(
 
 ### 全局请求加载
 
-请参考  [uni-ajax - FAQ - 配置全局请求加载](https://uniajax.ponjs.com/guide/question#%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E8%AF%B7%E6%B1%82%E5%8A%A0%E8%BD%BD)。**⚠️ 注意：如果你要同时发起多个请求并在所有请求结束后才关闭加载，你仍然需要手动控制加载的显隐。**
+请参考  [uni-ajax - FAQ - 配置全局请求加载](https://uniajax.ponjs.com/guide/question#%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E8%AF%B7%E6%B1%82%E5%8A%A0%E8%BD%BD)。**⚠️ 注意：这类做法不适用于局部加载展示。**
 
 ## 组合式函数
 
