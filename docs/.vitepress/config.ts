@@ -20,16 +20,49 @@ export default defineConfig({
   themeConfig: {
     logo: { src: '/logo.png', width: 24, height: 24 },
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: '指南', link: '/guide/introduction' },
+      {
+        text: '更新日志',
+        link: 'https://github.com/uni-helper/uni-network/tree/main/CHANGELOG.md',
+      },
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: '指南',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
+          { text: '介绍', link: '/guide/introduction' },
+          { text: '安装', link: '/guide/quick-start' },
+          { text: '示例', link: '/guide/example' },
+        ],
+      },
+      {
+        text: 'Un Api',
+        items: [
+          { text: 'API', link: '/guide/api-intro' },
+          { text: 'Un 实例', link: '/guide/instance' },
+          { text: '请求配置', link: '/guide/req-config' },
+          { text: '响应结构', link: '/guide/res-schema' },
+          { text: '默认配置', link: '/guide/config-defaults' },
+          { text: '拦截器', link: '/guide/interceptors' },
+          { text: '错误处理', link: '/guide/handling-errors' },
+          { text: '取消请求', link: '/guide/cancellation' },
+        ],
+      },
+      {
+        text: '进阶',
+        items: [
+          { text: 'TS 支持', link: '/advanced/ts-support' },
+          { text: '高级功能', link: '/advanced/enhancements' },
+          { text: '组合式函数', link: '/advanced/composition-api' },
+        ],
+      },
+      {
+        text: '其它',
+        items: [
+          { text: '构建', link: '/other/build' },
+          { text: '为什么不是...?', link: '/other/why-not' },
+          { text: '致谢', link: '/other/thank' },
         ],
       },
     ],

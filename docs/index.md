@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 快速入门 →
-      link: /markdown-examples
+      link: /guide/introduction
     - theme: alt
       text: 安装
       link: /api-examples
