@@ -44,14 +44,14 @@ export default defineConfig({
           { text: '请求配置', link: '/guide/req-config' },
           { text: '响应结构', link: '/guide/res-schema' },
           { text: '默认配置', link: '/guide/config-defaults' },
-          { text: '拦截器', link: '/guide/interceptors' },
-          { text: '错误处理', link: '/guide/handling-errors' },
-          { text: '取消请求', link: '/guide/cancellation' },
         ],
       },
       {
         text: '进阶',
         items: [
+          { text: '拦截器', link: '/advanced/interceptors' },
+          { text: '错误处理', link: '/advanced/handling-errors' },
+          { text: '取消请求', link: '/advanced/cancellation' },
           { text: 'TS 支持', link: '/advanced/ts-support' },
           { text: '高级功能', link: '/advanced/enhancements' },
           { text: '组合式函数', link: '/advanced/composition-api' },

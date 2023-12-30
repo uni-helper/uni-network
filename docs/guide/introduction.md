@@ -8,8 +8,8 @@
 - 上传文件使用 [uni.uploadFile](https://uniapp.dcloud.io/api/request/network-file.html#uploadfile)
 - 下载文件使用 [uni.downloadFile](https://uniapp.dcloud.io/api/request/network-file.html#downloadfile)
 - 支持 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
-- [拦截请求和响应的数据](../guide/interceptors.md)
-- [取消请求](../guide/cancellation.md)
+- [拦截请求和响应的数据](../advanced/interceptors.md)
+- [取消请求](../advanced/cancellation.md)
 - [TypeScript 支持](../advanced/ts-support.md)
 - [组合式函数](../advanced/composition-api.md)
 

@@ -67,4 +67,4 @@ un.get('/user/12345').then((response) => {
 });
 ```
 
-当使用 `catch`，或者传递一个 `rejection callback` 作为 `then` 的第二个参数时，响应可以作为 `error` 对象被使用，正如在 [错误处理](../guide/handling-errors.md) 部分解释的那样。
+当使用 `catch`，或者传递一个 `rejection callback` 作为 `then` 的第二个参数时，响应可以作为 `error` 对象被使用，正如在 [错误处理](../advanced/handling-errors.md) 部分解释的那样。
