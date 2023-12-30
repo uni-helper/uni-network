@@ -1,18 +1,20 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
   name: "Uni Network"
-  text: "为 uni-app 打造的基于 Promise 的 HTTP 客户端。"
-  tagline: My great project tagline
+  text: "Uni Helper 官方维护的请求库"
+  tagline: 为 uni-app 打造的基于 Promise 的 HTTP 客户端。
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: 快速入门 →
       link: /markdown-examples
     - theme: alt
-      text: API Examples
+      text: 安装
       link: /api-examples
+  image:
+    src: /logo.png
+    alt: Uni Helper
 
 features:
   - title: Feature A
