@@ -69,7 +69,10 @@
     "prepublishOnly": "pnpm run build",
     "prepare": "is-ci || simple-git-hooks",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@dcloudio/types": "^3.4.3",
@@ -112,6 +115,7 @@
     "type-fest": "^4.6.0",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0",
+    "vitepress": "1.0.0-rc.33",
     "vitest": "^0.34.6",
     "vue": "^3.3.7"
   },
