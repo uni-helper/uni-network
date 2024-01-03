@@ -21,7 +21,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 创建请求时使用的方法
    *
-   * 默认为 GET
+   * 默认为 'GET'
    */
   method?: UnMethod;
   /** 自动加在 `url` 前面，除非 `url` 是一个绝对 URL */
@@ -33,7 +33,13 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 可选方法，主要用于序列化 `params`
    *
-   * 默认使用 [query-string](https://github.com/sindresorhus/query-string) 序列化
+   * 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring) 序列化
+   *
+   * [qs](https://github.com/ljharb/qs) v6.10.0 开始引入了
+   * `get-intrinsic`，结合微信小程序和微信小程序插件使用时会出现报错，如有需要可以使用 v6.9.7
+   *
+   * [query-string](https://github.com/sindresorhus/query-string) v8.1.0
+   * 使用了支付宝小程序不支持的语法，如无支付宝小程序需求也可以使用 query-string，它体积比 qs 小，性能比 qs 好
    */
   paramsSerializer?: UnParamsSerializer;
   /**
@@ -47,6 +53,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 如果请求时间超过 `timeout` 的值，则请求会被中断
    *
+   * 要设置永不超时，可以将其设置为 Number.POSITIVE_INFINITY
+   *
    * 默认值是实际调用的 API 的默认值
    */
   timeout?: number;
@@ -57,11 +65,13 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 也可以指定为一个方法，返回一个 Promise 并提供一个有效的响应
    *
-   * 默认为 request
+   * 如果你正在使用 un.request、un.download、un.upload、un.get 等别名方法，则无需再指定该键的值
+   *
+   * 默认为 'request'
    */
   adapter?: 'request' | 'download' | 'upload' | UnAdapter<T, D>;
   /**
-   * 定义了对于给定的 HTTP 状态码是 resolve 还是 reject
+   * 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
    *
    * 如果 `validateStatus` 返回 `true`、`null` 或 `undefined`
    *
