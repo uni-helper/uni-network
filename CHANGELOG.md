@@ -1,5 +1,10 @@
 # 改动日志
 
+## 0.18.0 (2023-01-03)
+
+- feat!: 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring) 而不是 [query-string](https://github.com/sindresorhus/query-string) 序列化 `params`
+  - `query-string@8.1.0` 和它所依赖的库存在 `try {} catch {}` 的用法，该用法不受支付宝小程序支持
+
 ## 0.17.0 (2023-11-04)
 
 - feat!: 现在要求 `node>=18`
@@ -11,6 +16,7 @@
 ## 0.16.0 (2023-07-03)
 
 - feat!: 默认使用 [query-string](https://github.com/sindresorhus/query-string) 而不是 [qs](https://github.com/ljharb/qs) 序列化 `params`
+
   - `query-string@8.1.0` 支持 `node >= 14.16`，没有过多的历史包袱，而 `qs@6.11.2` 至今还在支持 `node >= 0.6`
   - `qs@6.10.0` 开始引入了 `get-intrinsic`，结合微信小程序和微信小程序插件使用时会出现报错，参考 [#31](https://github.com/uni-helper/uni-network/issues/31)，而 `query-string@8.1.0` 没有这个问题
   - 如果你的 `params` 对象内某个键的值为对象、数组或 Date，表现行为会不一致
