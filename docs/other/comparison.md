@@ -1,14 +1,16 @@
-# 为什么不是 `axios`？
+# 比较
 
-`axios` 非常棒，但它面对的是浏览器和 `Node.js`，即使使用了 `adapter`，某些底层功能也可能会在小程序内报错。`axios` 体积较大，会占用宝贵的小程序空间。
+最常见的比较就是 `axios` 和 `@uni-helper/uni-network` 的比较。
 
-此外，如果你想要获取良好的 TypeScript，你需要修改 `axios` 大部分类型定义。
+`axios` 非常棒，`@uni-helper/uni-network` 的灵感也源于 `axios`，但 `axios` 存在几个相对严重的问题。
 
-你可以查看 [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter) 获取 `adapter` 支持。
+- `axios` 面向浏览器和 Node.js，即使使用了 `adapter`，某些底层功能也可能会在小程序内报错。
+- `axios` 体积较大，会占用宝贵的小程序空间。
+- 如果你想要获取良好的 TypeScript，你需要修改 `axios` 大部分类型定义。
 
-### 比较
+如果你因为某些原因坚持使用 `axios`，你可以查看 [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter) 获取 `adapter` 支持。
 
-如果你发现这里信息已经过时，请提交 ISSUE 或 PR。
+以下是 `@uni-helper/uni-network` 与其它一些库的比较。如果你发现这里信息已经过时，欢迎提交 ISSUE 或 PR。
 
 |                              | `axios`                                                      | `luch-request`                                               | `uni-ajax`                                                   | `@uni-helper/uni-network`                                    |
 | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |

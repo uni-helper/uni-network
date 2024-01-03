@@ -4,7 +4,11 @@
 
 ## 添加拦截器
 
-```ts
+可以全局添加请求或响应的拦截器。
+
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 // 添加请求拦截器
 un.interceptors.request.use(
   function (config) {
@@ -32,47 +36,79 @@ un.interceptors.response.use(
 );
 ```
 
-可以给自定义实例添加拦截器。
+也可以给自定义实例添加请求或响应的拦截器。
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
+// 创建实例
 const instance = un.create();
+
+// 添加请求拦截器
 instance.interceptors.request.use(() => {
-  /*...*/
+  /* ... */
 });
+
+// 添加响应拦截器
+instance.interceptors.response.use(() => {
+  /* ... */
+})
 ```
 
 ## 移除拦截器
 
-```ts
-const myInterceptor = un.interceptors.request.use(() => {
-  /*...*/
+可以移除单个请求或响应的拦截器。
+
+```typescript
+import { un } from '@uni-helper/uni-network';
+
+// 添加请求拦截器
+const requestInterceptor = un.interceptors.request.use(() => {
+  /* ... */
 });
-un.interceptors.request.eject(myInterceptor);
+// 移除请求拦截器
+un.interceptors.request.eject(requestInterceptor);
+
+// 添加响应拦截器
+const responseInterceptor = un.interceptors.response.use(() => {
+  /* ... */
+})
+// 移除响应拦截器
+un.interceptors.response.eject(responseInterceptor);
 ```
 
 也可以移除所有请求或响应的拦截器。
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
+// 创建实例
 const instance = un.create();
+
+// 添加请求拦截器
 instance.interceptors.request.use(() => {
-  /*...*/
+  /* ... */
 });
-instance.interceptors.request.clear(); // 移除所有请求拦截器
+// 移除所有请求拦截器
+instance.interceptors.request.clear();
+
+// 添加响应拦截器
 instance.interceptors.response.use(() => {
-  /*...*/
+  /* ... */
 });
-instance.interceptors.response.clear(); // 移除所有响应拦截器
+// 移除所有响应拦截器
+instance.interceptors.response.clear();
 ```
 
 ## 拦截器选项
 
-当你添加请求拦截器时，`@uni-helper/uni-network` 默认认为它们是异步的。
-
-当主线程被阻塞时，这可能会导致 `@uni-helper/uni-network` 请求的执行延迟（底层为拦截器创建了一个 `Promise`，你的请求被放在了调用栈的底部）。
+当你添加请求拦截器时，`@uni-helper/uni-network` 默认认为它们是异步的。当主线程被阻塞时，这可能会导致 `@uni-helper/uni-network` 请求的执行延迟（底层为拦截器创建了一个 `Promise`，你的请求被放在了调用栈的底部）。
 
 如果你的请求拦截器是同步的，你可以在选项对象中添加一个标志，告诉 `@uni-helper/uni-network` 同步运行代码，避免请求执行中的任何延迟。
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 un.interceptors.request.use(
   (config) => {
     config.headers.test = 'I am only a header!';
@@ -83,13 +119,11 @@ un.interceptors.request.use(
 );
 ```
 
-如果你想根据运行时检查来执行某个拦截器，你可以在 `options` 对象中设置 `runWhen` 函数。
+如果你想根据运行时检查来执行某个拦截器，你可以在 `options` 对象中设置 `runWhen` 函数。**当且仅当** `runWhen` 的返回值为 `false` 时，拦截器不会被执行。该函数将和 `config` 对象一起被调用（别忘了，你也可以绑定你自己的参数）。当你有一个只需要在特定时间运行的异步请求拦截器时，这可能会很方便。
 
-**当且仅当** `runWhen` 的返回值为 `false` 时，拦截器不会被执行。该函数将和 `config` 对象一起被调用（别忘了，你也可以绑定你自己的参数）。
+```typescript
+import { un } from '@uni-helper/uni-network';
 
-当你有一个只需要在特定时间运行的异步请求拦截器时，这可能会很方便。
-
-```ts
 const onGetCall = (config) => config.method.toUpperCase() === 'GET';
 un.interceptors.request.use(
   (config) => {

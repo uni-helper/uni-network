@@ -32,18 +32,18 @@ export default defineConfig({
         text: '指南',
         items: [
           { text: '介绍', link: '/guide/introduction' },
-          { text: '安装', link: '/guide/quick-start' },
-          { text: '示例', link: '/guide/example' },
+          { text: '起步', link: '/guide/installation' },
+          { text: '基本用例', link: '/guide/example' },
         ],
       },
       {
-        text: 'Un Api',
+        text: 'API',
         items: [
-          { text: 'API', link: '/guide/api-intro' },
-          { text: 'Un 实例', link: '/guide/instance' },
-          { text: '请求配置', link: '/guide/req-config' },
-          { text: '响应结构', link: '/guide/res-schema' },
-          { text: '默认配置', link: '/guide/config-defaults' },
+          { text: 'API', link: '/api/introduction' },
+          { text: '实例', link: '/api/instance' },
+          { text: '请求配置', link: '/api/request-config' },
+          { text: '响应结构', link: '/api/response-schema' },
+          { text: '默认配置', link: '/api/config-defaults' },
         ],
       },
       {
@@ -52,7 +52,7 @@ export default defineConfig({
           { text: '拦截器', link: '/advanced/interceptors' },
           { text: '错误处理', link: '/advanced/handling-errors' },
           { text: '取消请求', link: '/advanced/cancellation' },
-          { text: 'TS 支持', link: '/advanced/ts-support' },
+          { text: 'TypeScript 支持', link: '/advanced/typescript-support' },
           { text: '高级功能', link: '/advanced/enhancements' },
           { text: '组合式函数', link: '/advanced/composition-api' },
         ],
@@ -60,8 +60,8 @@ export default defineConfig({
       {
         text: '其它',
         items: [
-          { text: '构建', link: '/other/build' },
-          { text: '为什么不是...?', link: '/other/why-not' },
+          { text: '构建与环境支持', link: '/other/build' },
+          { text: '比较', link: '/other/comparison' },
           { text: '致谢', link: '/other/thank' },
         ],
       },

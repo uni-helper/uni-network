@@ -1,11 +1,9 @@
 # 基本用例
 
-使用 `uni-network` 基本用例
-
 ## GET 请求
 
-```ts
-import un from '@uni-helper/uni-network';
+```typescript
+import { un } from '@uni-helper/uni-network';
 
 // 请求特定 ID 的用户数据
 un.get('/user?ID=12345')
@@ -38,9 +36,11 @@ un.get('/user', {
   });
 ```
 
-## async/await
+## 使用 async/await 的 GET 请求
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 async function getUser() {
   try {
     const response = await un.get('/user?ID=12345');
@@ -53,7 +53,9 @@ async function getUser() {
 
 ## POST 请求
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 un.post('/user', {
   firstName: 'Fred',
   lastName: 'Flintstone',
@@ -69,7 +71,9 @@ un.post('/user', {
 
 ## 并发请求
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 function getUserAccount() {
   return un.get('/user/12345');
 }
@@ -83,3 +87,5 @@ Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
   const perm = responses[1];
 });
 ```
+
+基本用例应该能让你初步上手 `@uni-helper/uni-network`。你可以动手尝试一下，也可以继续往下阅读。

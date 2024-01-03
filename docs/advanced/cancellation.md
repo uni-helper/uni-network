@@ -2,25 +2,26 @@
 
 ## AbortController
 
-支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 [这个 polyfill](https://github.com/mysticatea/abort-controller)。
+支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 [abort-controller polyfill](https://github.com/mysticatea/abort-controller)。
 
 ::: code-group
 
 ```sh [npm]
-npm add -D abort-controller@^3.0.0
-```
-
-```sh [pnpm]
-pnpm add -D abort-controller@^3.0.0
+npm add abort-controller@^3.0.0
 ```
 
 ```sh [yarn]
-yarn add -D abort-controller@^3.0.0
+yarn add abort-controller@^3.0.0
+```
+
+```sh [pnpm]
+pnpm add abort-controller@^3.0.0
 ```
 
 :::
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
 import AbortController from 'abort-controller/dist/abort-controller';
 // ❌ 错误做法 1
 // import AbortController from 'abort-controller';
@@ -40,9 +41,11 @@ controller.abort();
 
 ## CancelToken
 
-你也可以使用 `CancelToken`。
+你也可以使用 `CancelToken` 来取消请求。
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 const CancelToken = un.CancelToken;
 const source = CancelToken.source();
 
@@ -71,7 +74,9 @@ source.cancel('Operation canceled by the user.');
 
 你也可以通过向 `CancelToken` 构造函数传递一个执行函数来创建一个 `CancelToken` 实例。
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 const CancelToken = un.CancelToken;
 let cancel;
 
@@ -85,5 +90,14 @@ un.get('/user/12345', {
 cancel();
 ```
 
-> 注意：你可以用同一个 `CancelToken` / `AbortController` 取消几个请求。
-> 如果在发起请求的时候已经取消请求，那么该请求就会被立即取消，不会真正发起请求。
+::: tip 取消请求的数量
+
+你可以用同一个 `CancelToken` / `AbortController` 取消几个请求。
+
+:::
+
+::: tip 发起请求时取消请求
+
+如果在发起请求的时候已经取消请求，那么该请求就会被立即取消，不会真正发起请求。
+
+:::

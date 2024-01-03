@@ -4,13 +4,17 @@
 
 ## 全局配置默认值
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 un.defaults.baseUrl = 'https://api.example.com';
 ```
 
 ## 自定义实例默认值
 
-```ts
+```typescript
+import { un } from '@uni-helper/uni-network';
+
 // 创建实例时配置默认值
 const instance = un.create({
   baseUrl: 'https://api.example.com',
@@ -22,9 +26,9 @@ instance.defaults.baseUrl = 'https://api.another-example.com';
 
 ## 配置的优先级
 
-配置将会按优先级进行合并。优先级从低到高是内置的默认值、实例的 `defaults` 配置、请求的 `config`。后面的优先级要高于前面的。下面有一个例子。
+配置将会按优先级进行合并。优先级从低到高是内置的默认值、实例的 `defaults` 配置、请求的 `config`。下面是一个例子。
 
-```ts
+```typescript
 // 使用库提供的默认配置创建实例
 // 此时超时配置的默认值是实际调用的 API 的默认值
 const instance = un.create();
