@@ -23,7 +23,8 @@ describe('utils::buildUrl', () => {
         },
       }),
       // ).toEqual('/foo?foo%5Bbar%5D=baz'); // qs
-    ).toEqual('/foo?foo=%5Bobject%20Object%5D'); // query-string
+      // ).toEqual('/foo?foo=%5Bobject%20Object%5D'); // query-string
+    ).toEqual('/foo?foo='); // fast-querystring
   });
 
   it('should support date params', () => {
@@ -34,9 +35,8 @@ describe('utils::buildUrl', () => {
         date: date,
       }),
       // ).toEqual('/foo?date=' + encodeURIComponent(date.toISOString())); // qs
-    ).toEqual(
-      '/foo?date=' + encodeURIComponent(date.toString()).replace('(', '%28').replace(')', '%29'),
-    ); // query-string
+      // ).toEqual('/foo?date=' + encodeURIComponent(date.toString()).replace('(', '%28').replace(')', '%29')); // query-string
+    ).toEqual('/foo?date='); // fast-querystring
   });
 
   it('should support array params', () => {
@@ -72,7 +72,8 @@ describe('utils::buildUrl', () => {
         length: 5,
       }),
       // ).toEqual('/foo?query=bar&start=0&length=5'); // qs
-    ).toEqual('/foo?length=5&query=bar&start=0'); // query-string
+      // ).toEqual('/foo?length=5&query=bar&start=0'); // query-string
+    ).toEqual('/foo?query=bar&start=0&length=5'); // fast-querystring
   });
 
   it('should correct discard url hash mark', () => {
