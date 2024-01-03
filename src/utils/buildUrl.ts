@@ -14,8 +14,8 @@ export const buildUrl = (url: string, params?: UnParams, paramsSerializer?: UnPa
   const serializerParams = paramsSerializer
     ? paramsSerializer(params)
     : Object.prototype.toString.call(params).includes('URLSearchParams')
-    ? params.toString()
-    : qs.stringify(params);
+      ? params.toString()
+      : qs.stringify(params);
 
   if (serializerParams) {
     url += (url.includes('?') ? '&' : '?') + serializerParams;
