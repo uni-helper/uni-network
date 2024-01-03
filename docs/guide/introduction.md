@@ -10,5 +10,5 @@
 - 支持 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - [拦截请求和响应](../advanced/interceptors.md)
 - [取消请求](../advanced/cancellation.md)
-- [TypeScript 支持](../advanced/ts-support.md)
+- [TypeScript 支持](../advanced/typescript-support.md)
 - [组合式函数](../advanced/composition-api.md)

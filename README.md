@@ -4,6 +4,8 @@
 
 [![npm](https://img.shields.io/npm/v/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status)](https://app.netlify.com/sites/uni-network/deploys)
+
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
 
 - [@uni-helper/uni-network](#uni-helperuni-network)
