@@ -36,6 +36,12 @@ un.get('/user', {
   });
 ```
 
+::: tip 名称
+
+`un` 是 `uni` 和 `network` 的首字母缩写。如果你不习惯这个名称，你可以在导入时自行调整，比如使用 `uniNetwork`：`import { un as uniNetwork } from '@uni-helper/uni-network';`。
+
+:::
+
 ## 使用 async/await 的 GET 请求
 
 ```typescript
