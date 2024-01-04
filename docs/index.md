@@ -3,7 +3,6 @@ layout: home
 
 hero:
   name: 'Uni Network'
-  text: 'Uni Helper 官方维护的请求库'
   tagline: 为 uni-app 打造的基于 Promise 的 HTTP 客户端。
   actions:
     - theme: brand
@@ -28,7 +27,7 @@ features:
   - title: 🧱 组合式函数
     details: 提供组合式函数，更加方便地使用 Uni Network
   - title: 📤 支持上传下载
-    details: 基于 uni.request、uni.uploadFile、uni.downloadFile 内部封装
+    details: 基于 uni.request、uni.uploadFile、uni.downloadFile 封装，支持普通请求、上传、下载
 ---
 
 <!-- markdownlint-disable -->

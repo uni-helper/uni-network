@@ -26,7 +26,6 @@ export default defineConfig({
         link: 'https://github.com/uni-helper/uni-network/tree/main/CHANGELOG.md',
       },
     ],
-
     sidebar: [
       {
         text: '指南',
@@ -66,7 +65,13 @@ export default defineConfig({
         ],
       },
     ],
-
+    editLink: {
+      pattern: 'https://github.com/uni-helper/uni-network/edit/main/docs/:path',
+    },
+    lastUpdated: {},
     socialLinks: [{ icon: 'github', link: 'https://github.com/uni-helper/uni-network' }],
+    search: {
+      provider: 'local',
+    },
   },
 });
