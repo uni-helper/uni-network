@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -28,22 +28,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: pnpm
           registry-url: https://registry.npmjs.org
       - run: corepack enable
       - run: pnpm install
-      - run: pnpm run check:types
+      - run: pnpm run typecheck
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: pnpm
