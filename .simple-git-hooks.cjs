@@ -1,4 +1,4 @@
-module.exports = {
-  "pre-commit": "npx lint-staged",
-  "commit-msg": "npx commitlint --edit ${1}",
-};
+require('esbuild-register');
+const { simpleGitHooks } = require('@modyqyw/fabric');
+
+module.exports = simpleGitHooks();

@@ -1,12 +1,4 @@
 {
-  "MD001": false,
-  "MD003": false,
-  "MD013": false,
-  "MD022": false,
-  "MD024": false,
-  "MD025": false,
-  "MD028": false,
-  "MD033": false,
-  "MD036": false,
-  "MD050": false
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+  "extends": "@modyqyw/fabric/markdownlint.json"
 }
