@@ -2,7 +2,7 @@
 
 可以使用自定义配置创建一个实例。
 
-### un.create([config])
+## un.create([config])
 
 ```typescript
 const instance = un.create({
@@ -23,7 +23,7 @@ instance.request({
 });
 ```
 
-### 实例方法
+## 实例方法
 
 以下是可用的实例方法。指定的配置将与实例的配置合并。
 

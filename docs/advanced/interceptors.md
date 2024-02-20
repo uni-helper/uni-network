@@ -52,7 +52,7 @@ instance.interceptors.request.use(() => {
 // 添加响应拦截器
 instance.interceptors.response.use(() => {
   /* ... */
-})
+});
 ```
 
 ## 移除拦截器
@@ -72,7 +72,7 @@ un.interceptors.request.eject(requestInterceptor);
 // 添加响应拦截器
 const responseInterceptor = un.interceptors.response.use(() => {
   /* ... */
-})
+});
 // 移除响应拦截器
 un.interceptors.response.eject(responseInterceptor);
 ```

@@ -69,7 +69,9 @@ export default defineConfig({
       pattern: 'https://github.com/uni-helper/uni-network/edit/main/docs/:path',
     },
     lastUpdated: {},
-    socialLinks: [{ icon: 'github', link: 'https://github.com/uni-helper/uni-network' }],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/uni-helper/uni-network' },
+    ],
     search: {
       provider: 'local',
     },
