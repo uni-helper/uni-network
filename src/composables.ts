@@ -1,8 +1,16 @@
 import type { Ref, ShallowRef } from 'vue-demi';
 import { ref, shallowRef } from 'vue-demi';
-import { until } from '@vueuse/core';
-import type { UnInstance, UnResponse, UnCancelTokenSource, UnConfig, UnData } from './index';
+import { noop, until } from '@vueuse/core';
+import type {
+  UnInstance,
+  UnResponse,
+  UnCancelTokenSource,
+  UnConfig,
+  UnData,
+} from './index';
 import { un, UnError } from './index';
+
+/** Align with v10.7.2 */
 
 export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
   /** Un 响应 */
@@ -15,13 +23,13 @@ export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
   isLoading: Ref<boolean>;
   /** 是否已经取消 */
   isAborted: Ref<boolean>;
-  /** isAborted 别名 */
+  /** `isAborted` 别名 */
   isCanceled: Ref<boolean>;
   /** 发生的错误 */
   error: ShallowRef<unknown | undefined>;
   /** 取消当前请求 */
   abort: (message?: string | undefined) => void;
-  /** abort 别名 */
+  /** `abort` 别名 */
   cancel: (message?: string | undefined) => void;
 }
 export interface StrictUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
@@ -33,14 +41,13 @@ export interface StrictUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
 }
 export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   /** 手动调用 */
-  execute: (url: string, config?: UnConfig<T, D>) => Promise<EasyUseUnReturn<T, R, D>>;
+  execute: (
+    url: string,
+    config?: UnConfig<T, D>,
+  ) => Promise<EasyUseUnReturn<T, R, D>>;
 }
 export interface UseUnOptions<T = UnData> {
-  /**
-   * 当 `useUn` 被调用时，是否自动发起请求
-   *
-   * 第一个参数传递字符串时默认为 true，否则默认为 false
-   */
+  /** 当 `useUn` 被调用时，是否自动发起请求 */
   immediate?: boolean;
   /**
    * 是否使用 shallowRef
@@ -63,9 +70,12 @@ export interface UseUnOptions<T = UnData> {
   /** 请求结束时调用 */
   onFinish?: () => void;
 }
-type OverallUseUnReturn<T, R, D> = StrictUseUnReturn<T, R, D> | EasyUseUnReturn<T, R, D>;
+type OverallUseUnReturn<T, R, D> =
+  | StrictUseUnReturn<T, R, D>
+  | EasyUseUnReturn<T, R, D>;
 
-const isUnInstance = (val: any) => !!val?.request && !!val?.download && !!val?.upload;
+const isUnInstance = (val: any) =>
+  !!val?.request && !!val?.download && !!val?.upload;
 
 export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   url: string,
@@ -97,28 +107,46 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
 export function useUn<T = any, R = UnResponse<T>, D = any>(
   ...args: any[]
 ): OverallUseUnReturn<T, R, D> & Promise<OverallUseUnReturn<T, R, D>> {
-  const url: string | undefined = typeof args[0] === 'string' ? args[0] : undefined;
+  const url: string | undefined =
+    typeof args[0] === 'string' ? args[0] : undefined;
   const argsPlaceholder = typeof url === 'string' ? 1 : 0;
   let defaultConfig: UnConfig<T, D> = {};
   let instance: UnInstance = un;
-  let options: UseUnOptions<T> = { immediate: !!argsPlaceholder, shallow: true };
+  let options: UseUnOptions<T> = {
+    immediate: !!argsPlaceholder,
+    shallow: true,
+  };
 
   if (args.length > 0 + argsPlaceholder) {
     /** 在这里不能使用 `instanceof`，原因请参考 https://github.com/axios/axios/issues/737 */
-    if (isUnInstance(args[0 + argsPlaceholder])) instance = args[0 + argsPlaceholder];
+    if (isUnInstance(args[0 + argsPlaceholder]))
+      instance = args[0 + argsPlaceholder];
     else defaultConfig = args[0 + argsPlaceholder];
   }
 
-  if (args.length > 1 + argsPlaceholder && isUnInstance(args[1 + argsPlaceholder]))
+  if (
+    args.length > 1 + argsPlaceholder &&
+    isUnInstance(args[1 + argsPlaceholder])
+  )
     instance = args[1 + argsPlaceholder];
   if (
-    (args.length === 2 + argsPlaceholder && !isUnInstance(args[1 + argsPlaceholder])) ||
+    (args.length === 2 + argsPlaceholder &&
+      !isUnInstance(args[1 + argsPlaceholder])) ||
     args.length === 3 + argsPlaceholder
   )
-    options = args[args.length - 1];
+    options = args.at(-1) || options;
+
+  const {
+    initialData,
+    shallow,
+    onSuccess = noop,
+    onError = noop,
+    immediate,
+    resetOnExecute = false,
+  } = options;
 
   const response = shallowRef<UnResponse<T, D>>();
-  const data = (options.shallow ? shallowRef : ref)(options.initialData) as Ref<T | undefined>;
+  const data = (shallow ? shallowRef : ref)(initialData) as Ref<T | undefined>;
   const isFinished = ref(false);
   const isLoading = ref(false);
   const isAborted = ref(false);
@@ -140,8 +168,9 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     isFinished.value = !loading;
   };
 
+  /** 重置 data 为 initialData */
   const resetData = () => {
-    if (options.resetOnExecute ?? false) data.value = options.initialData;
+    if (resetOnExecute) data.value = initialData;
   };
   const waitUntilFinished = () =>
     new Promise<OverallUseUnReturn<T, R, D>>((resolve, reject) => {
@@ -153,12 +182,15 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     then: (...args) => waitUntilFinished().then(...args),
     catch: (...args) => waitUntilFinished().catch(...args),
   } as Promise<OverallUseUnReturn<T, R, D>>;
+
+  let executeCounter = 0;
   const execute: OverallUseUnReturn<T, R, D>['execute'] = (
     executeUrl: string | UnConfig<T, D> | undefined = url,
     config: UnConfig<T, D> = {},
   ) => {
     error.value = undefined;
-    const _url = typeof executeUrl === 'string' ? executeUrl : url ?? config.url;
+    const _url =
+      typeof executeUrl === 'string' ? executeUrl : url ?? config.url;
 
     if (_url === undefined) {
       error.value = new UnError(UnError.ERR_INVALID_URL);
@@ -168,29 +200,36 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     resetData();
     abort();
     loading(true);
+
+    executeCounter += 1;
+    const currentExecuteCounter = executeCounter;
+    isAborted.value = false;
+
     instance(_url, {
       ...defaultConfig,
       ...(typeof executeUrl === 'object' ? executeUrl : config),
       cancelToken: cancelToken.token,
     })
       .then((r: any) => {
+        if (isAborted.value) return;
         response.value = r;
         const result = r.data;
         data.value = result;
-        options.onSuccess?.(result);
+        onSuccess(result);
       })
       // eslint-disable-next-line unicorn/catch-error-name
       .catch((e: any) => {
         error.value = e;
-        options.onError?.(e);
+        onError(e);
       })
       .finally(() => {
         options.onFinish?.();
-        loading(false);
+        if (currentExecuteCounter === executeCounter) loading(false);
       });
     return promise;
   };
-  if (options.immediate && url) (execute as StrictUseUnReturn<T, R, D>['execute'])();
+
+  if (immediate && url) (execute as StrictUseUnReturn<T, R, D>['execute'])();
 
   const result = {
     response,
