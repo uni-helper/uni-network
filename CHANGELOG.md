@@ -1,5 +1,9 @@
 # 改动日志
 
+## 0.18.1 (2023-02-20)
+
+- fix(composables): 对齐 vueuse v10.7.2 改动
+
 ## 0.18.0 (2023-01-03)
 
 - feat!: 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring) 而不是 [query-string](https://github.com/sindresorhus/query-string) 序列化 `params`
