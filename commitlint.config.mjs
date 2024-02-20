@@ -1,3 +1,5 @@
 import { commitlint } from '@modyqyw/fabric';
 
-export default commitlint();
+export default commitlint({
+  monorepo: false,
+});
