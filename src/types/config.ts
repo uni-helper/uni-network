@@ -33,13 +33,22 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 可选方法，主要用于序列化 `params`
    *
-   * 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring) 序列化
+   * 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring)
+   * 序列化，需要自行处理嵌套值
    *
-   * [qs](https://github.com/ljharb/qs) v6.10.0 开始引入了
-   * `get-intrinsic`，结合微信小程序和微信小程序插件使用时会出现报错，如有需要可以使用 v6.9.7
+   * [picoquery](https://github.com/43081j/picoquery) 在 fast-querystring
+   * 基础上支持嵌套值、增加可配置性
    *
-   * [query-string](https://github.com/sindresorhus/query-string) v8.1.0
-   * 使用了支付宝小程序不支持的语法，如无支付宝小程序需求也可以使用 query-string，它体积比 qs 小，性能比 qs 好
+   * [qs](https://github.com/ljharb/qs) 包含大量无用的兼容代码，占用额外体积，如无必要不建议使用
+   *
+   * [qs](https://github.com/ljharb/qs) v6.10.0 引入了 `get-intrinsic`
+   * 导致结合微信小程序和微信小程序插件使用时出现报错，可使用 v6.9.7
+   *
+   * [query-string](https://github.com/sindresorhus/query-string) 体积性能都较好，支持完善
+   *
+   * [query-string](https://github.com/sindresorhus/query-string) 基于
+   * [decode-uri-component](https://github.com/SamVerschueren/decode-uri-component)，它使用了部分小程序（如支付宝小程序）不支持的语法（可选的
+   * catch 参数，Optional catch Binding），需自行修改处理
    */
   paramsSerializer?: UnParamsSerializer;
   /**
@@ -245,7 +254,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 下载进度变化时触发
    *
-   * 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
+   * 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress >
+   * onProgressUpdate
    */
   onDownloadProgress?: UnOnProgress;
   /**
@@ -253,7 +263,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 下载进度变化时触发
    *
-   * 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
+   * 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress >
+   * onProgressUpdate
    */
   onDownloadProgressUpdate?: UnOnProgress;
   /**
@@ -261,7 +272,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 上传进度变化时触发
    *
-   * 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
+   * 优先级 onUploadProgress > onUploadProgressUpdate > onProgress >
+   * onProgressUpdate
    */
   onUploadProgress?: UnOnProgress;
   /**
@@ -269,7 +281,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 上传进度变化时触发
    *
-   * 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
+   * 优先级 onUploadProgress > onUploadProgressUpdate > onProgress >
+   * onProgressUpdate
    */
   onUploadProgressUpdate?: UnOnProgress;
   /**
@@ -277,8 +290,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 上传/下载进度变化时触发
    *
-   * 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate >
-   * onProgress > onProgressUpdate
+   * 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate /
+   * onDownloadProgressUpdate > onProgress > onProgressUpdate
    */
   onProgress?: UnOnProgress;
   /**
@@ -286,8 +299,8 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 上传/下载进度变化时触发
    *
-   * 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate >
-   * onProgress > onProgressUpdate
+   * 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate /
+   * onDownloadProgressUpdate > onProgress > onProgressUpdate
    */
   onProgressUpdate?: UnOnProgress;
   [key: string]: any;
