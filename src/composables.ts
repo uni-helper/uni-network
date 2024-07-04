@@ -10,7 +10,7 @@ import type {
 } from './index';
 import { un, UnError } from './index';
 
-/** Align with v10.7.2 */
+/** Align with v10.8.0 */
 
 export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
   /** Un 响应 */
@@ -55,6 +55,12 @@ export interface UseUnOptions<T = UnData> {
    * @default true
    */
   shallow?: boolean;
+  /**
+   * 是否在新请求发起时中止之前的请求
+   *
+   * @default true
+   */
+  abortPrevious?: boolean;
   /** 在请求还未响应时使用的响应数据 */
   initialData?: T;
   /**
@@ -115,6 +121,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   let options: UseUnOptions<T> = {
     immediate: !!argsPlaceholder,
     shallow: true,
+    abortPrevious: true,
   };
 
   if (args.length > 0 + argsPlaceholder) {
@@ -176,6 +183,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     new Promise<OverallUseUnReturn<T, R, D>>((resolve, reject) => {
       until(isFinished)
         .toBe(true)
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         .then(() => (error.value ? reject(error.value) : resolve(result)));
     });
   const promise = {
@@ -198,7 +206,9 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
       return promise;
     }
     resetData();
-    abort();
+
+    if (options.abortPrevious) abort();
+
     loading(true);
 
     executeCounter += 1;
@@ -217,10 +227,9 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
         data.value = result;
         onSuccess(result);
       })
-      // eslint-disable-next-line unicorn/catch-error-name
-      .catch((e: any) => {
-        error.value = e;
-        onError(e);
+      .catch((error_: any) => {
+        error.value = error_;
+        onError(error_);
       })
       .finally(() => {
         options.onFinish?.();
