@@ -23,7 +23,7 @@ export class Un<T = UnData, D = UnData> {
     };
   }
 
-  request<TT = T, DD = D, R = UnResponse<TT, DD>>(
+  _request<TT = T, DD = D, R = UnResponse<TT, DD>>(
     configOrUrl: string | UnConfig<TT, DD>,
     config?: UnConfig<TT, DD>,
   ): Promise<R> {
@@ -131,6 +131,34 @@ export class Un<T = UnData, D = UnData> {
     }
 
     return promise;
+  }
+
+  async request<TT = T, DD = D, R = UnResponse<TT, DD>>(
+    configOrUrl: string | UnConfig<TT, DD>,
+    config?: UnConfig<TT, DD>,
+  ): Promise<R> {
+    try {
+      return await this._request(configOrUrl, config);
+    } catch (error) {
+      if (error instanceof Error) {
+        let dummy;
+        Error.captureStackTrace
+          ? Error.captureStackTrace((dummy = {}))
+          : (dummy = new Error());
+        // slice off the Error: ... line
+        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, '') : '';
+        if (!error.stack) {
+          error.stack = stack;
+          // match without the 2 top stack lines
+        } else if (
+          stack &&
+          !String(error.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))
+        ) {
+          error.stack += '\n' + stack;
+        }
+      }
+      throw error;
+    }
   }
 
   download<TT = T, DD = D, R = UnResponse<TT, DD>>(
