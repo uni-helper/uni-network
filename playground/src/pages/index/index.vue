@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import un from '@uni-helper/uni-network';
+import { un } from '@uni-helper/uni-network';
 
 const title = ref('Hello');
 un.get('https://jsonplaceholder.typicode.com/todos')
