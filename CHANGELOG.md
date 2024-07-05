@@ -1,13 +1,21 @@
 # 改动日志
 
-## 0.18.1 (2023-02-20)
+## 0.19.0 (2024-07-05)
+
+- feat!: 优化类型
+  - 移除了不安全的声明合并，[@typescript-eslint/no-unsafe-declaration-merging](https://typescript-eslint.io/rules/no-unsafe-declaration-merging/)
+  - 移除了潜在有害的方法速记语法 Method Shorthand Syntax，[Method Shorthand Syntax Considered Harmful](https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful)
+- fix(composables): 对齐 vueuse v10.8.0 改动
+- fix: 封装错误以改进异步堆栈跟踪，仅捕获处理原生错误对象的异步堆栈
+
+## 0.18.1 (2024-02-20)
 
 - fix(composables): 对齐 vueuse v10.7.2 改动
 
-## 0.18.0 (2023-01-03)
+## 0.18.0 (2024-01-03)
 
 - feat!: 默认使用 [fast-querystring](https://github.com/anonrig/fast-querystring) 而不是 [query-string](https://github.com/sindresorhus/query-string) 序列化 `params`
-  - `query-string@8.1.0` 和它所依赖的库存在 `try {} catch {}` 的用法，该用法不受支付宝小程序支持
+  - `query-string@8.1.0` 和它所依赖的库存在 `try {} catch {}` 的用法，该用法不受支付宝小程序支持，需要用户侧额外处理
 
 ## 0.17.0 (2023-11-04)
 
