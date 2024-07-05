@@ -15,34 +15,41 @@ import { extend, mergeConfig } from './utils';
 import { UnConfig, UnData, UnResponse } from './types';
 
 export interface UnInstance<T = UnData, D = UnData> extends Un<T, D> {
-  <TT = T, DD = D, R = UnResponse<TT, DD>>(config: UnConfig<TT, DD>): Promise<R>;
-  <TT = T, DD = D, R = UnResponse<TT, DD>>(url: string, config?: UnConfig<TT, DD>): Promise<R>;
+  <TT = T, DD = D, R = UnResponse<TT, DD>>(
+    config: UnConfig<TT, DD>,
+  ): Promise<R>;
+  <TT = T, DD = D, R = UnResponse<TT, DD>>(
+    url: string,
+    config?: UnConfig<TT, DD>,
+  ): Promise<R>;
 
   defaults: UnConfig<T, D>;
 }
 
 export interface UnStatic<T = UnData, D = UnData> extends UnInstance<T, D> {
-  create(config?: UnConfig<T, D>): UnInstance<T, D>;
+  create: (config?: UnConfig<T, D>) => UnInstance<T, D>;
 
   Un: typeof Un;
 
   CanceledError: typeof UnCanceledError<T, D>;
   CancelToken: UnCancelTokenStatic<T, D>;
-  isCancel(value: any): value is UnCancel;
+  isCancel: (value: any) => value is UnCancel;
 
   VERSION: string;
 
   UnError: typeof UnError;
-  isUnError<T = any, D = any>(value: any): value is UnError<T, D>;
+  isUnError: <T = any, D = any>(value: any) => value is UnError<T, D>;
 
-  all(values: Array<T | Promise<T>>): Promise<T[]>;
+  all: (values: Array<T | Promise<T>>) => Promise<T[]>;
 
   mergeConfig: typeof mergeConfig;
 
   HttpStatusCode: typeof HttpStatusCode;
 }
 
-const createInstance = <T = UnData, D = UnData>(defaultConfig: UnConfig<T, D>) => {
+const createInstance = <T = UnData, D = UnData>(
+  defaultConfig: UnConfig<T, D>,
+) => {
   const context = new Un(defaultConfig);
   const instance = Un.prototype.request.bind(context) as UnStatic<T, D>;
 
@@ -53,7 +60,8 @@ const createInstance = <T = UnData, D = UnData>(defaultConfig: UnConfig<T, D>) =
   extend(instance, context, null, { allOwnKeys: true });
 
   // Factory for creating new instances
-  instance.create = (instanceConfig) => createInstance(mergeConfig(defaultConfig, instanceConfig));
+  instance.create = (instanceConfig) =>
+    createInstance(mergeConfig(defaultConfig, instanceConfig));
 
   return instance;
 };

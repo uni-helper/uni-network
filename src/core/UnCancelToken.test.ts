@@ -9,14 +9,14 @@ describe('core:UnCancelToken', () => {
       expect(() => {
         // @ts-expect-error Expected 1 arguments, but got 0.ts(2554)
         new UnCancelToken();
-      }).toThrowError(TypeError('executor must be a function.'));
+      }).toThrowError(new TypeError('executor must be a function.'));
     });
 
     it('throws when executor is not a function', () => {
       expect(() => {
         // @ts-expect-error argument of type 'number' is not assignable to parameter of type '(cancel: UnCanceler<UnData, UnData>) => void'.ts(2345)
         new UnCancelToken(123);
-      }).toThrowError(TypeError('executor must be a function.'));
+      }).toThrowError(new TypeError('executor must be a function.'));
     });
   });
 
@@ -68,7 +68,9 @@ describe('core:UnCancelToken', () => {
         token.throwIfRequested();
       } catch (error) {
         expect(error).toBeInstanceOf(UnCanceledError);
-        expect((error as UnCanceledError).message).toBe('Operation has been canceled.');
+        expect((error as UnCanceledError).message).toBe(
+          'Operation has been canceled.',
+        );
       }
     });
 

@@ -17,13 +17,6 @@ export interface UnCancelTokenListener {
   (reason: UnCancel | PromiseLike<UnCancel>): void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface UnCancelToken {
-  promise: Promise<UnCancel>;
-  reason?: UnCancel;
-  throwIfRequested(): void;
-}
-
 export interface UnCancelTokenSource<T = UnData, D = UnData> {
   token: UnCancelToken;
   cancel: UnCanceler<T, D>;
@@ -31,12 +24,14 @@ export interface UnCancelTokenSource<T = UnData, D = UnData> {
 
 export interface UnCancelTokenStatic<T = UnData, D = UnData> {
   new (executor: (cancel: UnCanceler) => void): UnCancelToken;
-  source(): UnCancelTokenSource<T, D>;
+  source: () => UnCancelTokenSource<T, D>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UnCancelToken<T = UnData, D = UnData> {
-  listeners: UnCancelTokenListener[] = [];
+  promise: Promise<UnCancel>;
+  reason?: UnCancel;
+
+  private listeners: UnCancelTokenListener[] = [];
 
   constructor(executor: (cancel: UnCanceler<T, D>) => void) {
     if (typeof executor !== 'function') {
