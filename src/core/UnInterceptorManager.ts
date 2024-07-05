@@ -23,9 +23,9 @@ export class UnInterceptorManager<V, T = V, D = UnData> {
   private handlers: (UnInterceptorManagerHandler<V, T, D> | null)[] = [];
 
   use(
-    fulfilled: UnInterceptorManagerHandlerFulfilled<V>,
-    rejected: UnInterceptorManagerHandlerRejected,
-    options: UnInterceptorOptions<T, D>,
+    fulfilled?: UnInterceptorManagerHandlerFulfilled<V>,
+    rejected?: UnInterceptorManagerHandlerRejected,
+    options?: UnInterceptorOptions<T, D>,
   ) {
     this.handlers.push({
       fulfilled,

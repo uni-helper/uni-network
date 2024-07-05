@@ -10,7 +10,7 @@ import { dispatchRequest } from './dispatchRequest';
 export class Un<T = UnData, D = UnData> {
   defaults: UnConfig<T, D>;
 
-  private interceptors: {
+  interceptors: {
     request: UnInterceptorManager<UnConfig<T, D>, T, D>;
     response: UnInterceptorManager<UnResponse<T, D>, T, D>;
   };
