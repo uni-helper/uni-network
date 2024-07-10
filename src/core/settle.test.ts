@@ -3,8 +3,8 @@ import type { UnResponse } from '../types';
 import { settle } from './settle';
 
 describe('core::settle', () => {
-  let resolve: Mock<[value: UnResponse | PromiseLike<UnResponse>], void>;
-  let reject: Mock<[reason?: any], void>;
+  let resolve: Mock<(response: UnResponse | PromiseLike<UnResponse>) => void>;
+  let reject: Mock<(reason?: any) => void>;
 
   beforeEach(() => {
     resolve = vi.fn();
