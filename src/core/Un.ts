@@ -23,7 +23,7 @@ export class Un<T = UnData, D = UnData> {
     };
   }
 
-  _request<TT = T, DD = D, R = UnResponse<TT, DD>>(
+  private _request<TT = T, DD = D, R = UnResponse<TT, DD>>(
     configOrUrl: string | UnConfig<TT, DD>,
     config?: UnConfig<TT, DD>,
   ): Promise<R> {

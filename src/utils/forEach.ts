@@ -27,7 +27,11 @@ export function forEach(
     }
   } else {
     // Iterate over object keys
-    const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
+    const keys = allOwnKeys
+      ? Object.getOwnPropertyNames(obj).filter(
+          (key) => key !== 'constructor' && !key.startsWith('_'),
+        )
+      : Object.keys(obj);
     const len = keys.length;
     let key;
 
