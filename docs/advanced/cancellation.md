@@ -2,13 +2,41 @@
 
 ## AbortController
 
-支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 [abort-controller polyfill](https://github.com/mysticatea/abort-controller)。
+支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 Polyfill。
+
+### abortcontroller-polyfill
 
 ::: code-group
 
 ```sh [npm]
-npm add abort-controller@^3.0.0
+npm install abortcontroller-polyfill@^1.7.5
 ```
+
+```sh [yarn]
+yarn add abortcontroller-polyfill@^1.7.5
+```
+
+````sh [pnpm]
+pnpm add abortcontroller-polyfill@^1.7.5
+
+:::
+
+在 `App.vue` 中仅可能早地导入，后续可全局使用。
+
+```vue
+<script setup>
+// 尽可能早地导入，后续可全局使用
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+</script>
+```
+
+### abort-controller
+
+::: code-group
+
+```sh [npm]
+npm install abort-controller@^3.0.0
+````
 
 ```sh [yarn]
 yarn add abort-controller@^3.0.0
@@ -20,8 +48,11 @@ pnpm add abort-controller@^3.0.0
 
 :::
 
+必须导入后使用，不可全局使用。
+
 ```typescript
 import { un } from '@uni-helper/uni-network';
+// 必须导入后使用
 import AbortController from 'abort-controller/dist/abort-controller';
 // ❌ 错误做法 1
 // import AbortController from 'abort-controller';
