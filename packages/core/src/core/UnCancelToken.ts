@@ -96,6 +96,23 @@ export class UnCancelToken<T = UnData, D = UnData> {
     }
   }
 
+  toAbortSignal() {
+    const controller = new AbortController();
+
+    const abort: UnCancelTokenListener = (error) => {
+      controller.abort(error);
+    };
+
+    this.subscribe(abort);
+
+    // @ts-expect-error Property 'unsubscribe' does not exist on type 'AbortSignal'.ts(2339)
+    controller.signal.unsubscribe = () => this.unsubscribe(abort);
+
+    return controller.signal as AbortSignal & {
+      unsubscribe: () => void;
+    };
+  }
+
   static source<TT = UnData, DD = UnData>(): UnCancelTokenSource<TT, DD> {
     let cancel: UnCanceler<TT, DD>;
     const token = new UnCancelToken<TT, DD>((c) => {
