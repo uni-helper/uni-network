@@ -10,7 +10,9 @@ describe('core:UnCanceledError', () => {
 
     it('returns correct result when message is specified', () => {
       const cancel = new UnCanceledError('Operation has been canceled.');
-      expect(cancel.toString()).toBe('CanceledError: Operation has been canceled.');
+      expect(cancel.toString()).toBe(
+        'CanceledError: Operation has been canceled.',
+      );
     });
   });
 });

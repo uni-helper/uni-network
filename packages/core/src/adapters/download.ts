@@ -5,7 +5,9 @@ import { buildDownloadConfig } from '../utils';
 import { UnCancelTokenListener } from '../core/UnCancelToken';
 import type { UnData, UnConfig, UnResponse } from '../types';
 
-export const downloadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
+export const downloadAdapter = <T = UnData, D = UnData>(
+  config: UnConfig<T, D>,
+) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {
     const { onHeadersReceived, cancelToken, signal } = config;
 
@@ -101,13 +103,19 @@ export const downloadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) 
           return;
         }
         // @ts-expect-error no types
-        reject(!cancel || cancel.type ? new UnCanceledError(undefined, config, task) : cancel);
+        reject(
+          !cancel || cancel.type
+            ? new UnCanceledError(undefined, config, task)
+            : cancel,
+        );
         task.abort();
         task = undefined;
       };
 
       cancelToken?.subscribe(onCanceled);
       // @ts-expect-error no types
-      signal?.aborted ? onCanceled() : signal?.addEventListener('abort', onCanceled);
+      signal?.aborted
+        ? onCanceled()
+        : signal?.addEventListener('abort', onCanceled);
     }
   });

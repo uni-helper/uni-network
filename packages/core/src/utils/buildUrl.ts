@@ -1,7 +1,11 @@
 import qs from 'fast-querystring';
 import type { UnParams, UnParamsSerializer } from '../types';
 
-export const buildUrl = (url: string, params?: UnParams, paramsSerializer?: UnParamsSerializer) => {
+export const buildUrl = (
+  url: string,
+  params?: UnParams,
+  paramsSerializer?: UnParamsSerializer,
+) => {
   if (!params) {
     return url;
   }

@@ -85,6 +85,8 @@ describe('utils::buildUrl', () => {
   });
 
   it('should support URLSearchParams', () => {
-    expect(buildUrl('/foo', new URLSearchParams('bar=baz'))).toEqual('/foo?bar=baz');
+    expect(buildUrl('/foo', new URLSearchParams('bar=baz'))).toEqual(
+      '/foo?bar=baz',
+    );
   });
 });

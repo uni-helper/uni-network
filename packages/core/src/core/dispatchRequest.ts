@@ -3,7 +3,9 @@ import type { UnConfig, UnData } from '../types';
 import { isUnCancel } from './isUnCancel';
 import { UnCanceledError } from './UnCanceledError';
 
-const throwIfCancellationRequested = <T = UnData, D = UnData>(config: UnConfig<T, D>) => {
+const throwIfCancellationRequested = <T = UnData, D = UnData>(
+  config: UnConfig<T, D>,
+) => {
   if (config.cancelToken) {
     config.cancelToken?.throwIfRequested();
   }
@@ -13,7 +15,9 @@ const throwIfCancellationRequested = <T = UnData, D = UnData>(config: UnConfig<T
   }
 };
 
-export const dispatchRequest = <T = UnData, D = UnData>(config: UnConfig<T, D>) => {
+export const dispatchRequest = <T = UnData, D = UnData>(
+  config: UnConfig<T, D>,
+) => {
   throwIfCancellationRequested(config);
 
   let adapter = requestAdapter<T, D>;

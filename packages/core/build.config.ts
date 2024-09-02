@@ -16,7 +16,10 @@ export default defineBuildConfig({
   hooks: {
     'build:done': (ctx) => {
       const cjs = resolve(ctx.options.outDir, 'index.cjs');
-      appendFileSync(cjs, 'module.exports = Object.assign(exports.default || {}, exports);');
+      appendFileSync(
+        cjs,
+        'module.exports = Object.assign(exports.default || {}, exports);',
+      );
     },
   },
 });

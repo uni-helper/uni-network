@@ -2,7 +2,9 @@ import type { UnData, UnConfig } from '../types';
 import { buildFullPath } from './buildFullPath';
 import { buildUrl } from './buildUrl';
 
-export const buildDownloadConfig = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
+export const buildDownloadConfig = <T = UnData, D = UnData>(
+  config: UnConfig<T, D>,
+) =>
   ({
     url: buildUrl(
       buildFullPath(config.baseUrl ?? '', config.url ?? ''),

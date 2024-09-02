@@ -5,7 +5,13 @@ describe('core::UnError', () => {
   it('should create an Error with message, config, code, task, response, stack and isUnError', () => {
     const task = { path: '/foo' };
     const response = { status: 200, data: { foo: 'bar' } };
-    const error = new UnError('Boom!', 'ESOMETHING', { foo: 'bar' }, task, response);
+    const error = new UnError(
+      'Boom!',
+      'ESOMETHING',
+      { foo: 'bar' },
+      task,
+      response,
+    );
     expect(error instanceof Error).toBe(true);
     expect(error.message).toBe('Boom!');
     expect(error.config).toEqual({ foo: 'bar' });
@@ -20,7 +26,13 @@ describe('core::UnError', () => {
     //    TypeError: Converting circular structure to JSON
     const task = { path: '/foo' };
     const response = { status: 200, data: { foo: 'bar' } };
-    const error = new UnError('Boom!', 'ESOMETHING', { foo: 'bar' }, task, response);
+    const error = new UnError(
+      'Boom!',
+      'ESOMETHING',
+      { foo: 'bar' },
+      task,
+      response,
+    );
     const json = error.toJSON();
     expect(json.message).toBe('Boom!');
     expect(json.config).toEqual({ foo: 'bar' });
@@ -36,7 +48,13 @@ describe('core::UnError', () => {
       const task = { path: '/foo' };
       const response = { status: 200, data: { foo: 'bar' } };
 
-      const urError = UnError.from(error, 'ESOMETHING', { foo: 'bar' }, task, response);
+      const urError = UnError.from(
+        error,
+        'ESOMETHING',
+        { foo: 'bar' },
+        task,
+        response,
+      );
       expect(urError.config).toEqual({ foo: 'bar' });
       expect(urError.code).toBe('ESOMETHING');
       expect(urError.task).toBe(task);
@@ -46,7 +64,9 @@ describe('core::UnError', () => {
 
     it('should return error', () => {
       const error = new Error('Boom!');
-      expect(UnError.from(error, 'ESOMETHING', { foo: 'bar' }) instanceof UnError).toBeTruthy();
+      expect(
+        UnError.from(error, 'ESOMETHING', { foo: 'bar' }) instanceof UnError,
+      ).toBeTruthy();
     });
   });
 });

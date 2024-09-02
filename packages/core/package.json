@@ -1,0 +1,137 @@
+{
+  "name": "@uni-helper/uni-network",
+  "version": "0.19.2",
+  "description": "为 uni-app 打造的基于 Promise 的 HTTP 客户端",
+  "keywords": [
+    "uni-app",
+    "uniapp",
+    "uni",
+    "request",
+    "network",
+    "upload",
+    "uploadFile",
+    "download",
+    "downloadFile"
+  ],
+  "homepage": "https://github.com/uni-helper/uni-network#readme",
+  "bugs": {
+    "url": "https://github.com/uni-helper/uni-network/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uni-helper/uni-network.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "ModyQyW",
+    "email": "wurui-dev@foxmail.com",
+    "url": "https://modyqyw.github.io"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./composables": {
+      "import": {
+        "types": "./dist/composables.d.mts",
+        "default": "./dist/composables.mjs"
+      },
+      "require": {
+        "types": "./dist/composables.d.cts",
+        "default": "./dist/composables.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "depupdate": "taze -fw",
+    "dev": "unbuild --stub",
+    "docs:build": "vitepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:preview": "vitepress preview docs",
+    "format": "prettier . \"!**/packages-lock.json*\" \"!**/yarn.lock\" \"!**/pnpm-lock.yaml\" --ignore-unknown --write --cache --log-level=warn",
+    "lint": "conc \"pnpm:lint:eslint\" \"pnpm:lint:markdownlint\" \"pnpm:lint:publint\"",
+    "lint:eslint": "eslint ./src --fix --cache",
+    "lint:markdownlint": "markdownlint . --fix --ignore-path=.gitignore",
+    "lint:publint": "nr build && publint",
+    "prepublishOnly": "pnpm run build",
+    "release": "pnpm install && pnpm run lint && pnpm run type-check && bumpp",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dcloudio/types": "^3.4.8",
+    "@types/lodash.merge": "^4.6.9",
+    "@types/statuses": "^2.0.5",
+    "fast-querystring": "^1.1.2",
+    "lodash.merge": "^4.6.2",
+    "statuses": "^2.0.1",
+    "vue-demi": "^0.14.8"
+  },
+  "devDependencies": {
+    "@antfu/ni": "^0.21.12",
+    "@commitlint/cli": "^19.3.0",
+    "@modyqyw/fabric": "^10.11.0",
+    "@modyqyw/utils": "^8.0.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.10",
+    "@types/ungap__url-search-params": "^0.1.2",
+    "@ungap/url-search-params": "^0.2.2",
+    "@vitest/coverage-v8": "^2.0.1",
+    "@vitest/ui": "^2.0.1",
+    "@vueuse/core": "^10.11.0",
+    "bumpp": "^9.4.1",
+    "concurrently": "^8.2.2",
+    "esbuild-register": "^3.5.0",
+    "eslint": "^8.57.0",
+    "lint-staged": "^15.2.7",
+    "markdownlint-cli": "^0.41.0",
+    "prettier": "^3.3.2",
+    "publint": "^0.2.8",
+    "taze": "^0.14.2",
+    "typescript": "^5.5.3",
+    "unbuild": "^2.0.0",
+    "vitepress": "^1.3.0",
+    "vitest": "^2.0.1",
+    "vue": "^3.4.31"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0",
+    "@vueuse/core": "^9.0.0 || ^10.0.0",
+    "vue": "^2.6.0 || ^2.7.0 || ^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    },
+    "@vueuse/core": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@9.5.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
