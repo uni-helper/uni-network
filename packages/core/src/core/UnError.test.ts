@@ -69,4 +69,9 @@ describe('core::UnError', () => {
       ).toBeTruthy();
     });
   });
+
+  it('should have status property when response was passed to the constructor', () => {
+    const err = new UnError('test', 'foo', {}, {}, { status: 400 });
+    expect(err.status).toBe(400);
+  });
 });

@@ -42,7 +42,10 @@ export class UnError<T = UnData, D = UnData> extends Error {
     this.code = code;
     this.config = config;
     this.task = task;
-    this.response = response;
+    if (response) {
+      this.response = response;
+      this.status = response.status ?? undefined;
+    }
 
     this.isUnError = true;
   }
@@ -64,7 +67,7 @@ export class UnError<T = UnData, D = UnData> extends Error {
       stack: this.stack,
       config: this.config,
       code: this.code,
-      status: this.response?.status,
+      status: this.status,
     } as {
       name: string;
       message?: string;
