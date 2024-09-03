@@ -1,2 +1,3 @@
-import { lintStaged } from '@modyqyw/fabric';
-export default lintStaged();
+export default {
+  "*": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
+};

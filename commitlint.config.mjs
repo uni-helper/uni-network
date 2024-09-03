@@ -1,5 +1,6 @@
-import { commitlint } from '@modyqyw/fabric';
-
-export default commitlint({
-  monorepo: false,
-});
+export default {
+  extends: [
+    "@commitlint/config-conventional",
+    "@commitlint/config-pnpm-scopes",
+  ],
+};
