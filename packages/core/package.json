@@ -53,6 +53,15 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts",
+        "./dist/composables.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
