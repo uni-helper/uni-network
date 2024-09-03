@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { extend } from "./extend";
 
-describe("utils::extend", function () {
-  it("should be mutable", function () {
+describe("utils::extend", () => {
+  it("should be mutable", () => {
     const a: Record<string, any> = {};
     const b: Record<string, any> = { foo: 123 };
 
@@ -11,7 +11,7 @@ describe("utils::extend", function () {
     expect(a.foo).toEqual(b.foo);
   });
 
-  it("should extend properties", function () {
+  it("should extend properties", () => {
     let a: Record<string, any> = { foo: 123, bar: 456 };
     const b: Record<string, any> = { bar: 789 };
 
@@ -21,7 +21,7 @@ describe("utils::extend", function () {
     expect(a.bar).toEqual(789);
   });
 
-  it("should bind to thisArg", function () {
+  it("should bind to thisArg", () => {
     const a: Record<string, any> = {};
     const b: Record<string, any> = {
       getFoo: function getFoo() {

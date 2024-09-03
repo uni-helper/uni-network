@@ -1,9 +1,9 @@
-import { buildFullPath, buildUrl, mergeConfig } from "../utils";
 import type { UnConfig, UnData, UnResponse } from "../types";
+import { buildFullPath, buildUrl, mergeConfig } from "../utils";
 import {
   UnInterceptorManager,
-  UnInterceptorManagerHandlerFulfilled,
-  UnInterceptorManagerHandlerRejected,
+  type UnInterceptorManagerHandlerFulfilled,
+  type UnInterceptorManagerHandlerRejected,
 } from "./UnInterceptorManager";
 import { dispatchRequest } from "./dispatchRequest";
 
@@ -141,10 +141,13 @@ export class Un<T = UnData, D = UnData> {
       return await this._request(configOrUrl, config);
     } catch (error) {
       if (error instanceof Error) {
+        // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
         let dummy;
         Error.captureStackTrace
-          ? Error.captureStackTrace((dummy = {}))
-          : (dummy = new Error());
+          ? // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+            Error.captureStackTrace((dummy = {}))
+          : // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+            (dummy = new Error());
         // slice off the Error: ... line
         const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
         if (!error.stack) {
@@ -154,7 +157,7 @@ export class Un<T = UnData, D = UnData> {
           stack &&
           !String(error.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))
         ) {
-          error.stack += "\n" + stack;
+          error.stack += `\n${stack}`;
         }
       }
       throw error;

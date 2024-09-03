@@ -1,18 +1,18 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { forEach } from "./forEach";
 
-describe("utils::forEach", function () {
-  it("should loop over an array", function () {
+describe("utils::forEach", () => {
+  it("should loop over an array", () => {
     let sum = 0;
 
-    forEach([1, 2, 3, 4, 5], function (val) {
+    forEach([1, 2, 3, 4, 5], (val) => {
       sum += val;
     });
 
     expect(sum).toEqual(15);
   });
 
-  it("should loop over object keys", function () {
+  it("should loop over object keys", () => {
     let keys = "";
     let vals = 0;
     const obj = {
@@ -21,7 +21,7 @@ describe("utils::forEach", function () {
       r: 3,
     };
 
-    forEach(obj, function (v, k) {
+    forEach(obj, (v, k) => {
       keys += k;
       vals += v;
     });
@@ -30,22 +30,22 @@ describe("utils::forEach", function () {
     expect(vals).toEqual(6);
   });
 
-  it("should handle undefined gracefully", function () {
+  it("should handle undefined gracefully", () => {
     let count = 0;
 
-    forEach(undefined, function () {
+    forEach(undefined, () => {
       count++;
     });
 
     expect(count).toEqual(0);
   });
 
-  it("should make an array out of non-array argument", function () {
+  it("should make an array out of non-array argument", () => {
     let count = 0;
 
     forEach(
-      function () {},
-      function () {
+      () => {},
+      () => {
         count++;
       },
     );
@@ -53,12 +53,12 @@ describe("utils::forEach", function () {
     expect(count).toEqual(1);
   });
 
-  it("should handle non object prototype gracefully", function () {
+  it("should handle non object prototype gracefully", () => {
     let count = 0;
     const data = Object.create(null);
     data.foo = "bar";
 
-    forEach(data, function () {
+    forEach(data, () => {
       count++;
     });
 

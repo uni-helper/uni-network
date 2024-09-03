@@ -1,5 +1,5 @@
 import URLSearchParams from "@ungap/url-search-params";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { buildUrl } from "./buildUrl";
 
 describe("utils::buildUrl", () => {

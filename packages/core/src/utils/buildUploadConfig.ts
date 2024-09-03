@@ -1,4 +1,4 @@
-import type { UnData, UnConfig } from "../types";
+import type { UnConfig, UnData } from "../types";
 import { buildFullPath } from "./buildFullPath";
 import { buildUrl } from "./buildUrl";
 

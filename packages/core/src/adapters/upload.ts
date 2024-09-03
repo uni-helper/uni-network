@@ -1,9 +1,9 @@
 import statuses from "statuses";
-import { settle } from "../core/settle";
+import type { UnCancelTokenListener } from "../core/UnCancelToken";
 import { UnCanceledError } from "../core/UnCanceledError";
+import { settle } from "../core/settle";
+import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildUploadConfig } from "../utils";
-import { UnCancelTokenListener } from "../core/UnCancelToken";
-import type { UnData, UnConfig, UnResponse } from "../types";
 
 export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {
@@ -96,8 +96,8 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
         if (!task) {
           return;
         }
-        // @ts-expect-error no types
         reject(
+          // @ts-expect-error type not existed
           !cancel || cancel.type
             ? new UnCanceledError(undefined, config, task)
             : cancel,
@@ -107,9 +107,8 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
       };
 
       cancelToken?.subscribe(onCanceled);
-      // @ts-expect-error no types
       signal?.aborted
-        ? onCanceled()
-        : signal?.addEventListener("abort", onCanceled);
+        ? onCanceled({})
+        : signal?.addEventListener?.("abort", onCanceled);
     }
   });

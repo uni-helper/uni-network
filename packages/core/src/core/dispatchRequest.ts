@@ -1,7 +1,7 @@
 import { adapters, requestAdapter } from "../adapters";
 import type { UnConfig, UnData } from "../types";
-import { isUnCancel } from "./isUnCancel";
 import { UnCanceledError } from "./UnCanceledError";
+import { isUnCancel } from "./isUnCancel";
 
 const throwIfCancellationRequested = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,

@@ -1,18 +1,18 @@
 import { version } from "../package.json";
 import {
   HttpStatusCode,
-  isUnError,
   Un,
-  UnCancel,
-  UnCanceledError,
+  type UnCancel,
   UnCancelToken,
-  UnCancelTokenStatic,
+  type UnCancelTokenStatic,
+  UnCanceledError,
   UnError,
   isUnCancel,
+  isUnError,
 } from "./core";
 import { defaults } from "./defaults";
+import type { UnConfig, UnData, UnResponse } from "./types";
 import { extend, mergeConfig } from "./utils";
-import { UnConfig, UnData, UnResponse } from "./types";
 
 export interface UnInstance<T = UnData, D = UnData> extends Un<T, D> {
   <TT = T, DD = D, R = UnResponse<TT, DD>>(

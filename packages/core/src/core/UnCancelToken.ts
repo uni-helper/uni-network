@@ -9,13 +9,15 @@ export interface UnCancelStatic {
   new (message?: string): UnCancel;
 }
 
-export interface UnCanceler<T = UnData, D = UnData> {
-  (message?: string, config?: UnConfig<T, D>, task?: UnTask): void;
-}
+export type UnCanceler<T = UnData, D = UnData> = (
+  message?: string,
+  config?: UnConfig<T, D>,
+  task?: UnTask,
+) => void;
 
-export interface UnCancelTokenListener {
-  (reason: UnCancel | PromiseLike<UnCancel>): void;
-}
+export type UnCancelTokenListener = (
+  reason: UnCancel | PromiseLike<UnCancel>,
+) => void;
 
 export interface UnCancelTokenSource<T = UnData, D = UnData> {
   token: UnCancelToken;
@@ -51,6 +53,7 @@ export class UnCancelToken<T = UnData, D = UnData> {
       this.listeners = [];
     });
 
+    // biome-ignore lint/suspicious/noThenProperty: <explanation>
     this.promise.then = (onfulfilled) => {
       let _resolve: UnCancelTokenListener;
       const promise = new Promise<UnCancel>((resolve) => {

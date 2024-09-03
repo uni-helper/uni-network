@@ -26,13 +26,9 @@ export type UnHeaders = Record<string, any>;
 
 export type UnParams = Record<string, any>;
 
-export interface UnParamsSerializer {
-  (params?: UnParams): string;
-}
+export type UnParamsSerializer = (params?: UnParams) => string;
 
-export interface UnValidateStatus {
-  (status: number): boolean | null;
-}
+export type UnValidateStatus = (status: number) => boolean | null;
 
 export interface UnGenericAbortSignal {
   readonly aborted: boolean;
@@ -51,20 +47,18 @@ export interface UnFile {
   uri?: string;
 }
 
-export interface UnOnProgress {
-  (response?: {
-    /** 当前上传/下载百分比 */
-    progress?: number;
-    /** 已经上传的数据长度，单位 Bytes */
-    totalBytesSent?: number;
-    /** 预期需要上传的数据总长度，单位 Bytes */
-    totalBytesExpectedToSend?: number;
-    /** 已经下载的数据长度，单位 Bytes */
-    totalBytesWritten?: number;
-    /** 预期需要下载的数据总长度，单位 Bytes */
-    totalBytesExpectedToWrite?: number;
-  }): void;
-}
+export type UnOnProgress = (response?: {
+  /** 当前上传/下载百分比 */
+  progress?: number;
+  /** 已经上传的数据长度，单位 Bytes */
+  totalBytesSent?: number;
+  /** 预期需要上传的数据总长度，单位 Bytes */
+  totalBytesExpectedToSend?: number;
+  /** 已经下载的数据长度，单位 Bytes */
+  totalBytesWritten?: number;
+  /** 预期需要下载的数据总长度，单位 Bytes */
+  totalBytesExpectedToWrite?: number;
+}) => void;
 
 export type UnFileType = "image" | "video" | "audio";
 

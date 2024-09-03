@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
-import { noop } from "@modyqyw/utils";
-import { UnCancelToken, UnCanceler } from "./UnCancelToken";
+import { describe, expect, it } from "vitest";
+import { UnCancelToken, type UnCanceler } from "./UnCancelToken";
 import { UnCanceledError } from "./UnCanceledError";
+
+function noop() {}
 
 describe("core:UnCancelToken", () => {
   describe("constructor", () => {

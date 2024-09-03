@@ -10,9 +10,10 @@ export const buildUrl = (
     return url;
   }
 
+  let newUrl = url;
   const hashIndex = url.indexOf("#");
   if (hashIndex !== -1) {
-    url = url.slice(0, hashIndex);
+    newUrl = newUrl.slice(0, hashIndex);
   }
 
   const serializerParams = paramsSerializer
@@ -22,8 +23,8 @@ export const buildUrl = (
       : qs.stringify(params);
 
   if (serializerParams) {
-    url += (url.includes("?") ? "&" : "?") + serializerParams;
+    newUrl += (newUrl.includes("?") ? "&" : "?") + serializerParams;
   }
 
-  return url;
+  return newUrl;
 };

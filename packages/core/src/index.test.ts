@@ -1,18 +1,18 @@
-import { expect, it, describe } from "vitest";
-import { defaults } from "./defaults";
-import {
-  Un,
-  UnInterceptorManager,
-  UnCanceledError,
-  UnCancelToken,
-  isUnCancel,
-  UnError,
-  isUnError,
-  HttpStatusCode,
-} from "./core";
-import { mergeConfig } from "./utils";
+import { describe, expect, it } from "vitest";
 import { un } from ".";
 import { version } from "../package.json";
+import {
+  HttpStatusCode,
+  Un,
+  UnCancelToken,
+  UnCanceledError,
+  UnError,
+  UnInterceptorManager,
+  isUnCancel,
+  isUnError,
+} from "./core";
+import { defaults } from "./defaults";
+import { mergeConfig } from "./utils";
 
 describe("index", () => {
   it("un should be defined", () => {

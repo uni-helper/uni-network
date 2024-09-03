@@ -1,14 +1,14 @@
+import { noop, until } from "@vueuse/core";
 import type { Ref, ShallowRef } from "vue-demi";
 import { ref, shallowRef } from "vue-demi";
-import { noop, until } from "@vueuse/core";
 import type {
-  UnInstance,
-  UnResponse,
   UnCancelTokenSource,
   UnConfig,
   UnData,
+  UnInstance,
+  UnResponse,
 } from "./index";
-import { un, UnError } from "./index";
+import { UnError, un } from "./index";
 
 /** Align with v10.8.0 */
 
@@ -187,6 +187,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
         .then(() => (error.value ? reject(error.value) : resolve(result)));
     });
   const promise = {
+    // biome-ignore lint/suspicious/noThenProperty: <explanation>
     then: (...args) => waitUntilFinished().then(...args),
     catch: (...args) => waitUntilFinished().catch(...args),
   } as Promise<OverallUseUnReturn<T, R, D>>;

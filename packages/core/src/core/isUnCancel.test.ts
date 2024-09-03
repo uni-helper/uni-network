@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { isUnCancel } from "./isUnCancel";
+import { describe, expect, it } from "vitest";
 import { UnCanceledError } from "./UnCanceledError";
+import { isUnCancel } from "./isUnCancel";
 
 describe("core:isCancel", () => {
   it("returns true if value is a CanceledError", () => {

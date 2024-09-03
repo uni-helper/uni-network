@@ -5,13 +5,11 @@ export interface UnInterceptorOptions<T = UnData, D = UnData> {
   runWhen?: (config: UnConfig<T, D>) => boolean;
 }
 
-export interface UnInterceptorManagerHandlerFulfilled<V> {
-  (value: V): V | Promise<V>;
-}
+export type UnInterceptorManagerHandlerFulfilled<V> = (
+  value: V,
+) => V | Promise<V>;
 
-export interface UnInterceptorManagerHandlerRejected {
-  (error: any): any;
-}
+export type UnInterceptorManagerHandlerRejected = (error: any) => any;
 
 export interface UnInterceptorManagerHandler<V, T = V, D = UnData>
   extends UnInterceptorOptions<T, D> {

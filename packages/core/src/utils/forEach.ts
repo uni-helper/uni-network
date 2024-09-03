@@ -12,32 +12,30 @@ export function forEach(
 ) {
   if (obj === null || obj === undefined) return;
 
-  let i;
-  let l;
+  let i: number;
+  let l: number;
 
   // Force an array if not already something iterable
-  if (typeof obj !== "object") {
-    obj = [obj];
-  }
+  const object = typeof obj !== "object" ? [obj] : obj;
 
-  if (Array.isArray(obj)) {
+  if (Array.isArray(object)) {
     // Iterate over array values
-    for (i = 0, l = obj.length; i < l; i++) {
-      fn.call(null, obj[i], i, obj);
+    for (i = 0, l = object.length; i < l; i++) {
+      fn.call(null, object[i], i, object);
     }
   } else {
     // Iterate over object keys
     const keys = allOwnKeys
-      ? Object.getOwnPropertyNames(obj).filter(
+      ? Object.getOwnPropertyNames(object).filter(
           (key) => key !== "constructor" && !key.startsWith("_"),
         )
-      : Object.keys(obj);
+      : Object.keys(object);
     const len = keys.length;
-    let key;
+    let key: string;
 
     for (i = 0; i < len; i++) {
       key = keys[i];
-      fn.call(null, obj[key], key, obj);
+      fn.call(null, object[key], key, object);
     }
   }
 }

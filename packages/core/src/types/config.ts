@@ -1,19 +1,19 @@
-import { UnCancelToken } from "../core/UnCancelToken";
+import type { UnCancelToken } from "../core/UnCancelToken";
+import type { UnAdapter } from "./adapter";
 import type {
   UnData,
+  UnDataType,
+  UnFile,
+  UnFileType,
+  UnGenericAbortSignal,
   UnHeaders,
   UnMethod,
-  UnDataType,
-  UnResponseType,
-  UnGenericAbortSignal,
   UnOnProgress,
-  UnFileType,
-  UnParamsSerializer,
-  UnValidateStatus,
-  UnFile,
   UnParams,
+  UnParamsSerializer,
+  UnResponseType,
+  UnValidateStatus,
 } from "./common";
-import type { UnAdapter } from "./adapter";
 
 export interface UnConfig<T = UnData, D = UnData> {
   /** 用于请求的服务器 URL */
