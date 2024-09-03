@@ -1,35 +1,8 @@
 {
-  // 指定默认代码格式化器为 Prettier
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // 保存自动格式化
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
-  // 启动 Prettier
-  "prettier.enable": true,
-  // 启用 ESLint 平面配置
-  "eslint.experimental.useFlatConfig": true, // < 3.0.10
-  "eslint.useFlatConfig": true, // >= 3.0.10
-  // ESLint 检查的语言
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml"
-  ],
-  // JavaScript、JSX、TypeScript、TypeScript JSX、Vue、markdown、JSON、JSONC、YAML 手动保存后 ESLint 自动修复
-  "[javascript][javascriptreact][typescript][typescriptreact][vue][markdown][json][jsonc][yaml]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    }
-  },
-  // markdown 手动保存后 markdownlint 自动修复
-  "[markdown]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.markdownlint": "explicit"
-    }
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   }
 }
