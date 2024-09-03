@@ -6,9 +6,12 @@
       "**/.git",
       "**/.DS_Store",
       "**/dist",
+      "**/cache",
       "./playground",
       "./**/package.json",
-      "./lerna.json"
+      "./lerna.json",
+      "./.vscode",
+      "./coverage"
     ]
   },
   "organizeImports": {
