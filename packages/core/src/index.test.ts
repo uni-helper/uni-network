@@ -1,5 +1,5 @@
-import { expect, it, describe } from 'vitest';
-import { defaults } from './defaults';
+import { expect, it, describe } from "vitest";
+import { defaults } from "./defaults";
 import {
   Un,
   UnInterceptorManager,
@@ -9,47 +9,47 @@ import {
   UnError,
   isUnError,
   HttpStatusCode,
-} from './core';
-import { mergeConfig } from './utils';
-import { un } from '.';
-import { version } from '../package.json';
+} from "./core";
+import { mergeConfig } from "./utils";
+import { un } from ".";
+import { version } from "../package.json";
 
-describe('index', () => {
-  it('un should be defined', () => {
+describe("index", () => {
+  it("un should be defined", () => {
     expect(un).toBeDefined();
   });
-  it('un should be a function', () => {
-    expect(un).toSatisfy((fn) => typeof fn === 'function');
+  it("un should be a function", () => {
+    expect(un).toSatisfy((fn) => typeof fn === "function");
   });
-  it('un should have specific properties', () => {
-    expect(un).toHaveProperty('defaults');
-    expect(un).toHaveProperty('interceptors');
-    expect(un).toHaveProperty('request');
-    expect(un).toHaveProperty('download');
-    expect(un).toHaveProperty('upload');
-    expect(un).toHaveProperty('get');
-    expect(un).toHaveProperty('delete');
-    expect(un).toHaveProperty('head');
-    expect(un).toHaveProperty('options');
-    expect(un).toHaveProperty('trace');
-    expect(un).toHaveProperty('connect');
-    expect(un).toHaveProperty('post');
-    expect(un).toHaveProperty('put');
-    expect(un).toHaveProperty('patch');
-    expect(un).toHaveProperty('getUri');
-    expect(un).toHaveProperty('create');
-    expect(un).toHaveProperty('Un');
-    expect(un).toHaveProperty('CanceledError');
-    expect(un).toHaveProperty('CancelToken');
-    expect(un).toHaveProperty('isCancel');
-    expect(un).toHaveProperty('VERSION');
-    expect(un).toHaveProperty('UnError');
-    expect(un).toHaveProperty('isUnError');
-    expect(un).toHaveProperty('all');
-    expect(un).toHaveProperty('mergeConfig');
-    expect(un).toHaveProperty('HttpStatusCode');
+  it("un should have specific properties", () => {
+    expect(un).toHaveProperty("defaults");
+    expect(un).toHaveProperty("interceptors");
+    expect(un).toHaveProperty("request");
+    expect(un).toHaveProperty("download");
+    expect(un).toHaveProperty("upload");
+    expect(un).toHaveProperty("get");
+    expect(un).toHaveProperty("delete");
+    expect(un).toHaveProperty("head");
+    expect(un).toHaveProperty("options");
+    expect(un).toHaveProperty("trace");
+    expect(un).toHaveProperty("connect");
+    expect(un).toHaveProperty("post");
+    expect(un).toHaveProperty("put");
+    expect(un).toHaveProperty("patch");
+    expect(un).toHaveProperty("getUri");
+    expect(un).toHaveProperty("create");
+    expect(un).toHaveProperty("Un");
+    expect(un).toHaveProperty("CanceledError");
+    expect(un).toHaveProperty("CancelToken");
+    expect(un).toHaveProperty("isCancel");
+    expect(un).toHaveProperty("VERSION");
+    expect(un).toHaveProperty("UnError");
+    expect(un).toHaveProperty("isUnError");
+    expect(un).toHaveProperty("all");
+    expect(un).toHaveProperty("mergeConfig");
+    expect(un).toHaveProperty("HttpStatusCode");
   });
-  it('un properties expectation', () => {
+  it("un properties expectation", () => {
     expect(un.defaults).toBe(defaults);
     expect(un.interceptors.request).toBeInstanceOf(UnInterceptorManager);
     expect(un.interceptors.response).toBeInstanceOf(UnInterceptorManager);

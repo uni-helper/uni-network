@@ -1,9 +1,9 @@
-import statuses from 'statuses';
-import { settle } from '../core/settle';
-import { UnCanceledError } from '../core/UnCanceledError';
-import { buildRequestConfig } from '../utils';
-import { UnCancelTokenListener } from '../core/UnCancelToken';
-import type { UnData, UnConfig, UnResponse } from '../types';
+import statuses from "statuses";
+import { settle } from "../core/settle";
+import { UnCanceledError } from "../core/UnCanceledError";
+import { buildRequestConfig } from "../utils";
+import { UnCancelTokenListener } from "../core/UnCancelToken";
+import type { UnData, UnConfig, UnResponse } from "../types";
 
 export const requestAdapter = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
@@ -16,7 +16,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
     let onCanceled: UnCancelTokenListener;
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
-      signal?.removeEventListener?.('abort', onCanceled);
+      signal?.removeEventListener?.("abort", onCanceled);
     };
 
     let response: UnResponse<T, D>;
@@ -109,6 +109,6 @@ export const requestAdapter = <T = UnData, D = UnData>(
       // @ts-expect-error no types
       signal?.aborted
         ? onCanceled()
-        : signal?.addEventListener('abort', onCanceled);
+        : signal?.addEventListener("abort", onCanceled);
     }
   });

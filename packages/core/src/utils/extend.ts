@@ -1,4 +1,4 @@
-import { forEach } from './forEach';
+import { forEach } from "./forEach";
 
 /**
  * 向对象 a 添加对象 b 的属性
@@ -14,7 +14,7 @@ export const extend = (
   forEach(
     b,
     (val, key) => {
-      a[key] = thisArg && typeof val === 'function' ? val.bind(thisArg) : val;
+      a[key] = thisArg && typeof val === "function" ? val.bind(thisArg) : val;
     },
     { allOwnKeys },
   );

@@ -1,4 +1,4 @@
-import type { UnConfig, UnData } from '../types';
+import type { UnConfig, UnData } from "../types";
 
 export interface UnInterceptorOptions<T = UnData, D = UnData> {
   synchronous?: boolean;

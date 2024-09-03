@@ -1,6 +1,6 @@
-import { downloadAdapter } from './download';
-import { requestAdapter } from './request';
-import { uploadAdapter } from './upload';
+import { downloadAdapter } from "./download";
+import { requestAdapter } from "./request";
+import { uploadAdapter } from "./upload";
 
 export const adapters = {
   download: downloadAdapter,
@@ -8,6 +8,6 @@ export const adapters = {
   upload: uploadAdapter,
 };
 
-export * from './download';
-export * from './request';
-export * from './upload';
+export * from "./download";
+export * from "./request";
+export * from "./upload";

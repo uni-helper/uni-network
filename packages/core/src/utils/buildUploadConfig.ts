@@ -1,13 +1,13 @@
-import type { UnData, UnConfig } from '../types';
-import { buildFullPath } from './buildFullPath';
-import { buildUrl } from './buildUrl';
+import type { UnData, UnConfig } from "../types";
+import { buildFullPath } from "./buildFullPath";
+import { buildUrl } from "./buildUrl";
 
 export const buildUploadConfig = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
 ) =>
   ({
     url: buildUrl(
-      buildFullPath(config.baseUrl ?? '', config.url ?? ''),
+      buildFullPath(config.baseUrl ?? "", config.url ?? ""),
       config.params,
       config.paramsSerializer,
     ),

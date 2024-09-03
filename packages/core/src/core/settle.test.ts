@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
-import type { UnResponse } from '../types';
-import { settle } from './settle';
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
+import type { UnResponse } from "../types";
+import { settle } from "./settle";
 
-describe('core::settle', () => {
+describe("core::settle", () => {
   let resolve: Mock<(response: UnResponse | PromiseLike<UnResponse>) => void>;
   let reject: Mock<(reason?: any) => void>;
 
@@ -11,7 +11,7 @@ describe('core::settle', () => {
     reject = vi.fn();
   });
 
-  it('should resolve promise if status is not set', async () => {
+  it("should resolve promise if status is not set", async () => {
     const response = {
       config: {
         validateStatus: () => true,
@@ -22,7 +22,7 @@ describe('core::settle', () => {
     expect(reject).not.toHaveBeenCalled();
   });
 
-  it('should resolve promise if validateStatus is not set', () => {
+  it("should resolve promise if validateStatus is not set", () => {
     const response = {
       status: 500,
       config: {},
@@ -32,7 +32,7 @@ describe('core::settle', () => {
     expect(reject).not.toHaveBeenCalled();
   });
 
-  it('should resolve promise if validateStatus returns true', () => {
+  it("should resolve promise if validateStatus returns true", () => {
     const response = {
       status: 500,
       config: {
@@ -44,9 +44,9 @@ describe('core::settle', () => {
     expect(reject).not.toHaveBeenCalled();
   });
 
-  it('should reject promise if validateStatus returns false', () => {
+  it("should reject promise if validateStatus returns false", () => {
     const task = {
-      path: '/foo',
+      path: "/foo",
     };
     const response = {
       status: 500,
@@ -60,13 +60,13 @@ describe('core::settle', () => {
     expect(reject).toHaveBeenCalled();
     const reason = reject.mock.calls[0][0];
     expect(reason instanceof Error).toBe(true);
-    expect(reason.message).toBe('Request failed with status code 500');
+    expect(reason.message).toBe("Request failed with status code 500");
     expect(reason.config).toBe(response.config);
     expect(reason.task).toBe(task);
     expect(reason.response).toBe(response);
   });
 
-  it('should pass status to validateStatus', () => {
+  it("should pass status to validateStatus", () => {
     const validateStatus = vi.fn();
     const response = {
       status: 500,

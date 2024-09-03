@@ -16,7 +16,7 @@ export function forEach(
   let l;
 
   // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
+  if (typeof obj !== "object") {
     obj = [obj];
   }
 
@@ -29,7 +29,7 @@ export function forEach(
     // Iterate over object keys
     const keys = allOwnKeys
       ? Object.getOwnPropertyNames(obj).filter(
-          (key) => key !== 'constructor' && !key.startsWith('_'),
+          (key) => key !== "constructor" && !key.startsWith("_"),
         )
       : Object.keys(obj);
     const len = keys.length;

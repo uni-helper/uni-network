@@ -1,5 +1,5 @@
-import type { UnData, UnResponse } from '../types';
-import { UnError } from './UnError';
+import type { UnData, UnResponse } from "../types";
+import { UnError } from "./UnError";
 
 export const settle = <
   T = UnData,

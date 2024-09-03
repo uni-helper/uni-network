@@ -32,6 +32,7 @@ export default defineBuildConfig({
           ),
         ),
       );
+      await Promise.all(promises);
     },
   },
   rollup: {

@@ -1,4 +1,4 @@
-import { UnCancelToken } from '../core/UnCancelToken';
+import { UnCancelToken } from "../core/UnCancelToken";
 import type {
   UnData,
   UnHeaders,
@@ -12,8 +12,8 @@ import type {
   UnValidateStatus,
   UnFile,
   UnParams,
-} from './common';
-import type { UnAdapter } from './adapter';
+} from "./common";
+import type { UnAdapter } from "./adapter";
 
 export interface UnConfig<T = UnData, D = UnData> {
   /** 用于请求的服务器 URL */
@@ -78,7 +78,7 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * 默认为 'request'
    */
-  adapter?: 'request' | 'download' | 'upload' | UnAdapter<T, D>;
+  adapter?: "request" | "download" | "upload" | UnAdapter<T, D>;
   /**
    * 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
    *

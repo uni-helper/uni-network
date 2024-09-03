@@ -3,24 +3,24 @@
 export type UnData = string | Record<string, any> | ArrayBuffer;
 
 export type UnMethod =
-  | 'get'
-  | 'GET'
-  | 'delete'
-  | 'DELETE'
-  | 'head'
-  | 'HEAD'
-  | 'options'
-  | 'OPTIONS'
-  | 'post'
-  | 'POST'
-  | 'put'
-  | 'PUT'
-  | 'patch'
-  | 'PATCH'
-  | 'trace'
-  | 'TRACE'
-  | 'connect'
-  | 'CONNECT';
+  | "get"
+  | "GET"
+  | "delete"
+  | "DELETE"
+  | "head"
+  | "HEAD"
+  | "options"
+  | "OPTIONS"
+  | "post"
+  | "POST"
+  | "put"
+  | "PUT"
+  | "patch"
+  | "PATCH"
+  | "trace"
+  | "TRACE"
+  | "connect"
+  | "CONNECT";
 
 export type UnHeaders = Record<string, any>;
 
@@ -41,9 +41,9 @@ export interface UnGenericAbortSignal {
   removeEventListener?: (...args: any) => any;
 }
 
-export type UnDataType = 'json' | string;
+export type UnDataType = "json" | string;
 
-export type UnResponseType = 'text' | 'arraybuffer';
+export type UnResponseType = "text" | "arraybuffer";
 
 export interface UnFile {
   name?: string;
@@ -66,7 +66,7 @@ export interface UnOnProgress {
   }): void;
 }
 
-export type UnFileType = 'image' | 'video' | 'audio';
+export type UnFileType = "image" | "video" | "audio";
 
 export interface UnProfile {
   /**
@@ -160,5 +160,5 @@ export interface UnProfile {
   /** 收到字节数 */
   receivedBytedCount?: number;
   /** 使用协议类型 */
-  protocol?: 'http1.1' | 'h2' | 'quic' | 'unknown' | string;
+  protocol?: "http1.1" | "h2" | "quic" | "unknown" | string;
 }

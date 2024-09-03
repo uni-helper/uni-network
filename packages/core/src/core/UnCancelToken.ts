@@ -1,5 +1,5 @@
-import type { UnConfig, UnData, UnTask } from '../types';
-import { UnCanceledError } from './UnCanceledError';
+import type { UnConfig, UnData, UnTask } from "../types";
+import { UnCanceledError } from "./UnCanceledError";
 
 export interface UnCancel {
   message?: string;
@@ -34,8 +34,8 @@ export class UnCancelToken<T = UnData, D = UnData> {
   private listeners: UnCancelTokenListener[] = [];
 
   constructor(executor: (cancel: UnCanceler<T, D>) => void) {
-    if (typeof executor !== 'function') {
-      throw new TypeError('executor must be a function.');
+    if (typeof executor !== "function") {
+      throw new TypeError("executor must be a function.");
     }
 
     let resolvePromise: UnCancelTokenListener;

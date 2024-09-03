@@ -1,9 +1,9 @@
-import statuses from 'statuses';
-import { settle } from '../core/settle';
-import { UnCanceledError } from '../core/UnCanceledError';
-import { buildUploadConfig } from '../utils';
-import { UnCancelTokenListener } from '../core/UnCancelToken';
-import type { UnData, UnConfig, UnResponse } from '../types';
+import statuses from "statuses";
+import { settle } from "../core/settle";
+import { UnCanceledError } from "../core/UnCanceledError";
+import { buildUploadConfig } from "../utils";
+import { UnCancelTokenListener } from "../core/UnCancelToken";
+import type { UnData, UnConfig, UnResponse } from "../types";
 
 export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {
@@ -21,7 +21,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
       // @ts-expect-error No overload matches this call.
-      signal?.removeEventListener('abort', onCanceled);
+      signal?.removeEventListener("abort", onCanceled);
     };
 
     let response: UnResponse<T, D>;
@@ -110,6 +110,6 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
       // @ts-expect-error no types
       signal?.aborted
         ? onCanceled()
-        : signal?.addEventListener('abort', onCanceled);
+        : signal?.addEventListener("abort", onCanceled);
     }
   });

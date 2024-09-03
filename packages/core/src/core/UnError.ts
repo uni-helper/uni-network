@@ -1,18 +1,18 @@
-import type { UnConfig, UnData, UnResponse, UnTask } from '../types';
+import type { UnConfig, UnData, UnResponse, UnTask } from "../types";
 
 export class UnError<T = UnData, D = UnData> extends Error {
-  static ERR_FR_TOO_MANY_REDIRECTS = 'ERR_FR_TOO_MANY_REDIRECTS';
-  static ERR_BAD_OPTION_VALUE = 'ERR_BAD_OPTION_VALUE';
-  static ERR_BAD_OPTION = 'ERR_BAD_OPTION';
-  static ERR_NETWORK = 'ERR_NETWORK';
-  static ERR_DEPRECATED = 'ERR_DEPRECATED';
-  static ERR_BAD_RESPONSE = 'ERR_BAD_RESPONSE';
-  static ERR_BAD_REQUEST = 'ERR_BAD_REQUEST';
-  static ERR_NOT_SUPPORT = 'ERR_NOT_SUPPORT';
-  static ERR_INVALID_URL = 'ERR_INVALID_URL';
-  static ERR_CANCELED = 'ERR_CANCELED';
-  static ECONNABORTED = 'ECONNABORTED';
-  static ETIMEDOUT = 'ETIMEDOUT';
+  static ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS";
+  static ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
+  static ERR_BAD_OPTION = "ERR_BAD_OPTION";
+  static ERR_NETWORK = "ERR_NETWORK";
+  static ERR_DEPRECATED = "ERR_DEPRECATED";
+  static ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE";
+  static ERR_BAD_REQUEST = "ERR_BAD_REQUEST";
+  static ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT";
+  static ERR_INVALID_URL = "ERR_INVALID_URL";
+  static ERR_CANCELED = "ERR_CANCELED";
+  static ECONNABORTED = "ECONNABORTED";
+  static ETIMEDOUT = "ETIMEDOUT";
 
   code?: string;
   config?: UnConfig<T, D>;
@@ -31,8 +31,8 @@ export class UnError<T = UnData, D = UnData> extends Error {
   ) {
     super(message);
 
-    this.name = 'UnError';
-    this.message = message ?? '';
+    this.name = "UnError";
+    this.message = message ?? "";
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor);
     } else {

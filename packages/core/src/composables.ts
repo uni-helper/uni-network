@@ -1,14 +1,14 @@
-import type { Ref, ShallowRef } from 'vue-demi';
-import { ref, shallowRef } from 'vue-demi';
-import { noop, until } from '@vueuse/core';
+import type { Ref, ShallowRef } from "vue-demi";
+import { ref, shallowRef } from "vue-demi";
+import { noop, until } from "@vueuse/core";
 import type {
   UnInstance,
   UnResponse,
   UnCancelTokenSource,
   UnConfig,
   UnData,
-} from './index';
-import { un, UnError } from './index';
+} from "./index";
+import { un, UnError } from "./index";
 
 /** Align with v10.8.0 */
 
@@ -114,8 +114,8 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   ...args: any[]
 ): OverallUseUnReturn<T, R, D> & Promise<OverallUseUnReturn<T, R, D>> {
   const url: string | undefined =
-    typeof args[0] === 'string' ? args[0] : undefined;
-  const argsPlaceholder = typeof url === 'string' ? 1 : 0;
+    typeof args[0] === "string" ? args[0] : undefined;
+  const argsPlaceholder = typeof url === "string" ? 1 : 0;
   let defaultConfig: UnConfig<T, D> = {};
   let instance: UnInstance = un;
   let options: UseUnOptions<T> = {
@@ -192,13 +192,13 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   } as Promise<OverallUseUnReturn<T, R, D>>;
 
   let executeCounter = 0;
-  const execute: OverallUseUnReturn<T, R, D>['execute'] = (
+  const execute: OverallUseUnReturn<T, R, D>["execute"] = (
     executeUrl: string | UnConfig<T, D> | undefined = url,
     config: UnConfig<T, D> = {},
   ) => {
     error.value = undefined;
     const _url =
-      typeof executeUrl === 'string' ? executeUrl : url ?? config.url;
+      typeof executeUrl === "string" ? executeUrl : url ?? config.url;
 
     if (_url === undefined) {
       error.value = new UnError(UnError.ERR_INVALID_URL);
@@ -217,7 +217,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
 
     instance(_url, {
       ...defaultConfig,
-      ...(typeof executeUrl === 'object' ? executeUrl : config),
+      ...(typeof executeUrl === "object" ? executeUrl : config),
       cancelToken: cancelToken.token,
     })
       .then((r: any) => {
@@ -238,7 +238,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     return promise;
   };
 
-  if (immediate && url) (execute as StrictUseUnReturn<T, R, D>['execute'])();
+  if (immediate && url) (execute as StrictUseUnReturn<T, R, D>["execute"])();
 
   const result = {
     response,

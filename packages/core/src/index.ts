@@ -1,4 +1,4 @@
-import { version } from '../package.json';
+import { version } from "../package.json";
 import {
   HttpStatusCode,
   isUnError,
@@ -9,10 +9,10 @@ import {
   UnCancelTokenStatic,
   UnError,
   isUnCancel,
-} from './core';
-import { defaults } from './defaults';
-import { extend, mergeConfig } from './utils';
-import { UnConfig, UnData, UnResponse } from './types';
+} from "./core";
+import { defaults } from "./defaults";
+import { extend, mergeConfig } from "./utils";
+import { UnConfig, UnData, UnResponse } from "./types";
 
 export interface UnInstance<T = UnData, D = UnData> extends Un<T, D> {
   <TT = T, DD = D, R = UnResponse<TT, DD>>(
@@ -93,11 +93,11 @@ un.mergeConfig = mergeConfig;
 // Expose HttpStatusCode
 un.HttpStatusCode = HttpStatusCode;
 
-export * from './adapters';
-export * from './core';
-export * from './defaults';
-export * from './utils';
-export * from './types';
+export * from "./adapters";
+export * from "./core";
+export * from "./defaults";
+export * from "./utils";
+export * from "./types";
 export { un };
 
 export default un;

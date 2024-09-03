@@ -1,11 +1,11 @@
-import { buildFullPath, buildUrl, mergeConfig } from '../utils';
-import type { UnConfig, UnData, UnResponse } from '../types';
+import { buildFullPath, buildUrl, mergeConfig } from "../utils";
+import type { UnConfig, UnData, UnResponse } from "../types";
 import {
   UnInterceptorManager,
   UnInterceptorManagerHandlerFulfilled,
   UnInterceptorManagerHandlerRejected,
-} from './UnInterceptorManager';
-import { dispatchRequest } from './dispatchRequest';
+} from "./UnInterceptorManager";
+import { dispatchRequest } from "./dispatchRequest";
 
 export class Un<T = UnData, D = UnData> {
   defaults: UnConfig<T, D>;
@@ -28,7 +28,7 @@ export class Un<T = UnData, D = UnData> {
     config?: UnConfig<TT, DD>,
   ): Promise<R> {
     const _config =
-      typeof configOrUrl === 'string'
+      typeof configOrUrl === "string"
         ? { ...config, url: configOrUrl }
         : { ...configOrUrl, ...config };
 
@@ -43,7 +43,7 @@ export class Un<T = UnData, D = UnData> {
     let synchronousRequestInterceptors = true;
     this.interceptors.request.each((interceptor) => {
       if (
-        typeof interceptor.runWhen === 'function' &&
+        typeof interceptor.runWhen === "function" &&
         interceptor.runWhen(mergedConfig) === false
       ) {
         return;
@@ -146,15 +146,15 @@ export class Un<T = UnData, D = UnData> {
           ? Error.captureStackTrace((dummy = {}))
           : (dummy = new Error());
         // slice off the Error: ... line
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, '') : '';
+        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
         if (!error.stack) {
           error.stack = stack;
           // match without the 2 top stack lines
         } else if (
           stack &&
-          !String(error.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))
+          !String(error.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))
         ) {
-          error.stack += '\n' + stack;
+          error.stack += "\n" + stack;
         }
       }
       throw error;
@@ -165,14 +165,14 @@ export class Un<T = UnData, D = UnData> {
     configOrUrl: string | UnConfig<TT, DD>,
     config?: UnConfig<TT, DD>,
   ): Promise<R> {
-    return this.request(configOrUrl, { ...config, adapter: 'download' });
+    return this.request(configOrUrl, { ...config, adapter: "download" });
   }
 
   upload<TT = T, DD = D, R = UnResponse<TT, DD>>(
     configOrUrl: string | UnConfig<TT, DD>,
     config?: UnConfig<TT, DD>,
   ): Promise<R> {
-    return this.request(configOrUrl, { ...config, adapter: 'upload' });
+    return this.request(configOrUrl, { ...config, adapter: "upload" });
   }
 
   get<TT = T, DD = D, R = UnResponse<TT, DD>>(
@@ -181,7 +181,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'GET',
+      method: "GET",
       url,
     });
   }
@@ -192,7 +192,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'DELETE',
+      method: "DELETE",
       url,
     });
   }
@@ -203,7 +203,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'HEAD',
+      method: "HEAD",
       url,
     });
   }
@@ -214,7 +214,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'OPTIONS',
+      method: "OPTIONS",
       url,
     });
   }
@@ -225,7 +225,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'TRACE',
+      method: "TRACE",
       url,
     });
   }
@@ -236,7 +236,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'CONNECT',
+      method: "CONNECT",
       url,
     });
   }
@@ -248,7 +248,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'POST',
+      method: "POST",
       url,
       data,
     });
@@ -261,7 +261,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'PUT',
+      method: "PUT",
       url,
       data,
     });
@@ -274,7 +274,7 @@ export class Un<T = UnData, D = UnData> {
   ): Promise<R> {
     return this.request({
       ...config,
-      method: 'PATCH',
+      method: "PATCH",
       url,
       data,
     });
@@ -283,8 +283,8 @@ export class Un<T = UnData, D = UnData> {
   getUri(config: UnConfig<T, D>) {
     const mergedConfig = mergeConfig(this.defaults, config);
     const fullPath = buildFullPath(
-      mergedConfig?.baseUrl ?? '',
-      mergedConfig?.url ?? '',
+      mergedConfig?.baseUrl ?? "",
+      mergedConfig?.url ?? "",
     );
     return buildUrl(
       fullPath,
