@@ -4,7 +4,9 @@ export default defineConfig({
   title: "Uni Network",
   description: "为 uni-app 打造的基于 Promise 的 HTTP 客户端。",
   head: [
+    // icon
     ["link", { rel: "icon", type: "image/png", href: "/logo.png" }],
+    // Open Graph
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "zh-cn" }],
     ["meta", { name: "og:site_name", content: "Uni Network" }],
@@ -15,6 +17,22 @@ export default defineConfig({
         content:
           "https://github.com/uni-helper/website/raw/main/.github/assets/uni-helper-banner.png",
       },
+    ],
+    // Google Analytics
+    [
+      "script",
+      {
+        async: "",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-7L81RK6W5F",
+      },
+    ],
+    [
+      "script",
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7L81RK6W5F');`,
     ],
   ],
   themeConfig: {
