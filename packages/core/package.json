@@ -73,10 +73,9 @@
   "dependencies": {
     "@dcloudio/types": "^3.4.8",
     "@types/lodash.merge": "^4.6.9",
-    "@types/statuses": "^2.0.5",
     "fast-querystring": "^1.1.2",
     "lodash.merge": "^4.6.2",
-    "statuses": "^2.0.1",
+    "statuses-es": "^2.0.6",
     "vue-demi": "^0.14.8"
   },
   "devDependencies": {

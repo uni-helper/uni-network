@@ -1,4 +1,4 @@
-import statuses from "statuses";
+import statuses from "statuses-es";
 import type { UnCancelTokenListener } from "../core/UnCancelToken";
 import { UnCanceledError } from "../core/UnCanceledError";
 import { settle } from "../core/settle";
