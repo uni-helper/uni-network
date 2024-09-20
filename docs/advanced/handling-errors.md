@@ -35,7 +35,7 @@ un.get('/user/12345', {
 });
 ```
 
-如果你追求语义化，可以使用导出的和挂载的状态码、[statuses](https://github.com/jshttp/statuses)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
+如果你追求语义化，可以使用导出的和挂载的状态码、[statuses-es](https://github.com/esm-ts/statuses-es)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
 
 ```typescript
 import { un, HttpStatusCode } from '@uni-helper/uni-network';
