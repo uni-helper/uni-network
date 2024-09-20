@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
+  "version": "0.0.0",
+  "npmClient": "pnpm",
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "version": {
+      "allowBranch": "main",
+      "conventionalCommits": true,
+      "changelogIncludeCommitsClientLogin": " - by @%l",
+      "message": "chore: release %s",
+      "remoteClient": "github"
+    }
+  },
+  "changelogPreset": "conventional-changelog-conventionalcommits",
+  "ignoreChanges": [
+    "**/test/**",
+    "**/tests/**",
+    "**/__test__/**",
+    "**/__tests__/**",
+    "**/*.md"
+  ]
+}
