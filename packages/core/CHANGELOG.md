@@ -12,7 +12,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * add the missed implementation of UnError[#status](https://github.com/uni-helper/uni-network/issues/status) property, axios[#6573](https://github.com/uni-helper/uni-network/issues/6573) ([43b5bc5](https://github.com/uni-helper/uni-network/commit/43b5bc541f79f00d6cd95e406205ecfe95f484dd)) - by @ModyQyW
-* allow vueuse v11 ([cd84a78](https://github.com/uni-helper/uni-network/commit/cd84a784a9f0ed67d018a19da48c267f1e3ed274)) - by @
+* allow vueuse v11 ([cd84a78](https://github.com/uni-helper/uni-network/commit/cd84a784a9f0ed67d018a19da48c267f1e3ed274)) - by @ModyQyW
 * disregard protocol-relative URL to remediate SSRF, axios[#6539](https://github.com/uni-helper/uni-network/issues/6539) ([025cd49](https://github.com/uni-helper/uni-network/commit/025cd49fbf44493f97db3f340762de1599d31910)) - by @ModyQyW
 * fix main entry ([7c6561c](https://github.com/uni-helper/uni-network/commit/7c6561ca770a9cdc0f1c861a0d9506cb3f31fe86)) - by @ModyQyW
 * fix node10 ts support ([ad3b98c](https://github.com/uni-helper/uni-network/commit/ad3b98cf958bfdb0aeff06dafe7dd3996bcbbd9b)) - by @ModyQyW
