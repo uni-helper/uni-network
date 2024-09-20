@@ -1,6 +1,7 @@
 {
   "name": "uni-preset-vue",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "build:app": "uni build -p app",
     "build:app-android": "uni build -p app-android",
