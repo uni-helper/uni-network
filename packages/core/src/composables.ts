@@ -199,7 +199,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
   ) => {
     error.value = undefined;
     const _url =
-      typeof executeUrl === "string" ? executeUrl : url ?? config.url;
+      typeof executeUrl === "string" ? executeUrl : (url ?? config.url);
 
     if (_url === undefined) {
       error.value = new UnError(UnError.ERR_INVALID_URL);
