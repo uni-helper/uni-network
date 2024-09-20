@@ -1112,7 +1112,7 @@ un.interceptors.response.use(
   pnpm add @vueuse/core@^9.13.0
   ```
 
-如果你希望使用 `@vueuse/core@^10.0.0`，请查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
+如果你希望使用 `@vueuse/core@^10.0.0` 或 `@vueuse/core@^11.0.0`，请查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
 
 从 `@uni-helper/uni-network/composables` 中导入组合式函数后即可使用。
 
@@ -1143,6 +1143,7 @@ import { useUn } from '@uni-helper/uni-network/composables';
 如果你因为某些原因坚持使用 `axios`，你可以查看 [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter) 获取 `adapter` 支持。
 
 以下是 `@uni-helper/uni-network` 与其它一些库的比较。如果你发现这里信息已经过时，欢迎提交 ISSUE 或 PR。
+
 | | `axios` | `luch-request` | `uni-ajax` | `@uni-helper/uni-network` |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 基本信息 | [![npm](https://img.shields.io/npm/v/axios)](https://www.npmjs.com/package/axios) [![npm](https://img.shields.io/npm/dw/axios)](https://www.npmjs.com/package/axios) | [![npm](https://img.shields.io/npm/v/luch-request)](https://www.npmjs.com/package/luch-request) [![npm](https://img.shields.io/npm/dw/luch-request)](https://www.npmjs.com/package/luch-request) | [![npm](https://img.shields.io/npm/v/uni-ajax)](https://www.npmjs.com/package/uni-ajax) [![npm](https://img.shields.io/npm/dw/uni-ajax)](https://www.npmjs.com/package/uni-ajax) | [![npm](https://img.shields.io/npm/v/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) [![npm](https://img.shields.io/npm/dw/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) |
