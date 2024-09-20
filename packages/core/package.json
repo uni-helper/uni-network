@@ -19,7 +19,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uni-helper/uni-network.git"
+    "url": "git+https://github.com/uni-helper/uni-network.git",
+    "directory": "packages/core"
   },
   "license": "MIT",
   "author": {
