@@ -53,26 +53,26 @@
     "preversion": "pnpm run check"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
-    "@commitlint/config-pnpm-scopes": "^19.1.0",
+    "@biomejs/biome": "^1.9.2",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/config-pnpm-scopes": "^19.5.0",
     "@dcloudio/types": "^3.4.12",
-    "@lerna-lite/cli": "^3.8.0",
-    "@lerna-lite/version": "^3.8.0",
-    "@types/node": "^20.14.14",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@lerna-lite/cli": "^3.9.1",
+    "@lerna-lite/version": "^3.9.1",
+    "@types/node": "^20.16.5",
+    "@vitest/coverage-v8": "^2.1.1",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "is-ci": "^3.0.1",
     "lint-staged": "^15.2.10",
     "rimraf": "^6.0.1",
     "simple-git-hooks": "^2.11.1",
-    "taze": "^0.16.7",
-    "typescript": "^5.5.4",
+    "taze": "^0.16.9",
+    "typescript": "^5.6.2",
     "unbuild": "^3.0.0-rc.7",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.1"
   },
-  "packageManager": "pnpm@9.7.0",
+  "packageManager": "pnpm@9.10.0",
   "engines": {
     "node": ">=18"
   },

@@ -53,7 +53,7 @@
     "@vueuse/core": "^9.13.0",
     "abort-controller": "^3.0.0",
     "abortcontroller-polyfill": "^1.7.5",
-    "core-js": "^3.37.1",
+    "core-js": "^3.38.1",
     "vue": "~3.4.38",
     "vue-i18n": "^9.14.0"
   },
@@ -63,7 +63,7 @@
     "@dcloudio/uni-cli-shared": "3.0.0-4020420240722002",
     "@dcloudio/uni-stacktracey": "3.0.0-4020420240722002",
     "@dcloudio/vite-plugin-uni": "3.0.0-4020420240722002",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2"
+    "typescript": "^5.6.2",
+    "vite": "^5.4.6"
   }
 }
