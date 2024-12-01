@@ -54,6 +54,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
       fail: (err) => {
         response = {
           ...response,
+          config,
           // @ts-expect-error no types
           errMsg: err?.errMsg ?? err?.errmsg ?? err?.msg ?? err?.message,
           // @ts-expect-error no types

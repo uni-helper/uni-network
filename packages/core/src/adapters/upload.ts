@@ -57,6 +57,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
       fail: (err) => {
         response = {
           ...response,
+          config,
           // @ts-expect-error no types
           errMsg: err?.errMsg ?? err?.errmsg ?? err?.msg ?? err?.message,
           // @ts-expect-error no types
