@@ -1,6 +1,7 @@
 import statuses from "statuses-es";
 import type { UnCancelTokenListener } from "../core/UnCancelToken";
 import { UnCanceledError } from "../core/UnCanceledError";
+import { UnError } from "../core/UnError";
 import { settle } from "../core/settle";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildUploadConfig } from "../utils";
@@ -24,7 +25,6 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
       signal?.removeEventListener("abort", onCanceled);
     };
 
-    let response: UnResponse<T, D>;
     let task: UniApp.UploadTask | undefined;
 
     task = uni.uploadFile({
@@ -38,8 +38,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
           // 当 statusCode 不合法、statuses 抛出错误时，设置 statusText 为 undefined
           statusText = undefined;
         }
-        response = {
-          ...response,
+        const response: UnResponse<T, D> = {
           // @ts-expect-error no types
           errMsg: res?.errMsg ?? res?.errmsg ?? res?.msg ?? res?.message,
           // @ts-expect-error no types
@@ -53,23 +52,6 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
           data: res?.data,
           task,
         };
-      },
-      fail: (err) => {
-        response = {
-          ...response,
-          // @ts-expect-error no types
-          errMsg: err?.errMsg ?? err?.errmsg ?? err?.msg ?? err?.message,
-          // @ts-expect-error no types
-          errno: err?.errno,
-        };
-      },
-      complete: () => {
-        if (onHeadersReceived) {
-          task?.offHeadersReceived(onHeadersReceived);
-        }
-        if (onProgressUpdate) {
-          task?.offProgressUpdate(onProgressUpdate);
-        }
         settle<T, D, UnResponse<T, D>>(
           (val) => {
             resolve(val);
@@ -81,6 +63,17 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
           },
           response,
         );
+      },
+      fail: (err) => {
+        reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
+      },
+      complete: () => {
+        if (onHeadersReceived) {
+          task?.offHeadersReceived(onHeadersReceived);
+        }
+        if (onProgressUpdate) {
+          task?.offProgressUpdate(onProgressUpdate);
+        }
       },
     });
 
