@@ -31,6 +31,7 @@ describe("core:UnCancelToken", () => {
       cancel("Operation has been canceled.");
       expect(token.reason).toEqual(expect.any(UnCanceledError));
       expect(token.reason?.message).toBe("Operation has been canceled.");
+      expect(token.reason?.isUnCanceledError).toBe(true);
     });
 
     it("returns undefined if cancellation has not been requested", () => {

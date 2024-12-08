@@ -3,6 +3,7 @@ import { UnCanceledError } from "./UnCanceledError";
 
 export interface UnCancel {
   message?: string;
+  isUnCanceledError: true;
 }
 
 export interface UnCancelStatic {

@@ -2,7 +2,7 @@ import type { UnConfig, UnData, UnTask } from "../types";
 import { UnError } from "./UnError";
 
 class UnCanceledError<T = UnData, D = UnData> extends UnError<T, D> {
-  isUnCanceledError = true;
+  isUnCanceledError: true = true;
 
   constructor(message?: string, config?: UnConfig<T, D>, task?: UnTask) {
     super(message ?? "canceled");
