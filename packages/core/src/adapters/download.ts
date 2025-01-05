@@ -73,7 +73,17 @@ export const downloadAdapter = <T = UnData, D = UnData>(
         );
       },
       fail: (err) => {
-        reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
+        switch (err.errMsg) {
+          case "request:fail abort":
+            reject(new UnError(err.errMsg, UnError.ERR_CANCELED, config, task));
+            break;
+          case "request:fail timeout":
+            reject(new UnError(err.errMsg, UnError.ETIMEDOUT, config, task));
+            break;
+          default:
+            reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
+            break;
+        }
       },
       complete: () => {
         if (onHeadersReceived) {
