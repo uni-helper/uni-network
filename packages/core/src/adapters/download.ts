@@ -1,6 +1,7 @@
 import statuses from "statuses-es";
 import type { UnCancelTokenListener } from "../core/UnCancelToken";
 import { UnCanceledError } from "../core/UnCanceledError";
+import { UnError } from "../core/UnError";
 import { settle } from "../core/settle";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildDownloadConfig } from "../utils";
@@ -26,7 +27,6 @@ export const downloadAdapter = <T = UnData, D = UnData>(
       signal?.removeEventListener("abort", onCanceled);
     };
 
-    let response: UnResponse<T, D>;
     let task: UniApp.DownloadTask | undefined;
 
     task = uni.downloadFile({
@@ -40,8 +40,7 @@ export const downloadAdapter = <T = UnData, D = UnData>(
           // 当 statusCode 不合法、statuses 抛出错误时，设置 statusText 为 undefined
           statusText = undefined;
         }
-        response = {
-          ...response,
+        const response: UnResponse<T, D> = {
           // @ts-expect-error no types
           errMsg: res?.errMsg ?? res?.errmsg ?? res?.msg ?? res?.message,
           // @ts-expect-error no types
@@ -61,21 +60,6 @@ export const downloadAdapter = <T = UnData, D = UnData>(
           },
           task,
         };
-      },
-      fail: (err) => {
-        response = {
-          ...response,
-          errMsg: err?.errMsg ?? err?.errmsg ?? err?.msg ?? err?.message,
-          errno: err?.errno,
-        };
-      },
-      complete: () => {
-        if (onHeadersReceived) {
-          task?.offHeadersReceived(onHeadersReceived);
-        }
-        if (onProgressUpdate) {
-          task?.offProgressUpdate(onProgressUpdate);
-        }
         settle<T, D, UnResponse<T, D>>(
           (val) => {
             resolve(val);
@@ -87,6 +71,27 @@ export const downloadAdapter = <T = UnData, D = UnData>(
           },
           response,
         );
+      },
+      fail: (err) => {
+        switch (err.errMsg) {
+          case "request:fail abort":
+            reject(new UnError(err.errMsg, UnError.ERR_CANCELED, config, task));
+            break;
+          case "request:fail timeout":
+            reject(new UnError(err.errMsg, UnError.ETIMEDOUT, config, task));
+            break;
+          default:
+            reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
+            break;
+        }
+      },
+      complete: () => {
+        if (onHeadersReceived) {
+          task?.offHeadersReceived(onHeadersReceived);
+        }
+        if (onProgressUpdate) {
+          task?.offProgressUpdate(onProgressUpdate);
+        }
       },
     });
 
