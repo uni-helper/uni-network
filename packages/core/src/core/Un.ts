@@ -141,12 +141,10 @@ export class Un<T = UnData, D = UnData> {
       return await this._request(configOrUrl, config);
     } catch (error) {
       if (error instanceof Error) {
-        // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
-        let dummy;
+        let dummy: any = {};
         Error.captureStackTrace
-          ? // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-            Error.captureStackTrace((dummy = {}))
-          : // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+          ? Error.captureStackTrace(dummy)
+          : // biome-ignore lint/suspicious/noAssignInExpressions: follow axios implementation
             (dummy = new Error());
         // slice off the Error: ... line
         const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
