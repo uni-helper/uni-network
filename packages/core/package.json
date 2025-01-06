@@ -72,7 +72,7 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@dcloudio/types": "^3.4.12",
+    "@dcloudio/types": "^3.4.14",
     "@types/lodash.merge": "^4.6.9",
     "fast-querystring": "^1.1.2",
     "lodash.merge": "^4.6.2",
@@ -82,13 +82,13 @@
   "devDependencies": {
     "@types/ungap__url-search-params": "^0.1.2",
     "@ungap/url-search-params": "^0.2.2",
-    "@vueuse/core": "^11.1.0",
-    "vitest": "^2.1.1",
-    "vue": "^3.5.6"
+    "@vueuse/core": "^12.3.0",
+    "vitest": "^2.1.8",
+    "vue": "^3.5.13"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0",
-    "@vueuse/core": "^9.0.0 || ^10.0.0 || ^11.0.0",
+    "@vueuse/core": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
     "vue": "^2.6.0 || ^2.7.0 || ^3.2.0"
   },
   "peerDependenciesMeta": {
@@ -102,7 +102,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@9.15.3",
   "engines": {
     "node": ">=18"
   },
