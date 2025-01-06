@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/uni-helper/uni-network/compare/v0.19.3...v0.20.0) (2025-01-06)
+
+### ⚠ BREAKING CHANGES
+
+* improve error handling (#56)
+
+### Features
+
+* improve error handling ([#56](https://github.com/uni-helper/uni-network/issues/56)) ([0b6aa80](https://github.com/uni-helper/uni-network/commit/0b6aa80afa231cce891e288c309d278bf86fd7f4)) - by @peerless-hero
+
+### Bug Fixes
+
+* syntax error on ios, axios/axios[#6608](https://github.com/uni-helper/uni-network/issues/6608) ([2f51786](https://github.com/uni-helper/uni-network/commit/2f51786702e6f0c69930002356941fce8f1db2c7)) - by @
+
 ## [0.19.3](https://github.com/uni-helper/uni-network/compare/v0.19.2...v0.19.3) (2024-09-20)
 
 ### Features
