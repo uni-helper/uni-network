@@ -5,15 +5,15 @@
 ## un(config)
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 发起 POST 请求
 un({
-  method: 'POST',
-  url: '/user/12345',
+  method: "POST",
+  url: "/user/12345",
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -21,10 +21,10 @@ un({
 ## un(url[, config])
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 发起 GET 请求（默认请求方法）
-un('/user/12345');
+un("/user/12345");
 ```
 
 ## 请求别名

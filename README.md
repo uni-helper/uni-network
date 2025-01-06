@@ -108,33 +108,33 @@
 #### GET 请求
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 请求特定 ID 的用户数据
-un.get('/user?ID=12345')
+un.get("/user?ID=12345")
   .then((response) => {
     // 处理响应
-    console.log('response', response);
+    console.log("response", response);
   })
   .catch((error) => {
     // 处理错误
-    console.log('error', error);
+    console.log("error", error);
   })
   .finally(() => {
     // 总是会执行
   });
 
 // 上述请求和以下等同
-un.get('/user', {
+un.get("/user", {
   params: {
-    ID: '12345',
+    ID: "12345",
   },
 })
   .then((response) => {
-    console.log('response', response);
+    console.log("response", response);
   })
   .catch((error) => {
-    console.log('error', error);
+    console.log("error", error);
   })
   .finally(() => {
     // 总是会执行
@@ -146,11 +146,11 @@ un.get('/user', {
 #### 使用 async/await 的 GET 请求
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 async function getUser() {
   try {
-    const response = await un.get('/user?ID=12345');
+    const response = await un.get("/user?ID=12345");
     console.log(response);
   } catch (error) {
     console.error(error);
@@ -161,11 +161,11 @@ async function getUser() {
 #### POST 请求
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-un.post('/user', {
-  firstName: 'Fred',
-  lastName: 'Flintstone',
+un.post("/user", {
+  firstName: "Fred",
+  lastName: "Flintstone",
 })
   .then(function (response) {
     console.log(response);
@@ -179,14 +179,14 @@ un.post('/user', {
 #### 并发请求
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 function getUserAccount() {
-  return un.get('/user/12345');
+  return un.get("/user/12345");
 }
 
 function getUserPermissions() {
-  return un.get('/user/12345/permissions');
+  return un.get("/user/12345/permissions");
 }
 
 Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
@@ -206,15 +206,15 @@ Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
 #### `un(config)`
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 发起 POST 请求
 un({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -222,10 +222,10 @@ un({
 #### `un(url[, config])`
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 发起 GET 请求（默认请求方法）
-un('/user/12345');
+un("/user/12345");
 ```
 
 #### 请求别名
@@ -252,12 +252,12 @@ un('/user/12345');
 #### `un.create([config])`
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 const instance = un.create({
-  baseUrl: 'https://some-domain.com/api/',
+  baseUrl: "https://some-domain.com/api/",
   timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' },
+  headers: { "X-Custom-Header": "foobar" },
 });
 ```
 
@@ -541,18 +541,18 @@ const instance = un.create({
 当使用 then 时，你将接收如下响应：
 
 ```typescript
-un.get('/user/12345').then((response) => {
-  console.log('errMsg', response?.errMsg);
-  console.log('errno', response?.errno);
-  console.log('profile', response?.profile);
-  console.log('config', response?.config);
-  console.log('status', response?.status);
-  console.log('statusText', response?.statusText);
-  console.log('headers', response?.headers);
-  console.log('data', response?.data);
-  console.log('cookies', response?.cookies);
-  console.log('tmpFilePath', response?.tmpFilePath);
-  console.log('filePath', response?.filePath);
+un.get("/user/12345").then((response) => {
+  console.log("errMsg", response?.errMsg);
+  console.log("errno", response?.errno);
+  console.log("profile", response?.profile);
+  console.log("config", response?.config);
+  console.log("status", response?.status);
+  console.log("statusText", response?.statusText);
+  console.log("headers", response?.headers);
+  console.log("data", response?.data);
+  console.log("cookies", response?.cookies);
+  console.log("tmpFilePath", response?.tmpFilePath);
+  console.log("filePath", response?.filePath);
 });
 ```
 
@@ -565,23 +565,23 @@ un.get('/user/12345').then((response) => {
 #### 全局配置默认值
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-un.defaults.baseUrl = 'https://api.example.com';
+un.defaults.baseUrl = "https://api.example.com";
 ```
 
 #### 自定义实例默认值
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 创建实例时配置默认值
 const instance = un.create({
-  baseUrl: 'https://api.example.com',
+  baseUrl: "https://api.example.com",
 });
 
 // 创建实例后修改默认值
-instance.defaults.baseUrl = 'https://api.another-example.com';
+instance.defaults.baseUrl = "https://api.another-example.com";
 ```
 
 #### 配置的优先级
@@ -598,7 +598,7 @@ const instance = un.create();
 instance.defaults.timeout = 2500;
 
 // 重写此请求的超时时间，因为该请求需要很长时间
-instance.get('/longRequest', {
+instance.get("/longRequest", {
   timeout: 5000,
 });
 ```
@@ -614,7 +614,7 @@ instance.get('/longRequest', {
 可以全局添加请求或响应的拦截器。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加请求拦截器
 un.interceptors.request.use(
@@ -625,7 +625,7 @@ un.interceptors.request.use(
   function (error) {
     // 对请求错误做些什么
     return Promise.reject(error);
-  },
+  }
 );
 
 // 添加响应拦截器
@@ -639,14 +639,14 @@ un.interceptors.response.use(
     // 超出 2xx 范围的状态码都会触发该函数
     // 对响应错误做点什么
     return Promise.reject(error);
-  },
+  }
 );
 ```
 
 也可以给自定义实例添加请求或响应的拦截器。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 创建实例
 const instance = un.create();
@@ -667,7 +667,7 @@ instance.interceptors.response.use(() => {
 可以移除单个请求或响应的拦截器。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加请求拦截器
 const requestInterceptor = un.interceptors.request.use(() => {
@@ -687,7 +687,7 @@ un.interceptors.response.eject(responseInterceptor);
 也可以移除所有请求或响应的拦截器。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 创建实例
 const instance = un.create();
@@ -714,31 +714,31 @@ instance.interceptors.response.clear();
 如果你的请求拦截器是同步的，你可以在选项对象中添加一个标志，告诉 `@uni-helper/uni-network` 同步运行代码，避免请求执行中的任何延迟。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 un.interceptors.request.use(
   (config) => {
-    config.headers.test = 'I am only a header!';
+    config.headers.test = "I am only a header!";
     return config;
   },
   null,
-  { synchronous: true },
+  { synchronous: true }
 );
 ```
 
 如果你想根据运行时检查来执行某个拦截器，你可以在 `options` 对象中设置 `runWhen` 函数。**当且仅当** `runWhen` 的返回值为 `false` 时，拦截器不会被执行。该函数将和 `config` 对象一起被调用（别忘了，你也可以绑定你自己的参数）。当你有一个只需要在特定时间运行的异步请求拦截器时，这可能会很方便。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-const onGetCall = (config) => config.method.toUpperCase() === 'GET';
+const onGetCall = (config) => config.method.toUpperCase() === "GET";
 un.interceptors.request.use(
   (config) => {
-    config.headers.test = 'special get headers';
+    config.headers.test = "special get headers";
     return config;
   },
   null,
-  { runWhen: onGetCall },
+  { runWhen: onGetCall }
 );
 ```
 
@@ -759,9 +759,9 @@ un.interceptors.request.use(
 默认把每一个返回的状态代码不在 2xx 范围内的响应视为错误。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-un.get('/user/12345').catch((error) => {
+un.get("/user/12345").catch((error) => {
   if (error.response) {
     // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
     console.log(error.response.data);
@@ -773,7 +773,7 @@ un.get('/user/12345').catch((error) => {
     console.log(error.task);
   } else {
     // 发送请求时出了点问题
-    console.log('Error', error.message);
+    console.log("Error", error.message);
   }
   console.log(error.config);
 });
@@ -782,9 +782,9 @@ un.get('/user/12345').catch((error) => {
 使用 `validateStatus` 配置选项，可以自定义抛出错误的 HTTP code。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   validateStatus: (status) => {
     return status < 500; // 处理状态码小于 500 的情况
   },
@@ -794,9 +794,9 @@ un.get('/user/12345', {
 如果你追求语义化，可以使用导出的和挂载的状态码、[statuses-es](https://github.com/esm-ts/statuses-es)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
 
 ```typescript
-import { un, HttpStatusCode } from '@uni-helper/uni-network';
+import { un, HttpStatusCode } from "@uni-helper/uni-network";
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   validateStatus: (status) => {
     return status < HttpStatusCode.InternalServerError; // 处理状态码小于 500 的情况
     // return status < un.HttpStatusCode.InternalServerError; // 也可以使用挂载在 un 上的状态码
@@ -807,7 +807,7 @@ un.get('/user/12345', {
 使用 `toJSON` 可以获取更多关于 HTTP 错误的信息。
 
 ```typescript
-un.get('/user/12345').catch((error) => {
+un.get("/user/12345").catch((error) => {
   console.log(error.toJSON());
 });
 ```
@@ -815,9 +815,9 @@ un.get('/user/12345').catch((error) => {
 如果需要针对 `UnError` 和非 `UnError` 做处理，可以使用导出的 `isUnError` 方法判断。
 
 ```typescript
-import { un, isUnError } from '@uni-helper/uni-network';
+import { un, isUnError } from "@uni-helper/uni-network";
 
-un.get('/user/12345').catch((error) => {
+un.get("/user/12345").catch((error) => {
   if (isUnError(error)) {
     /* ... */
   } else {
@@ -851,8 +851,8 @@ un.get('/user/12345').catch((error) => {
   ```
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
-import AbortController from 'abort-controller/dist/abort-controller';
+import { un } from "@uni-helper/uni-network";
+import AbortController from "abort-controller/dist/abort-controller";
 // ❌ 错误做法 1
 // import AbortController from 'abort-controller';
 // ❌ 错误做法 2
@@ -860,7 +860,7 @@ import AbortController from 'abort-controller/dist/abort-controller';
 
 const controller = new AbortController();
 
-un.get('/foo/bar', {
+un.get("/foo/bar", {
   signal: controller.signal,
 }).then(function (response) {
   //...
@@ -874,43 +874,43 @@ controller.abort();
 你也可以使用 `CancelToken` 来取消请求。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 const CancelToken = un.CancelToken;
 const source = CancelToken.source();
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   cancelToken: source.token,
 }).catch(function (thrown) {
-  if (un.isUnCancel(thrown)) {
-    console.log('Request canceled', thrown.message);
+  if (un.isCancel(thrown)) {
+    console.log("Request canceled", thrown.message);
   } else {
     // 处理错误
   }
 });
 
 un.post(
-  '/user/12345',
+  "/user/12345",
   {
-    name: 'new name',
+    name: "new name",
   },
   {
     cancelToken: source.token,
-  },
+  }
 );
 // 取消请求（信息是可选的）
-source.cancel('Operation canceled by the user.');
+source.cancel("Operation canceled by the user.");
 ```
 
 你也可以通过向 `CancelToken` 构造函数传递一个执行函数来创建一个 `CancelToken` 实例。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 const CancelToken = un.CancelToken;
 let cancel;
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   cancelToken: new CancelToken(function executor(c) {
     cancel = c;
   }),
@@ -931,17 +931,17 @@ cancel();
 最常见的一个类型问题是，调用 API 时得不到响应数据和发送数据的类型。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // response 的类型是 UnResponse<UnData, UnData>
 // response.data 的类型是 UnData，你希望是 Record<string, any>
 const response = await un({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData，你希望是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -949,7 +949,7 @@ const response = await un({
 这可以通过设置两个范型类型来解决，两个范型类型依次分别对应响应数据和发送数据的类型。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // response 的类型是 UnResponse<Record<string, any>, Record<string, string>>
 // response.data 的类型是 Record<string, any>
@@ -957,12 +957,12 @@ const response = await un<
   Record<string, any>, // 对应 response.data 类型
   Record<string, string> // 对应传参中 data 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -970,7 +970,7 @@ const response = await un<
 而另一个常见的类型问题是，使用响应拦截器后响应类型不正确。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data);
@@ -978,12 +978,12 @@ un.interceptors.response.use((response) => response.data);
 // response 的类型是 UnResponse<UnData, UnData>，你希望是 Record<string, any>
 // response.data 的类型是 UnData，你希望是 Record<string, any>
 const response = await un({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData，你希望是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -991,7 +991,7 @@ const response = await un({
 这需要设置三个范型类型来解决，三个范型类型依次分别对应响应数据、发送数据、响应的类型。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data);
@@ -1003,12 +1003,12 @@ const response = await un<
   Record<string, string>, // 对应传参中 data 类型
   Record<string, any> // 对应 response 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -1018,7 +1018,7 @@ const response = await un<
 你可以从 `@uni-helper/uni-network` 中导入 `UnData` 以保持前两个范型类型的默认值。
 
 ```typescript
-import { un, type UnData } from '@uni-helper/uni-network';
+import { un, type UnData } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data);
@@ -1030,12 +1030,12 @@ const response = await un<
   UnData, // 对应传参中 data 类型
   Record<string, any> // 对应 response 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -1065,14 +1065,14 @@ const response = await un<
 在某些情况下，你可能不希望响应失败抛出错误，这时候可以使用响应拦截器来处理。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器
 un.interceptors.response.use(
   (response) => response,
   // 直接返回错误，不再需要使用 catch 来捕获
   // 需要注意返回值可能是 UnError 类型
-  (error) => error,
+  (error) => error
 );
 ```
 
@@ -1117,7 +1117,7 @@ un.interceptors.response.use(
 从 `@uni-helper/uni-network/composables` 中导入组合式函数后即可使用。
 
 ```typescript
-import { useUn } from '@uni-helper/uni-network/composables';
+import { useUn } from "@uni-helper/uni-network/composables";
 ```
 
 `useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。这里不再赘述。
@@ -1144,34 +1144,34 @@ import { useUn } from '@uni-helper/uni-network/composables';
 
 以下是 `@uni-helper/uni-network` 与其它一些库的比较。如果你发现这里信息已经过时，欢迎提交 ISSUE 或 PR。
 
-| | `axios` | `luch-request` | `uni-ajax` | `@uni-helper/uni-network` |
+|                              | `axios`                                                                                                                                                              | `luch-request`                                                                                                                                                                                   | `uni-ajax`                                                                                                                                                                       | `@uni-helper/uni-network`                                                                                                                                                                                                                    |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 基本信息 | [![npm](https://img.shields.io/npm/v/axios)](https://www.npmjs.com/package/axios) [![npm](https://img.shields.io/npm/dw/axios)](https://www.npmjs.com/package/axios) | [![npm](https://img.shields.io/npm/v/luch-request)](https://www.npmjs.com/package/luch-request) [![npm](https://img.shields.io/npm/dw/luch-request)](https://www.npmjs.com/package/luch-request) | [![npm](https://img.shields.io/npm/v/uni-ajax)](https://www.npmjs.com/package/uni-ajax) [![npm](https://img.shields.io/npm/dw/uni-ajax)](https://www.npmjs.com/package/uni-ajax) | [![npm](https://img.shields.io/npm/v/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) [![npm](https://img.shields.io/npm/dw/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) |
-| 开发语言 | JavaScript | JavaScript | JavaScript | TypeScript |
-| 类型支持 | `index.d.ts`（没有考虑 `uni-app`） | `index.d.ts`（泛型支持较差） | `index.d.ts` | 包含 |
-| 运行环境 | 浏览器和 `Node.js` | `uni-app` | `uni-app` | `uni-app` |
-| `Promise` | √ | √ | √ | √ |
-| `uni_modules` | × | √ | √ | × |
-| `npm` 包 | √ | √ | √ | √ |
-| 实例化 | √ | √ | √ | √ |
-| 请求说明 | √ | √ | √ | √ |
-| 请求头 headers | `AxiosHeaders` | 普通对象 | 普通对象 | 普通对象 |
-| 请求参数 params | `AxiosURLSearchParams` | 普通对象 | 普通对象 | 普通对象或 `URLSearchParams` 对象 |
-| 请求转换 `transformRequest` | √ | × | × | × |
-| 响应说明 | √ | × | √ | √ |
-| 响应转换 `transformResponse` | √ | × | × | × |
-| 任务说明 | ×（没有考虑 `uni-app`  任务） | × | √（只有 `requestTask`  说明） | √（只有简单说明） |
-| 适配器 | √（内置 `xhr` 和 `http`） | × | √ | √ |
-| `uni.request` | ×（自行开发，还需要覆写类型） | √ | √ | √ |
-| `uni.downloadFile` | ×（自行开发，还需要覆写类型） | √ | ×（自行开发，还需要覆写类型） | √ |
-| `uni.uploadFile` | ×（自行开发，还需要覆写类型） | √ | ×（自行开发，还需要覆写类型） | √ |
-| 请求拦截器 | √ | √ | √ | √ |
-| 响应拦截器 | √ | √ | √ | √ |
-| 配置说明 | √ | √ | √ | √ |
-| 取消请求说明 | √ | × | √ | √ |
-| 错误处理说明 | √ | × | √ | √ |
-| 测试 | 完善 | 部分 | 无 | 部分 |
-| 使用示例 | √ | √ | √ | √ |
+| 基本信息                     | [![npm](https://img.shields.io/npm/v/axios)](https://www.npmjs.com/package/axios) [![npm](https://img.shields.io/npm/dw/axios)](https://www.npmjs.com/package/axios) | [![npm](https://img.shields.io/npm/v/luch-request)](https://www.npmjs.com/package/luch-request) [![npm](https://img.shields.io/npm/dw/luch-request)](https://www.npmjs.com/package/luch-request) | [![npm](https://img.shields.io/npm/v/uni-ajax)](https://www.npmjs.com/package/uni-ajax) [![npm](https://img.shields.io/npm/dw/uni-ajax)](https://www.npmjs.com/package/uni-ajax) | [![npm](https://img.shields.io/npm/v/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) [![npm](https://img.shields.io/npm/dw/@uni-helper/uni-network)](https://www.npmjs.com/package/@uni-helper/uni-network) |
+| 开发语言                     | JavaScript                                                                                                                                                           | JavaScript                                                                                                                                                                                       | JavaScript                                                                                                                                                                       | TypeScript                                                                                                                                                                                                                                   |
+| 类型支持                     | `index.d.ts`（没有考虑 `uni-app`）                                                                                                                                   | `index.d.ts`（泛型支持较差）                                                                                                                                                                     | `index.d.ts`                                                                                                                                                                     | 包含                                                                                                                                                                                                                                         |
+| 运行环境                     | 浏览器和 `Node.js`                                                                                                                                                   | `uni-app`                                                                                                                                                                                        | `uni-app`                                                                                                                                                                        | `uni-app`                                                                                                                                                                                                                                    |
+| `Promise`                    | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| `uni_modules`                | ×                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | ×                                                                                                                                                                                                                                            |
+| `npm` 包                     | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 实例化                       | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 请求说明                     | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 请求头 headers               | `AxiosHeaders`                                                                                                                                                       | 普通对象                                                                                                                                                                                         | 普通对象                                                                                                                                                                         | 普通对象                                                                                                                                                                                                                                     |
+| 请求参数 params              | `AxiosURLSearchParams`                                                                                                                                               | 普通对象                                                                                                                                                                                         | 普通对象                                                                                                                                                                         | 普通对象或 `URLSearchParams` 对象                                                                                                                                                                                                            |
+| 请求转换 `transformRequest`  | √                                                                                                                                                                    | ×                                                                                                                                                                                                | ×                                                                                                                                                                                | ×                                                                                                                                                                                                                                            |
+| 响应说明                     | √                                                                                                                                                                    | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 响应转换 `transformResponse` | √                                                                                                                                                                    | ×                                                                                                                                                                                                | ×                                                                                                                                                                                | ×                                                                                                                                                                                                                                            |
+| 任务说明                     | ×（没有考虑 `uni-app`  任务）                                                                                                                                        | ×                                                                                                                                                                                                | √（只有 `requestTask`  说明）                                                                                                                                                    | √（只有简单说明）                                                                                                                                                                                                                            |
+| 适配器                       | √（内置 `xhr` 和 `http`）                                                                                                                                            | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| `uni.request`                | ×（自行开发，还需要覆写类型）                                                                                                                                        | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| `uni.downloadFile`           | ×（自行开发，还需要覆写类型）                                                                                                                                        | √                                                                                                                                                                                                | ×（自行开发，还需要覆写类型）                                                                                                                                                    | √                                                                                                                                                                                                                                            |
+| `uni.uploadFile`             | ×（自行开发，还需要覆写类型）                                                                                                                                        | √                                                                                                                                                                                                | ×（自行开发，还需要覆写类型）                                                                                                                                                    | √                                                                                                                                                                                                                                            |
+| 请求拦截器                   | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 响应拦截器                   | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 配置说明                     | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 取消请求说明                 | √                                                                                                                                                                    | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 错误处理说明                 | √                                                                                                                                                                    | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
+| 测试                         | 完善                                                                                                                                                                 | 部分                                                                                                                                                                                             | 无                                                                                                                                                                               | 部分                                                                                                                                                                                                                                         |
+| 使用示例                     | √                                                                                                                                                                    | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
 
 ## 资源
 

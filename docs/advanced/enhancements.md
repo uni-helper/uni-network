@@ -27,14 +27,14 @@
 在某些情况下，你可能不希望响应失败抛出错误，这时候可以使用响应拦截器来处理。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器
 un.interceptors.response.use(
   (response) => response,
   // 直接返回错误，不再需要使用 catch 来捕获
   // 需要注意返回值可能是 UnError 类型
-  (error) => error,
+  (error) => error
 );
 ```
 

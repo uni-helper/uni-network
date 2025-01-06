@@ -5,17 +5,17 @@
 调用 API 时得不到响应数据和请求数据的类型是最常见的类型问题之一。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // response 的类型是 UnResponse<UnData, UnData>
 // response.data 的类型是 UnData，你希望是 Record<string, any>
 const response = await un({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData，你希望是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -23,7 +23,7 @@ const response = await un({
 这可以通过设置两个泛型类型来解决，两个泛型类型依次分别对应响应数据和请求数据的类型。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // response 的类型是 UnResponse<Record<string, any>, Record<string, string>>
 // response.data 的类型是 Record<string, any>
@@ -31,12 +31,12 @@ const response = await un<
   Record<string, any>, // 对应 response.data 类型
   Record<string, string> // 对应传参中 data 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -44,7 +44,7 @@ const response = await un<
 而另一个常见的类型问题是，使用响应拦截器后响应类型不正确。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data as any);
@@ -52,12 +52,12 @@ un.interceptors.response.use((response) => response.data as any);
 // response 的类型是 UnResponse<UnData, UnData>，你希望是 Record<string, any>
 // response.data 的类型是 UnData，你希望是 Record<string, any>
 const response = await un({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData，你希望是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -65,7 +65,7 @@ const response = await un({
 这需要设置三个泛型类型来解决，三个泛型类型依次分别对应响应数据、请求数据、响应的类型。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data as any);
@@ -77,12 +77,12 @@ const response = await un<
   Record<string, string>, // 对应传参中 data 类型
   Record<string, any> // 对应 response 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 Record<string, string>
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```
@@ -96,7 +96,7 @@ const response = await un<
 你可以从 `@uni-helper/uni-network` 中导入 `UnData` 以保持前两个泛型类型的默认值。
 
 ```typescript
-import { un, type UnData } from '@uni-helper/uni-network';
+import { un, type UnData } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
 un.interceptors.response.use((response) => response.data as any);
@@ -108,12 +108,12 @@ const response = await un<
   UnData, // 对应传参中 data 类型
   Record<string, any> // 对应 response 类型
 >({
-  method: 'post',
-  url: '/user/12345',
+  method: "post",
+  url: "/user/12345",
   // 以下 data 的类型是 UnData
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```

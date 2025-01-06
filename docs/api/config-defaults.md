@@ -5,23 +5,23 @@
 ## 全局配置默认值
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
-un.defaults.baseUrl = 'https://api.example.com';
+un.defaults.baseUrl = "https://api.example.com";
 ```
 
 ## 自定义实例默认值
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 // 创建实例时配置默认值
 const instance = un.create({
-  baseUrl: 'https://api.example.com',
+  baseUrl: "https://api.example.com",
 });
 
 // 创建实例后修改默认值
-instance.defaults.baseUrl = 'https://api.another-example.com';
+instance.defaults.baseUrl = "https://api.another-example.com";
 ```
 
 ## 配置的优先级
@@ -38,7 +38,7 @@ const instance = un.create();
 instance.defaults.timeout = 2500;
 
 // 重写此请求的超时时间，因为该请求需要很长时间
-instance.get('/longRequest', {
+instance.get("/longRequest", {
   timeout: 5000,
 });
 ```

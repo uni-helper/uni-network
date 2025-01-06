@@ -6,19 +6,19 @@
 
 ```typescript
 const instance = un.create({
-  baseUrl: 'https://some-domain.com/api/',
+  baseUrl: "https://some-domain.com/api/",
   timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' },
+  headers: { "X-Custom-Header": "foobar" },
 });
 ```
 
 ```typescript
 instance.request({
-  method: 'POST',
-  url: '/user/12345',
+  method: "POST",
+  url: "/user/12345",
   data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone',
+    firstName: "Fred",
+    lastName: "Flintstone",
   },
 });
 ```

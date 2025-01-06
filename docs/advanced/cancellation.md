@@ -51,9 +51,9 @@ pnpm add abort-controller@^3.0.0
 必须导入后使用，不可全局使用。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 // 必须导入后使用
-import AbortController from 'abort-controller/dist/abort-controller';
+import AbortController from "abort-controller/dist/abort-controller";
 // ❌ 错误做法 1
 // import AbortController from 'abort-controller';
 // ❌ 错误做法 2
@@ -61,7 +61,7 @@ import AbortController from 'abort-controller/dist/abort-controller';
 
 const controller = new AbortController();
 
-un.get('/foo/bar', {
+un.get("/foo/bar", {
   signal: controller.signal,
 }).then(function (response) {
   //...
@@ -75,43 +75,43 @@ controller.abort();
 你也可以使用 `CancelToken` 来取消请求。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 const CancelToken = un.CancelToken;
 const source = CancelToken.source();
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   cancelToken: source.token,
 }).catch(function (error) {
-  if (un.isUnCancel(error)) {
-    console.log('Request canceled', error.message);
+  if (un.isCancel(error)) {
+    console.log("Request canceled", error.message);
   } else {
     // 处理错误
   }
 });
 
 un.post(
-  '/user/12345',
+  "/user/12345",
   {
-    name: 'new name',
+    name: "new name",
   },
   {
     cancelToken: source.token,
-  },
+  }
 );
 // 取消请求（信息是可选的）
-source.cancel('Operation canceled by the user.');
+source.cancel("Operation canceled by the user.");
 ```
 
 你也可以通过向 `CancelToken` 构造函数传递一个执行函数来创建一个 `CancelToken` 实例。
 
 ```typescript
-import { un } from '@uni-helper/uni-network';
+import { un } from "@uni-helper/uni-network";
 
 const CancelToken = un.CancelToken;
 let cancel;
 
-un.get('/user/12345', {
+un.get("/user/12345", {
   cancelToken: new CancelToken(function executor(c) {
     cancel = c;
   }),

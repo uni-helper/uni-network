@@ -22,12 +22,12 @@
   pnpm add @vueuse/core@^9.13.0
   ```
 
-如果你希望使用 `@vueuse/core@^10.0.0` 或 `@vueuse/core@^11.0.0`，请查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
+如果你希望使用 `@vueuse/core>=10`，请查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
 
 从 `@uni-helper/uni-network/composables` 中导入组合式函数后即可使用。
 
 ```typescript
-import { useUn } from '@uni-helper/uni-network/composables';
+import { useUn } from "@uni-helper/uni-network/composables";
 ```
 
 `useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。这里不再赘述。
