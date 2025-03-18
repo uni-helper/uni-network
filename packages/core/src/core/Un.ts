@@ -286,6 +286,7 @@ export class Un<T = UnData, D = UnData> {
     const fullPath = buildFullPath(
       mergedConfig?.baseUrl ?? "",
       mergedConfig?.url ?? "",
+      mergedConfig?.allowAbsoluteUrls ?? true,
     );
     return buildUrl(
       fullPath,

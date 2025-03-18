@@ -24,8 +24,16 @@ export interface UnConfig<T = UnData, D = UnData> {
    * 默认为 'GET'
    */
   method?: UnMethod;
-  /** 自动加在 `url` 前面，除非 `url` 是一个绝对 URL */
+  /** 自动加在 `url` 前面，除非 `url` 是一个绝对 URL 且选项 `allowAbsoluteUrls` 为 true */
   baseUrl?: string;
+  /**
+   * 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
+   *
+   * 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
+   *
+   * 当设置为 false 时，绝对值的 `url` 会始终被 `baseUrl` 前置
+   */
+  allowAbsoluteUrls?: boolean;
   /** 自定义请求头，不能设置 Referer */
   headers?: UnHeaders;
   /** 与请求一起发送的 URL 参数 */

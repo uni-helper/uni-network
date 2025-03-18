@@ -7,7 +7,11 @@ export const buildUploadConfig = <T = UnData, D = UnData>(
 ) =>
   ({
     url: buildUrl(
-      buildFullPath(config.baseUrl ?? "", config.url ?? ""),
+      buildFullPath(
+        config.baseUrl ?? "",
+        config.url ?? "",
+        config.allowAbsoluteUrls ?? true,
+      ),
       config.params,
       config.paramsSerializer,
     ),

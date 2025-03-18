@@ -288,9 +288,14 @@ const instance = un.create({
   // `url` 是用于请求的服务器 URL
   url: '/user',
 
-  // `baseUrl` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL
+  // `baseUrl` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL 且选项 `allowAbsoluteUrls` 为 true
   // 设置一个 `baseUrl` 便于为实例方法传递相对 URL
   baseUrl: 'https://some-domain.com/api/',
+
+  // 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
+  // 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
+  // 当设置为 false 时，绝对值的 `url` 会始终被 `baseUrl` 前置
+  allowAbsoluteUrls?: boolean;
 
   // 自定义请求头
   // 不能设置 Referer
