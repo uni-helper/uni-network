@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.0](https://github.com/uni-helper/uni-network/compare/v0.20.0...v0.21.0) (2025-03-18)
+
+### Features
+
+* add allowAbsoluteUrls option ([79c4581](https://github.com/uni-helper/uni-network/commit/79c4581620717485ff2e83b0fecde92c44707c64)) - by @
+
 ## [0.20.0](https://github.com/uni-helper/uni-network/compare/v0.19.3...v0.20.0) (2025-01-06)
 
 ### ⚠ BREAKING CHANGES
