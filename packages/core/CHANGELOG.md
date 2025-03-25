@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/uni-helper/uni-network/compare/v0.21.0...v0.21.1) (2025-03-25)
+
+### Bug Fixes
+
+* fix buildFullPath judgement ([fbe706a](https://github.com/uni-helper/uni-network/commit/fbe706a16d9abed6fe39b15c259c764874f5e63b)) - by @
+
 ## [0.21.0](https://github.com/uni-helper/uni-network/compare/v0.20.0...v0.21.0) (2025-03-18)
 
 ### Features
