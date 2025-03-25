@@ -28,6 +28,12 @@ describe("utils::buildFullPath", () => {
     ).toBe("https://api.github.com/https://api.example.com/users");
   });
 
+  it("should not combine the URLs when the requestedURL is absolute, allowAbsoluteUrls is false, and the baseURL is not configured", () => {
+    expect(buildFullPath("", "https://api.example.com/users", false)).toBe(
+      "https://api.example.com/users",
+    );
+  });
+
   it("should not combine URLs when the baseURL is not configured", () => {
     expect(buildFullPath("", "/users", true)).toBe("/users");
   });

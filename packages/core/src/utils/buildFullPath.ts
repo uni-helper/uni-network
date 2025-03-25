@@ -7,7 +7,7 @@ export const buildFullPath = (
   allowAbsoluteUrls: boolean,
 ) => {
   const isRelativeUrl = !isAbsoluteUrl(requestedUrl);
-  if ((baseUrl && isRelativeUrl) || !allowAbsoluteUrls) {
+  if (baseUrl && (isRelativeUrl || !allowAbsoluteUrls)) {
     return combineUrls(baseUrl, requestedUrl);
   }
   return requestedUrl;
