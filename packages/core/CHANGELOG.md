@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/uni-helper/uni-network/compare/v0.21.1...v0.21.2) (2025-05-14)
+
+### Bug Fixes
+
+* fix the Un constructor implementation to treat the config argument as optional, https://github.com/axios/axios/pull/6881 ([7086fb8](https://github.com/uni-helper/uni-network/commit/7086fb86f159428e4b0eb2ac46328d7b72afe506)) - by @
+
 ## [0.21.1](https://github.com/uni-helper/uni-network/compare/v0.21.0...v0.21.1) (2025-03-25)
 
 ### Bug Fixes
