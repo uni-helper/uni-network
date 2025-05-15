@@ -10,13 +10,18 @@ import type {
 } from "./index";
 import { UnError, un } from "./index";
 
-/** Align with v10.8.0 */
+/** Align with v12.3.0 */
 
-export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
+export interface UseUnReturn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptions<T> = UseUnOptions<T>,
+> {
   /** Un 响应 */
   response: ShallowRef<R | undefined>;
   /** Un 响应数据 */
-  data: Ref<T | undefined>;
+  data: O extends UseUnOptionsWithInitialData<T> ? Ref<T> : Ref<T | undefined>;
   /** 是否已经结束 */
   isFinished: Ref<boolean>;
   /** 是否正在请求 */
@@ -32,12 +37,17 @@ export interface UseUnReturn<T = UnData, R = UnResponse<T>, D = UnData> {
   /** `abort` 别名 */
   cancel: (message?: string | undefined) => void;
 }
-export interface StrictUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
+export interface StrictUseUnReturn<
+  T,
+  R,
+  D,
+  O extends UseUnOptions<T> = UseUnOptions<T>,
+> extends UseUnReturn<T, R, D, O> {
   /** 手动调用 */
   execute: (
     url?: string | UnConfig<T, D>,
     config?: UnConfig<T, D>,
-  ) => Promise<StrictUseUnReturn<T, R, D>>;
+  ) => Promise<StrictUseUnReturn<T, R, D, O>>;
 }
 export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
   /** 手动调用 */
@@ -46,7 +56,7 @@ export interface EasyUseUnReturn<T, R, D> extends UseUnReturn<T, R, D> {
     config?: UnConfig<T, D>,
   ) => Promise<EasyUseUnReturn<T, R, D>>;
 }
-export interface UseUnOptions<T = UnData> {
+export interface UseUnOptionsBase<T = UnData> {
   /** 当 `useUn` 被调用时，是否自动发起请求 */
   immediate?: boolean;
   /**
@@ -61,8 +71,6 @@ export interface UseUnOptions<T = UnData> {
    * @default true
    */
   abortPrevious?: boolean;
-  /** 在请求还未响应时使用的响应数据 */
-  initialData?: T;
   /**
    * 是否在执行前将请求数据重置为 initialData
    *
@@ -76,6 +84,13 @@ export interface UseUnOptions<T = UnData> {
   /** 请求结束时调用 */
   onFinish?: () => void;
 }
+export interface UseUnOptionsWithInitialData<T> extends UseUnOptionsBase<T> {
+  /** 在请求还未响应时使用的响应数据 */
+  initialData: T;
+}
+export type UseUnOptions<T = UnData> =
+  | UseUnOptionsBase<T>
+  | UseUnOptionsWithInitialData<T>;
 type OverallUseUnReturn<T, R, D> =
   | StrictUseUnReturn<T, R, D>
   | EasyUseUnReturn<T, R, D>;
@@ -83,34 +98,80 @@ type OverallUseUnReturn<T, R, D> =
 const isUnInstance = (val: any) =>
   !!val?.request && !!val?.download && !!val?.upload;
 
-export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsWithInitialData<T> = UseUnOptionsWithInitialData<T>,
+>(
   url: string,
   config?: UnConfig<T, D>,
-  options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsWithInitialData<T> = UseUnOptionsWithInitialData<T>,
+>(
   url: string,
   instance?: UnInstance,
-  options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsWithInitialData<T> = UseUnOptionsWithInitialData<T>,
+>(
   url: string,
   config: UnConfig<T, D>,
   instance: UnInstance,
-  options?: UseUnOptions<T>,
-): StrictUseUnReturn<T, R, D> & Promise<StrictUseUnReturn<T, R, D>>;
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsBase<T> = UseUnOptionsBase<T>,
+>(
+  url: string,
+  config?: UnConfig<T, D>,
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsBase<T> = UseUnOptionsBase<T>,
+>(
+  url: string,
+  instance?: UnInstance,
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<
+  T = UnData,
+  R = UnResponse<T>,
+  D = UnData,
+  O extends UseUnOptionsBase<T> = UseUnOptionsBase<T>,
+>(
+  url: string,
+  config: UnConfig<T, D>,
+  instance: UnInstance,
+  options?: O,
+): StrictUseUnReturn<T, R, D, O> & Promise<StrictUseUnReturn<T, R, D, O>>;
+export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   config?: UnConfig<T, D>,
 ): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   instance?: UnInstance,
 ): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   config?: UnConfig<T, D>,
   instance?: UnInstance,
 ): EasyUseUnReturn<T, R, D> & Promise<EasyUseUnReturn<T, R, D>>;
 
-export function useUn<T = any, R = UnResponse<T>, D = any>(
+export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
   ...args: any[]
 ): OverallUseUnReturn<T, R, D> & Promise<OverallUseUnReturn<T, R, D>> {
   const url: string | undefined =
@@ -144,7 +205,6 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     options = args.at(-1) || options;
 
   const {
-    initialData,
     shallow,
     onSuccess = noop,
     onError = noop,
@@ -152,6 +212,7 @@ export function useUn<T = any, R = UnResponse<T>, D = any>(
     resetOnExecute = false,
   } = options;
 
+  const initialData = (options as UseUnOptionsWithInitialData<T>).initialData;
   const response = shallowRef<UnResponse<T, D>>();
   const data = (shallow ? shallowRef : ref)(initialData) as Ref<T | undefined>;
   const isFinished = ref(false);
