@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.3](https://github.com/uni-helper/uni-network/compare/v0.21.2...v0.21.3) (2025-05-15)
+
+### Bug Fixes
+
+* useUn narrow type of data when initialValue is provided, https://github.com/vueuse/vueuse/pull/4419/files ([33ef53b](https://github.com/uni-helper/uni-network/commit/33ef53bb266d2d158ed2f3bff440348634bab051)) - by @
+
 ## [0.21.2](https://github.com/uni-helper/uni-network/compare/v0.21.1...v0.21.2) (2025-05-14)
 
 ### Bug Fixes
