@@ -242,13 +242,13 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * Download 使用
    *
-   * 文件下载后存储的本地路径
+   * 文件下载后存储的本地路径，支持相对路径与绝对路径
    */
   filePath?: string;
   /**
    * Upload 使用
    *
-   * 文件名称
+   * 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
    */
   name?: string;
   /**
