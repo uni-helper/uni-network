@@ -242,7 +242,7 @@ export interface UnConfig<T = UnData, D = UnData> {
    *
    * Download 使用
    *
-   * 文件下载后存储的本地路径，支持相对路径与绝对路径
+   * 文件下载后存储的本地路径
    */
   filePath?: string;
   /**

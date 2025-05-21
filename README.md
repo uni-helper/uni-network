@@ -449,7 +449,7 @@ const instance = un.create({
   // 文件路径，files 和 filePath 必填一个
   //
   // download 使用
-  // 文件下载后存储的本地路径，支持相对路径与绝对路径
+  // 文件下载后存储的本地路径
   filePath: '/fake/path',
 
   // upload 使用
