@@ -453,8 +453,8 @@ const instance = un.create({
   filePath: '/fake/path',
 
   // upload 使用
-  // 文件名称
-  name: 'fake-file.png',
+  // 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+  name: 'file',
 
   // upload 使用
   // 一个对象，会作为 HTTP 请求中其它额外的 form data

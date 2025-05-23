@@ -248,7 +248,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * Upload 使用
    *
-   * 文件名称
+   * 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
    */
   name?: string;
   /**
