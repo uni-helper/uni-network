@@ -202,7 +202,7 @@ export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
       !isUnInstance(args[1 + argsPlaceholder])) ||
     args.length === 3 + argsPlaceholder
   )
-    options = args.at(-1) || options;
+    options = args[args.length - 1] || options;
 
   const {
     shallow,
