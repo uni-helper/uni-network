@@ -1,6 +1,6 @@
 {
   "name": "@uni-helper/uni-network",
-  "version": "0.21.4",
+  "version": "0.21.5",
   "description": "为 uni-app 打造的基于 Promise 的 HTTP 客户端",
   "keywords": [
     "uni-app",

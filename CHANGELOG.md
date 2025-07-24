@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.5](https://github.com/uni-helper/uni-network/compare/v0.21.4...v0.21.5) (2025-07-24)
+
+### Bug Fixes
+
+* allow no instanceConfig and use {} ([ed30fd3](https://github.com/uni-helper/uni-network/commit/ed30fd3bc9814b34233f3a0fdf5685114ed895df)) - by @
+
 ## [0.21.4](https://github.com/uni-helper/uni-network/compare/v0.21.3...v0.21.4) (2025-07-24)
 
 ### Bug Fixes
