@@ -87,10 +87,10 @@ export class UnError<T = UnData, D = UnData> extends Error {
     response?: UnResponse<TT, DD>,
     customProps?: Record<string, any>,
   ) {
-    const urError = new UnError(error?.message, code, config, task, response);
+    const unError = new UnError(error?.message, code, config, task, response);
     if (customProps) {
-      Object.assign(urError, customProps);
+      Object.assign(unError, customProps);
     }
-    return urError;
+    return unError;
   }
 }
