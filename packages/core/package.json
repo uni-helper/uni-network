@@ -32,8 +32,8 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
         "types": "./dist/index.d.cts",
@@ -42,8 +42,8 @@
     },
     "./composables": {
       "import": {
-        "types": "./dist/composables.d.mts",
-        "default": "./dist/composables.mjs"
+        "types": "./dist/composables.d.ts",
+        "default": "./dist/composables.js"
       },
       "require": {
         "types": "./dist/composables.d.cts",
@@ -51,8 +51,8 @@
       }
     }
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -67,9 +67,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown",
     "prepublishOnly": "pnpm build",
-    "stub": "unbuild --stub"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@dcloudio/types": "^3.4.14",
