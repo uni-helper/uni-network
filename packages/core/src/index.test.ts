@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { un } from ".";
 import { version } from "../package.json";
+import { un } from ".";
 import {
   HttpStatusCode,
-  Un,
-  UnCancelToken,
-  UnCanceledError,
-  UnError,
-  UnInterceptorManager,
   isUnCancel,
   isUnError,
+  Un,
+  UnCanceledError,
+  UnCancelToken,
+  UnError,
+  UnInterceptorManager,
 } from "./core";
 import { defaults } from "./defaults";
 import { mergeConfig } from "./utils";

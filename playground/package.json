@@ -51,20 +51,21 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4050620250312001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4050620250312001",
     "@uni-helper/uni-network": "workspace:*",
-    "@vueuse/core": "^9.13.0",
+    "@vueuse/core": "^13.5.0",
     "abort-controller": "^3.0.0",
     "abortcontroller-polyfill": "^1.7.8",
-    "core-js": "^3.41.0",
+    "core-js": "^3.44.0",
     "vue": "~3.4.38",
-    "vue-i18n": "^9.14.3"
+    "vue-i18n": "^9.14.5"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.4.14",
+    "@dcloudio/types": "^3.4.16",
     "@dcloudio/uni-automator": "3.0.0-4050620250312001",
     "@dcloudio/uni-cli-shared": "3.0.0-4050620250312001",
     "@dcloudio/uni-stacktracey": "3.0.0-4050620250312001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4050620250312001",
-    "typescript": "^5.8.2",
-    "vite": "^5.4.14"
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19",
+    "vite-plugin-uni-polyfill": "^0.1.0"
   }
 }

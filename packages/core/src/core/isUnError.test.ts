@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { UnError } from "./UnError";
 import { isUnError } from "./isUnError";
+import { UnError } from "./UnError";
 
 describe("core::isUnError", () => {
   it("should return true if the error is created by core::createError", () => {

@@ -15,7 +15,7 @@ import { UnError, un } from "./index";
 export interface UseUnReturn<
   T = UnData,
   R = UnResponse<T>,
-  D = UnData,
+  _D = UnData,
   O extends UseUnOptions<T> = UseUnOptions<T>,
 > {
   /** Un 响应 */
@@ -248,7 +248,7 @@ export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
         .then(() => (error.value ? reject(error.value) : resolve(result)));
     });
   const promise = {
-    // biome-ignore lint/suspicious/noThenProperty: <explanation>
+    // biome-ignore lint/suspicious/noThenProperty: Expected.
     then: (...args) => waitUntilFinished().then(...args),
     catch: (...args) => waitUntilFinished().catch(...args),
   } as Promise<OverallUseUnReturn<T, R, D>>;

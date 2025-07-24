@@ -1,21 +1,27 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "root": true,
   "files": {
-    "ignore": [
-      "**/node_modules",
-      "**/.git",
-      "**/.DS_Store",
-      "**/dist",
-      "**/cache",
-      "./playground",
-      "./**/package.json",
-      "./lerna.json",
-      "./.vscode",
-      "./coverage"
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/.git/**",
+      "!**/.DS_Store",
+      "!**/dist/**",
+      "!**/cache/**",
+      "!**/playground/**",
+      "!**/package.json",
+      "!**/lerna.json",
+      "!**/coverage/**"
     ]
   },
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "linter": {
     "enabled": true,

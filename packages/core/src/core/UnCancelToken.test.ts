@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { UnCancelToken, type UnCanceler } from "./UnCancelToken";
 import { UnCanceledError } from "./UnCanceledError";
+import { type UnCanceler, UnCancelToken } from "./UnCancelToken";
 
 function noop() {}
 

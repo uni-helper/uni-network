@@ -1,8 +1,8 @@
 import statuses from "statuses-es";
-import type { UnCancelTokenListener } from "../core/UnCancelToken";
-import { UnCanceledError } from "../core/UnCanceledError";
-import { UnError } from "../core/UnError";
 import { settle } from "../core/settle";
+import { UnCanceledError } from "../core/UnCanceledError";
+import type { UnCancelTokenListener } from "../core/UnCancelToken";
+import { UnError } from "../core/UnError";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildUploadConfig } from "../utils";
 

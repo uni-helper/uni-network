@@ -1,14 +1,14 @@
 import { version } from "../package.json";
 import {
   HttpStatusCode,
-  Un,
-  type UnCancel,
-  UnCancelToken,
-  type UnCancelTokenStatic,
-  UnCanceledError,
-  UnError,
   isUnCancel,
   isUnError,
+  Un,
+  type UnCancel,
+  UnCanceledError,
+  UnCancelToken,
+  type UnCancelTokenStatic,
+  UnError,
 } from "./core";
 import { defaults } from "./defaults";
 import type { UnConfig, UnData, UnResponse } from "./types";
@@ -96,8 +96,8 @@ un.HttpStatusCode = HttpStatusCode;
 export * from "./adapters";
 export * from "./core";
 export * from "./defaults";
-export * from "./utils";
 export * from "./types";
+export * from "./utils";
 export { un };
 
 export default un;

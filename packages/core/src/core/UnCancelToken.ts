@@ -53,7 +53,7 @@ export class UnCancelToken<T = UnData, D = UnData> {
       this.listeners = [];
     });
 
-    // biome-ignore lint/suspicious/noThenProperty: <explanation>
+    // biome-ignore lint/suspicious/noThenProperty: Expected.
     this.promise.then = (onfulfilled) => {
       let _resolve: UnCancelTokenListener;
       const promise = new Promise<UnCancel>((resolve) => {
