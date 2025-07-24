@@ -15,7 +15,7 @@ export class Un<T = UnData, D = UnData> {
     response: UnInterceptorManager<UnResponse<T, D>, T, D>;
   };
 
-  constructor(instanceConfig: UnConfig<T, D>) {
+  constructor(instanceConfig?: UnConfig<T, D>) {
     this.defaults = instanceConfig || {};
     this.interceptors = {
       request: new UnInterceptorManager(),
