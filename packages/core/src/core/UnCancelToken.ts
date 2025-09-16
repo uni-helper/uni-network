@@ -25,7 +25,7 @@ export interface UnCancelTokenSource<T = UnData, D = UnData> {
 }
 
 export interface UnCancelTokenStatic<T = UnData, D = UnData> {
-  new (executor: (cancel: UnCanceler) => void): UnCancelToken;
+  new (executor: (cancel: UnCanceler<T, D>) => void): UnCancelToken<T, D>;
   source: () => UnCancelTokenSource<T, D>;
 }
 

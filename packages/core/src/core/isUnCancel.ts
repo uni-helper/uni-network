@@ -1,4 +1,6 @@
-import type { UnCancel } from "./UnCancelToken";
+import type { UnData } from "../types";
+import type { UnCanceledError } from "./UnCanceledError";
 
-export const isUnCancel = (value: any): value is UnCancel =>
-  value?.isUnCanceledError === true;
+export const isUnCancel = <T = UnData, D = UnData>(
+  value: any,
+): value is UnCanceledError<T, D> => value?.isUnCanceledError === true;

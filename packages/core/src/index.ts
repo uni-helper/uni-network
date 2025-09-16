@@ -4,7 +4,6 @@ import {
   isUnCancel,
   isUnError,
   Un,
-  type UnCancel,
   UnCanceledError,
   UnCancelToken,
   type UnCancelTokenStatic,
@@ -33,7 +32,7 @@ export interface UnStatic<T = UnData, D = UnData> extends UnInstance<T, D> {
 
   CanceledError: typeof UnCanceledError<T, D>;
   CancelToken: UnCancelTokenStatic<T, D>;
-  isCancel: (value: any) => value is UnCancel;
+  isCancel: (value: any) => value is UnCanceledError<T, D>;
 
   VERSION: string;
 
