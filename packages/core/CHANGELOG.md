@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.0](https://github.com/uni-helper/uni-network/compare/v0.21.5...v0.22.0) (2025-09-16)
+
+### ⚠ BREAKING CHANGES
+
+* improve types
+
+### Bug Fixes
+
+* improve types ([de364a9](https://github.com/uni-helper/uni-network/commit/de364a9287d30ae38b36b0e2fcd7370db5a05056)) - by @
+
 ## [0.21.5](https://github.com/uni-helper/uni-network/compare/v0.21.4...v0.21.5) (2025-07-24)
 
 ### Bug Fixes
