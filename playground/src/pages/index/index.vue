@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { un } from "@uni-helper/uni-network";
 import { useUn } from "@uni-helper/uni-network/composables";
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 
 const title = ref("Hello");
 un.get("https://jsonplaceholder.typicode.com/todos")
@@ -15,9 +15,11 @@ un.get("https://jsonplaceholder.typicode.com/todos")
 const { data, error, isLoading } = useUn(
   "https://jsonplaceholder.typicode.com/todos",
 );
-console.log("composable data", data.value);
-console.log("composable error", error.value);
-console.log("composable isLoading", isLoading.value);
+watchEffect(() => {
+  console.log("composable data", data.value);
+  console.log("composable error", error.value);
+  console.log("composable isLoading", isLoading.value);
+})
 </script>
 
 <template>
