@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.0](https://github.com/uni-helper/uni-network/compare/v0.22.0...v0.23.0) (2025-10-27)
+
+### Features
+
+* support more request options, omit request/upload/download config nullish value ([24f7619](https://github.com/uni-helper/uni-network/commit/24f7619d1b88f59108a0165b7ffb189df1a31258)) - by @
+
 ## [0.22.0](https://github.com/uni-helper/uni-network/compare/v0.21.5...v0.22.0) (2025-09-16)
 
 ### ⚠ BREAKING CHANGES
