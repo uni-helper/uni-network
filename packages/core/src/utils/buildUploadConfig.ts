@@ -4,8 +4,8 @@ import { buildUrl } from "./buildUrl";
 
 export const buildUploadConfig = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
-) =>
-  ({
+): UniApp.UploadFileOption => {
+  const result = {
     url: buildUrl(
       buildFullPath(
         config.baseUrl ?? "",
@@ -23,4 +23,13 @@ export const buildUploadConfig = <T = UnData, D = UnData>(
     header: config.headers,
     timeout: config.timeout,
     formData: config.formData,
-  }) as UniApp.UploadFileOption;
+  };
+
+  const entries = Object.entries(result) as [
+    keyof typeof result,
+    (typeof result)[keyof typeof result],
+  ][];
+  return Object.fromEntries(
+    entries.filter(([k]) => result[k] != null),
+  ) as unknown as UniApp.UploadFileOption;
+};

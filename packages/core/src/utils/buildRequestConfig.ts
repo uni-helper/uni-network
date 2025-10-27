@@ -4,8 +4,8 @@ import { buildUrl } from "./buildUrl";
 
 export const buildRequestConfig = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
-) =>
-  ({
+): UniApp.RequestOptions => {
+  const result = {
     url: buildUrl(
       buildFullPath(
         config.baseUrl ?? "",
@@ -21,6 +21,9 @@ export const buildRequestConfig = <T = UnData, D = UnData>(
     timeout: config.timeout,
     dataType: config.dataType,
     responseType: config.responseType,
+    sslVerify: config.sslVerify,
+    withCredentials: config.withCredentials,
+    firstIpv4: config.firstIpv4,
     enableHttp2: config.enableHttp2,
     enableQuic: config.enableQuic,
     enableCache: config.enableCache,
@@ -28,7 +31,16 @@ export const buildRequestConfig = <T = UnData, D = UnData>(
     httpDNSServiceId: config.httpDNSServiceId,
     enableChunked: config.enableChunked,
     forceCellularNetwork: config.forceCellularNetwork,
-    sslVerify: config.sslVerify,
-    withCredentials: config.withCredentials,
-    firstIpv4: config.firstIpv4,
-  }) as UniApp.RequestOptions;
+    enableCookie: config.enableCookie,
+    cloudCache: config.cloudCache,
+    defer: config.defer,
+  };
+
+  const entries = Object.entries(result) as [
+    keyof typeof result,
+    (typeof result)[keyof typeof result],
+  ][];
+  return Object.fromEntries(
+    entries.filter(([k]) => result[k] != null),
+  ) as unknown as UniApp.RequestOptions;
+};

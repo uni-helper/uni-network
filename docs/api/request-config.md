@@ -105,6 +105,21 @@
   responseType: "text",
 
   // request 使用
+  // 是否验证 ssl 证书
+  // 默认值是 true
+  sslVerify: true,
+
+  // request 使用
+  // 跨域请求时是否需要使用凭证
+  // 默认值是 false
+  withCredentials: false,
+
+  // request 使用
+  // 是否在 DNS 解析时优先使用 ipv4
+  // 默认值是 false
+  firstIpv4: false,
+
+  // request 使用
   // 是否开启 http2
   // 默认值是 false
   enableHttp2: false,
@@ -139,26 +154,33 @@
   forceCellularNetwork: false,
 
   // request 使用
-  // 是否验证 ssl 证书
-  // 默认值是 true
-  sslVerify: true,
-
-  // request 使用
-  // 跨域请求时是否需要使用凭证
-  // 默认值是 false
-  withCredentials: false,
-
-  // request 使用
-  // 是否在 DNS 解析时优先使用 ipv4
-  // 默认值是 false
-  firstIpv4: false,
-
-  // request 使用
   // 监听 Transfer-Encoding Chunk Received 事件
   // 当接收到新的 chunk 时触发
   onChunkReceived: (response) => {
     /* ... */
   },
+
+  // Request 使用
+  // 是否可在 headers 中编辑 cookie
+  // 默认为 false
+  enableCookie?: boolean;
+
+  // Request 使用
+  // 是否开启云加速
+  // 默认为 false
+  cloudCache?: boolean | {
+    // 用于指定 query 中哪些字段不作为缓存依据
+    excludeURLQueries?: string[];
+    // 用于表达云加速缓存的最快刷新时间
+    // 单位 s
+    minRefresh?: number;
+    [key: string]: any;
+  };
+
+  // Request 使用
+  // 控制当前请求是否延时至首屏内容渲染后发送
+  // 默认为 false
+  defer?: boolean;
 
   // upload 使用
   // 需要上传的文件列表，files 和 filePath 必填一个
