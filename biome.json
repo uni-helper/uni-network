@@ -1,18 +1,17 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.1/schema.json",
   "root": true,
   "files": {
     "includes": [
       "**",
-      "!**/node_modules/**",
-      "!**/.git/**",
+      "!**/node_modules",
+      "!**/.git",
       "!**/.DS_Store",
-      "!**/dist/**",
-      "!**/cache/**",
-      "!**/playground/**",
+      "!**/dist",
+      "!**/cache",
       "!**/package.json",
       "!**/lerna.json",
-      "!**/coverage/**"
+      "!**/coverage"
     ]
   },
   "assist": {
@@ -38,5 +37,38 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
-  }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true,
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space"
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["./playground/src/*.json"],
+      "json": {
+        "parser": {
+          "allowComments": true,
+          "allowTrailingCommas": true
+        }
+      }
+    },
+    {
+      "includes": ["./playground/src/**/*.vue"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      }
+    }
+  ]
 }

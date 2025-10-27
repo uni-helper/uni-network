@@ -4,27 +4,41 @@ import { useUn } from "@uni-helper/uni-network/composables";
 import { ref, watchEffect } from "vue";
 
 const title = ref("Hello");
+
+// 直接请求
 un.get("https://jsonplaceholder.typicode.com/todos")
   .then((data) => {
-    console.log("data", data);
+    console.log("direct request data", data);
   })
   .catch((error) => {
-    console.log("error", error);
+    console.log("direct request error", error);
   });
 
+// Vue Composition
 const { data, error, isLoading } = useUn(
   "https://jsonplaceholder.typicode.com/todos",
 );
 watchEffect(() => {
-  console.log("composable data", data.value);
-  console.log("composable error", error.value);
-  console.log("composable isLoading", isLoading.value);
-})
+  console.log("composition data", data.value);
+  console.log("composition error", error.value);
+  console.log("composition isLoading", isLoading.value);
+});
+
+// 自定义实例
+const unInstance = un.create({ timeout: 10000 });
+unInstance
+  .get("https://jsonplaceholder.typicode.com/todos")
+  .then((data) => {
+    console.log("custom instance data", data);
+  })
+  .catch((error) => {
+    console.log("custom instance error", error);
+  });
 </script>
 
 <template>
   <view class="content">
-    <image class="logo" src="/static/logo.png" />
+    <image class="logo" src="/static/logo.png"/>
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>

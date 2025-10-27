@@ -72,7 +72,7 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@dcloudio/types": "^3.4.16",
+    "@dcloudio/types": "^3.4.26",
     "@types/lodash.merge": "^4.6.9",
     "fast-querystring": "^1.1.2",
     "lodash.merge": "^4.6.2",
@@ -82,9 +82,8 @@
   "devDependencies": {
     "@types/ungap__url-search-params": "^0.1.2",
     "@ungap/url-search-params": "^0.2.2",
-    "@vueuse/core": "^13.5.0",
-    "vitest": "^3.2.4",
-    "vue": "^3.5.18"
+    "@vueuse/core": "^13.9.0",
+    "vue": "^3.5.22"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0",
@@ -102,7 +101,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.19.0",
   "engines": {
     "node": ">=18"
   },
