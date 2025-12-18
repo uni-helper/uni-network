@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: pnpm dlx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      glob:
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"
+      stage_fixed: true
+
+commit-msg:
+  parallel: true
+  jobs:
+    - run: pnpm dlx commitlint --edit {1}
