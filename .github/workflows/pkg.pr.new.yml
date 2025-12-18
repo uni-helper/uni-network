@@ -1,4 +1,3 @@
-# https://github.com/unocss/unocss/blob/fe83a90b59cf4599be57ea825166bb74d92b104c/.github/workflows/pkg.pr.new.yml
 name: Publish Any Commit
 
 on:
