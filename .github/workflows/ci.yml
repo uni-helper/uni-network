@@ -41,7 +41,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Setup corepack
-        run: npm install -f -g corepack@latest && corepack enable
+        run: npm install -f -g npm@latest corepack@latest && corepack enable
 
       - name: Install Dependencies
         run: pnpm install
