@@ -190,8 +190,8 @@ function getUserPermissions() {
 }
 
 Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
-  const acct = responses[0];
-  const perm = responses[1];
+  const userAccount = responses[0];
+  const userPermissions = responses[1];
 });
 ```
 
@@ -259,6 +259,15 @@ const instance = un.create({
   timeout: 1000,
   headers: { "X-Custom-Header": "foobar" },
 });
+
+instance.request({
+  method: "POST",
+  url: "/user/12345",
+  data: {
+    firstName: "Fred",
+    lastName: "Flintstone",
+  },
+});
 ```
 
 #### 实例方法
@@ -295,7 +304,7 @@ const instance = un.create({
   // 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
   // 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
   // 当设置为 false 时，绝对值的 `url` 会始终被 `baseUrl` 前置
-  allowAbsoluteUrls?: boolean;
+  allowAbsoluteUrls?: boolean,
 
   // 自定义请求头
   // 不能设置 Referer

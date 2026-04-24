@@ -89,8 +89,8 @@ function getUserPermissions() {
 }
 
 Promise.all([getUserAccount(), getUserPermissions()]).then((responses) => {
-  const acct = responses[0];
-  const perm = responses[1];
+  const userAccount = responses[0];
+  const userPermissions = responses[1];
 });
 ```
 

@@ -3,7 +3,7 @@
 一个请求的响应包应含以下信息。
 
 ```typescript
-const res = {
+const response = {
   // `errMsg` 是可选的错误信息
   errMsg: "",
 

@@ -10,9 +10,7 @@ const instance = un.create({
   timeout: 1000,
   headers: { "X-Custom-Header": "foobar" },
 });
-```
 
-```typescript
 instance.request({
   method: "POST",
   url: "/user/12345",
