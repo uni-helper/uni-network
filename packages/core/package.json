@@ -68,26 +68,27 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "build-post": "exit 0",
     "prepublishOnly": "pnpm build",
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@dcloudio/types": "^3.4.28",
-    "@types/lodash.merge": "^4.6.9",
-    "fast-querystring": "^1.1.2",
-    "lodash.merge": "^4.6.2",
-    "statuses-es": "^2.0.6",
-    "vue-demi": "^0.14.10"
+    "@dcloudio/types": "catalog:",
+    "@types/lodash.merge": "catalog:",
+    "fast-querystring": "catalog:",
+    "lodash.merge": "catalog:",
+    "statuses-es": "catalog:",
+    "vue-demi": "catalog:"
   },
   "devDependencies": {
-    "@types/ungap__url-search-params": "^0.1.2",
-    "@ungap/url-search-params": "^0.2.2",
-    "@vueuse/core": "^13.9.0",
-    "vue": "^3.5.25"
+    "@types/ungap__url-search-params": "catalog:",
+    "@ungap/url-search-params": "catalog:",
+    "@vueuse/core": "catalog:",
+    "vue": "catalog:"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0",
-    "@vueuse/core": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0",
+    "@vueuse/core": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
     "vue": "^2.6.0 || ^2.7.0 || ^3.2.0"
   },
   "peerDependenciesMeta": {
@@ -101,7 +102,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.26.0",
+  "packageManager": "pnpm@10.33.2",
   "engines": {
     "node": ">=18"
   },
