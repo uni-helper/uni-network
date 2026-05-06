@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 import type { UnResponse } from "../types";
 import { settle } from "./settle";
+import { UnError } from "./UnError";
 
 describe("core::settle", () => {
   let resolve: Mock<(response: UnResponse | PromiseLike<UnResponse>) => void>;
@@ -76,5 +77,62 @@ describe("core::settle", () => {
     };
     settle(resolve, reject, response);
     expect(validateStatus).toHaveBeenCalledWith(500);
+  });
+
+  it("should assign ERR_BAD_REQUEST for 4xx status", () => {
+    settle(resolve, reject, {
+      status: 404,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBe(UnError.ERR_BAD_REQUEST);
+  });
+
+  it("should assign ERR_BAD_REQUEST for 499 status", () => {
+    settle(resolve, reject, {
+      status: 499,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBe(UnError.ERR_BAD_REQUEST);
+  });
+
+  it("should assign ERR_BAD_RESPONSE for 5xx status", () => {
+    settle(resolve, reject, {
+      status: 503,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBe(UnError.ERR_BAD_RESPONSE);
+  });
+
+  it("should assign ERR_BAD_RESPONSE for 3xx status rejected via custom validateStatus", () => {
+    settle(resolve, reject, {
+      status: 301,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBeDefined();
+    expect(error.code).toBe(UnError.ERR_BAD_RESPONSE);
+  });
+
+  it("should assign ERR_BAD_RESPONSE for 2xx status rejected via custom validateStatus", () => {
+    settle(resolve, reject, {
+      status: 200,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBeDefined();
+    expect(error.code).toBe(UnError.ERR_BAD_RESPONSE);
+  });
+
+  it("should assign ERR_BAD_RESPONSE for 6xx status rejected via custom validateStatus", () => {
+    settle(resolve, reject, {
+      status: 600,
+      config: { validateStatus: () => false },
+    });
+    const error = reject.mock.calls[0][0];
+    expect(error.code).toBeDefined();
+    expect(error.code).toBe(UnError.ERR_BAD_RESPONSE);
   });
 });

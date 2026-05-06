@@ -17,9 +17,9 @@ export const settle = <
     reject(
       new UnError(
         `Request failed with status code ${response.status}`,
-        [UnError.ERR_BAD_REQUEST, UnError.ERR_BAD_RESPONSE][
-          Math.floor(response.status / 100) - 4
-        ],
+        response.status >= 400 && response.status < 500
+          ? UnError.ERR_BAD_REQUEST
+          : UnError.ERR_BAD_RESPONSE,
         response.config,
         response.task,
         response,
