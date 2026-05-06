@@ -1,3 +1,5 @@
+type StringLiteralsOrString<Literals extends string> = Literals | (string & {});
+
 // T 表示响应数据
 // D 表示请求数据
 export type UnData = string | Record<string, any> | ArrayBuffer;
@@ -37,7 +39,7 @@ export interface UnGenericAbortSignal {
   removeEventListener?: (...args: any) => any;
 }
 
-export type UnDataType = "json" | string;
+export type UnDataType = StringLiteralsOrString<"json">;
 
 export type UnResponseType = "text" | "arraybuffer";
 
@@ -154,5 +156,5 @@ export interface UnProfile {
   /** 收到字节数 */
   receivedBytedCount?: number;
   /** 使用协议类型 */
-  protocol?: "http1.1" | "h2" | "quic" | "unknown" | string;
+  protocol?: StringLiteralsOrString<"http1.1" | "h2" | "quic" | "unknown">;
 }
