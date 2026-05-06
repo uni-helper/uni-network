@@ -70,6 +70,18 @@ describe("core::UnError", () => {
     });
   });
 
+  it("should be a native error as checked by the NodeJS `isNativeError` function", () => {
+    if (typeof process !== "undefined" && process.release.name === "node") {
+      const { isNativeError } = require("node:util/types");
+      expect(isNativeError(new UnError("My UnError"))).toBeTruthy();
+    }
+  });
+
+  it("should create an error using one of the static class properties as an error code", () => {
+    const myError = new UnError("My UnError", UnError.ECONNABORTED);
+    expect(myError.code).toEqual(UnError.ECONNABORTED);
+  });
+
   it("should have status property when response was passed to the constructor", () => {
     const err = new UnError("test", "foo", {}, {}, { status: 400 });
     expect(err.status).toBe(400);

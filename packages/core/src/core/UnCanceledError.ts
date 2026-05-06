@@ -16,6 +16,4 @@ class UnCanceledError<T = UnData, D = UnData> extends UnError<T, D> {
   }
 }
 
-UnCanceledError.prototype.isUnCanceledError = true;
-
 export { UnCanceledError };

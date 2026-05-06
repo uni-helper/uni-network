@@ -15,4 +15,13 @@ describe("core:UnCanceledError", () => {
       );
     });
   });
+
+  it("should be a native error as checked by the NodeJS `isNativeError` function", () => {
+    if (typeof process !== "undefined" && process.release.name === "node") {
+      const { isNativeError } = require("node:util/types");
+      expect(
+        isNativeError(new UnCanceledError("My Canceled Error")),
+      ).toBeTruthy();
+    }
+  });
 });

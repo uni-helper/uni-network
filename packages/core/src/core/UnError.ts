@@ -32,12 +32,6 @@ export class UnError<T = UnData, D = UnData> extends Error {
     super(message);
 
     this.name = "UnError";
-    this.message = message ?? "";
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    } else {
-      this.stack = new Error().stack;
-    }
 
     this.code = code;
     this.config = config;
@@ -87,7 +81,18 @@ export class UnError<T = UnData, D = UnData> extends Error {
     response?: UnResponse<TT, DD>,
     customProps?: Record<string, any>,
   ) {
-    const unError = new UnError(error?.message, code, config, task, response);
+    const unError = new UnError(
+      error?.message,
+      // @ts-expect-error no types
+      code || error?.code,
+      config,
+      task,
+      response,
+    );
+    if (error && unError.cause == null) {
+      unError.cause = error;
+    }
+    unError.name = error?.name ?? "Error";
     if (customProps) {
       Object.assign(unError, customProps);
     }
