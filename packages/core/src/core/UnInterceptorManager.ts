@@ -2,7 +2,7 @@ import type { UnConfig, UnData } from "../types";
 
 export interface UnInterceptorOptions<T = UnData, D = UnData> {
   synchronous?: boolean;
-  runWhen?: (config: UnConfig<T, D>) => boolean;
+  runWhen?: ((config: UnConfig<T, D>) => boolean) | null;
 }
 
 export type UnInterceptorManagerHandlerFulfilled<V> = (
