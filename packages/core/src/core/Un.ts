@@ -147,15 +147,34 @@ export class Un<T = UnData, D = UnData> {
           : // biome-ignore lint/suspicious/noAssignInExpressions: follow axios implementation
             (dummy = new Error());
         // slice off the Error: ... line
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, "") : "";
-        if (!error.stack) {
-          error.stack = stack;
-          // match without the 2 top stack lines
-        } else if (
-          stack &&
-          !String(error.stack).endsWith(stack.replace(/^.+\n.+\n/, ""))
-        ) {
-          error.stack += `\n${stack}`;
+        const stack = (() => {
+          if (!dummy.stack) {
+            return "";
+          }
+          const firstNewlineIndex = dummy.stack.indexOf("\n");
+          return firstNewlineIndex === -1
+            ? ""
+            : dummy.stack.slice(firstNewlineIndex + 1);
+        })();
+        try {
+          if (!error.stack) {
+            error.stack = stack;
+          } else if (stack) {
+            const firstNewlineIndex = stack.indexOf("\n");
+            const secondNewlineIndex =
+              firstNewlineIndex === -1
+                ? -1
+                : stack.indexOf("\n", firstNewlineIndex + 1);
+            const stackWithoutTwoTopLines =
+              secondNewlineIndex === -1
+                ? ""
+                : stack.slice(secondNewlineIndex + 1);
+            if (!String(error.stack).endsWith(stackWithoutTwoTopLines)) {
+              error.stack += `\n${stack}`;
+            }
+          }
+        } catch (_) {
+          // ignore the case where "stack" is an un-writable property
         }
       }
       throw error;
