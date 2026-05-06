@@ -13,6 +13,7 @@ export class UnError<T = UnData, D = UnData> extends Error {
   static ERR_CANCELED = "ERR_CANCELED";
   static ECONNABORTED = "ECONNABORTED";
   static ETIMEDOUT = "ETIMEDOUT";
+  static ECONNREFUSED = "ECONNREFUSED";
 
   code?: string;
   config?: UnConfig<T, D>;
