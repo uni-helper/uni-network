@@ -100,7 +100,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /** 用于取消请求 */
   signal?: UnGenericAbortSignal;
   /** 用于取消请求 */
-  cancelToken?: UnCancelToken<T, D>;
+  cancelToken?: UnCancelToken<T, D> | undefined;
   /**
    * 监听 HTTP Response Header 事件
    *
