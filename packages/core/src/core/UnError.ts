@@ -93,6 +93,11 @@ export class UnError<T = UnData, D = UnData> extends Error {
       unError.cause = error;
     }
     unError.name = error?.name ?? "Error";
+    // @ts-expect-error no types
+    if (error?.status != null && unError.status == null) {
+      // @ts-expect-error no types
+      unError.status = error.status;
+    }
     if (customProps) {
       Object.assign(unError, customProps);
     }

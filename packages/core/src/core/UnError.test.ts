@@ -68,6 +68,31 @@ describe("core::UnError", () => {
         UnError.from(error, "ESOMETHING", { foo: "bar" }) instanceof UnError,
       ).toBeTruthy();
     });
+
+    it("should preserve status property from original error when response is not provided", () => {
+      const error = new Error("Network Error");
+      // @ts-expect-error no types
+      error.status = 404;
+
+      const unError = UnError.from(error, "ERR_NETWORK", { foo: "bar" });
+      expect(unError.status).toBe(404);
+    });
+
+    it("should use response.status over error.status when response is provided", () => {
+      const error = new Error("Error");
+      // @ts-expect-error no types
+      error.status = 500;
+      const response = { status: 404 };
+
+      const unError = UnError.from(
+        error,
+        "ERR_BAD_REQUEST",
+        {},
+        undefined,
+        response,
+      );
+      expect(unError.status).toBe(404);
+    });
   });
 
   it("should be a native error as checked by the NodeJS `isNativeError` function", () => {
