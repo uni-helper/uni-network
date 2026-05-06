@@ -76,6 +76,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
             reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
             break;
         }
+        done();
       },
       complete: () => {
         if (onHeadersReceived) {
@@ -106,6 +107,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
             : cancel,
         );
         task.abort();
+        done();
         task = undefined;
       };
 

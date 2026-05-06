@@ -73,6 +73,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
             reject(new UnError(err.errMsg, UnError.ERR_NETWORK, config, task));
             break;
         }
+        done();
       },
       complete: () => {
         if (onHeadersReceived) {
@@ -105,6 +106,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
             : cancel,
         );
         task.abort();
+        done();
         task = undefined;
       };
 
