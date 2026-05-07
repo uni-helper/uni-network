@@ -32,42 +32,42 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       },
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       },
       "bun": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       }
     },
     "./composables": {
       "import": {
-        "types": "./dist/composables.d.ts",
-        "default": "./dist/composables.js"
+        "types": "./dist/composables.d.mts",
+        "default": "./dist/composables.mjs"
       },
       "require": {
         "types": "./dist/composables.d.cts",
         "default": "./dist/composables.cjs"
       },
       "bun": {
-        "types": "./dist/composables.d.ts",
-        "default": "./dist/composables.js"
+        "types": "./dist/composables.d.mts",
+        "default": "./dist/composables.mjs"
       }
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       "*": [
         "./dist/*",
-        "./dist/index.d.ts",
-        "./dist/composables.d.ts"
+        "./dist/index.d.mts",
+        "./dist/composables.d.mts"
       ]
     }
   },
