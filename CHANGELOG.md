@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.0](https://github.com/uni-helper/uni-network/compare/v0.23.1...v0.24.0) (2026-05-07)
+
+### Features
+
+* add ECONNREFUSED error code constant to UnError, sync https://github.com/axios/axios/pull/10680 ([f8e7821](https://github.com/uni-helper/uni-network/commit/f8e78219571e9a58df405308bc08375cab05db6c)) - by @
+
+### Bug Fixes
+
+* add 'bun' package.json 'exports' condition ([ac2f400](https://github.com/uni-helper/uni-network/commit/ac2f40042d66e946f4f19e60a67438f573b3cafb)) - by @
+* add create to index exports, sync https://github.com/axios/axios/pull/6460 ([93135b8](https://github.com/uni-helper/uni-network/commit/93135b85157ddf842f288026a93b817be8001db0)) - by @
+* add input validation to isAbsoluteUrl, sync https://github.com/axios/axios/pull/7326 ([64a7aa7](https://github.com/uni-helper/uni-network/commit/64a7aa77dbcde6b6a7d17328acca3fe9f4b58c73)) - by @
+* allow cancelToken to be undefined, sync https://github.com/axios/axios/pull/5560 ([676424a](https://github.com/uni-helper/uni-network/commit/676424a0c8d984261692340b6fedcfe65154c878)) - by @
+* allow runWhen to be null, sync https://github.com/axios/axios/pull/7529 ([ce60a5e](https://github.com/uni-helper/uni-network/commit/ce60a5e97a337fe9708e8ca25abe2b2a6562ad98)) - by @
+* copy status from source error in UnError.from, sync https://github.com/axios/axios/pull/7403 ([ad65dc8](https://github.com/uni-helper/uni-network/commit/ad65dc87b2f71b06deb2a63f68014c01140d82f6)) - by @
+* handle optional response data safely, sync https://github.com/vueuse/vueuse/pull/5318 ([b4c83f7](https://github.com/uni-helper/uni-network/commit/b4c83f7c741e4cf748b5939ff0fe49d293ab53bd)) - by @
+* improve error handling, sync https://github.com/axios/axios/pull/5558 ([c432b84](https://github.com/uni-helper/uni-network/commit/c432b8495d70708d4680b151e5952f58ea0e1140)) - by @
+* improve error stack handling in Un class, sync https://github.com/axios/axios/pull/10660 ([375f8f6](https://github.com/uni-helper/uni-network/commit/375f8f6b25eedb13736df22be122c0b8beae8d37)) - by @
+* intellisense for string literals in a widened union, sync https://github.com/axios/axios/pull/6134 ([e87723f](https://github.com/uni-helper/uni-network/commit/e87723f0a317986298ff37e6b5e20063391c594d)) - by @
+* prevent undefined error codes in settle, sync https://github.com/axios/axios/pull/7276 ([54cd388](https://github.com/uni-helper/uni-network/commit/54cd3889aaa2ea899a355af2a1f4fb848875fd6f)) - by @
+* unsubscribe cancelToken and signal on error, timeout, and abort paths, sync https://github.com/axios/axios/pull/10787 ([b656d90](https://github.com/uni-helper/uni-network/commit/b656d90365466dca6d4467e93c49f6b65a3ff219)) - by @
+
 ## [0.23.1](https://github.com/uni-helper/uni-network/compare/v0.23.0...v0.23.1) (2025-12-18)
 
 **Note:** Version bump only for package @monorepo/uni-network
