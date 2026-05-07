@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { version } from "../package.json";
-import { un } from ".";
+import { create, un } from ".";
 import {
   HttpStatusCode,
   isUnCancel,
@@ -76,5 +76,9 @@ describe("index", () => {
     expect(un.isUnError).toBe(isUnError);
     expect(un.mergeConfig).toBe(mergeConfig);
     expect(un.HttpStatusCode).toBe(HttpStatusCode);
+  });
+  it("should expose create as a named export", () => {
+    expect(create).toBeInstanceOf(Function);
+    expect(create).toBe(un.create);
   });
 });

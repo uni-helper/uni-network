@@ -98,5 +98,6 @@ export * from "./defaults";
 export * from "./types";
 export * from "./utils";
 export { un };
+export const create = un.create;
 
 export default un;
