@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.1](https://github.com/uni-helper/uni-network/compare/v0.24.0...v0.24.1) (2026-05-07)
+
+### Bug Fixes
+
+* fix exports ([4d5a6f1](https://github.com/uni-helper/uni-network/commit/4d5a6f1a3b1fa1e097454e5badd8f6700fd47017)) - by @
+
 ## [0.24.0](https://github.com/uni-helper/uni-network/compare/v0.23.1...v0.24.0) (2026-05-07)
 
 ### Features
