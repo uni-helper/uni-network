@@ -285,7 +285,7 @@ export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
       .then((r: any) => {
         if (isAborted.value) return;
         response.value = r;
-        const result = r.data;
+        const result = r?.data;
         data.value = result;
         onSuccess(result);
       })
