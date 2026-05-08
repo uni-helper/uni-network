@@ -6,6 +6,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status)](https://app.netlify.com/sites/uni-network/deploys)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/uni-helper/uni-network)
+
 [Vitepress 在线文档](https://uni-network.netlify.app)
 
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
@@ -62,13 +64,13 @@
 
 ### 介绍
 
-`@uni-helper/uni-network` 是一个为 [uni-app](https://uniapp.dcloud.io/) 打造的 [基于 Promise](https://javascript.info/promise-basics) 的 HTTP 客户端。
+`@uni-helper/uni-network` 是一个为 [uni-app](https://uniapp.dcloud.net.cn/) 打造的 [基于 Promise](https://javascript.info/promise-basics) 的 HTTP 客户端。
 
 `@uni-helper/uni-network` 灵感和代码绝大部分源于 `axios@0.27.2`，功能包括：
 
-- 默认请求使用 [uni.request](https://uniapp.dcloud.io/api/request/request.html)
-- 上传文件使用 [uni.uploadFile](https://uniapp.dcloud.io/api/request/network-file.html#uploadfile)
-- 下载文件使用 [uni.downloadFile](https://uniapp.dcloud.io/api/request/network-file.html#downloadfile)
+- 默认请求使用 [uni.request](https://uniapp.dcloud.net.cn/api/request/request.html)
+- 上传文件使用 [uni.uploadFile](https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile)
+- 下载文件使用 [uni.downloadFile](https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile)
 - 支持 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - [拦截](#拦截器)请求和响应
 - [取消请求](#取消请求)
