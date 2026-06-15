@@ -3,7 +3,7 @@ import { buildFullPath } from "./buildFullPath";
 
 describe("utils::buildFullPath", () => {
   it("should combine URLs when the requestedURL is relative", () => {
-    expect(buildFullPath("https://api.github.com", "/users", true)).toBe(
+    expect(buildFullPath("https://api.github.com", "/users", true, {})).toBe(
       "https://api.github.com/users",
     );
   });
@@ -14,6 +14,7 @@ describe("utils::buildFullPath", () => {
         "https://api.github.com",
         "https://api.example.com/users",
         true,
+        {},
       ),
     ).toBe("https://api.example.com/users");
   });
@@ -24,21 +25,22 @@ describe("utils::buildFullPath", () => {
         "https://api.github.com",
         "https://api.example.com/users",
         false,
+        {},
       ),
     ).toBe("https://api.github.com/https://api.example.com/users");
   });
 
   it("should not combine the URLs when the requestedURL is absolute, allowAbsoluteUrls is false, and the baseURL is not configured", () => {
-    expect(buildFullPath("", "https://api.example.com/users", false)).toBe(
+    expect(buildFullPath("", "https://api.example.com/users", false, {})).toBe(
       "https://api.example.com/users",
     );
   });
 
   it("should not combine URLs when the baseURL is not configured", () => {
-    expect(buildFullPath("", "/users", true)).toBe("/users");
+    expect(buildFullPath("", "/users", true, {})).toBe("/users");
   });
 
   it("should combine URLs when the baseURL and requestedURL are relative", () => {
-    expect(buildFullPath("/api", "/users", true)).toBe("/api/users");
+    expect(buildFullPath("/api", "/users", true, {})).toBe("/api/users");
   });
 });

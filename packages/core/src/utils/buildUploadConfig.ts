@@ -11,6 +11,7 @@ export const buildUploadConfig = <T = UnData, D = UnData>(
         config.baseUrl ?? "",
         config.url ?? "",
         config.allowAbsoluteUrls ?? true,
+        config,
       ),
       config.params,
       config.paramsSerializer,

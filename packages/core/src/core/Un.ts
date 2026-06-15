@@ -306,6 +306,7 @@ export class Un<T = UnData, D = UnData> {
       mergedConfig?.baseUrl ?? "",
       mergedConfig?.url ?? "",
       mergedConfig?.allowAbsoluteUrls ?? true,
+      mergedConfig,
     );
     return buildUrl(
       fullPath,
