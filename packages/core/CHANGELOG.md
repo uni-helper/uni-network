@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.2](https://github.com/uni-helper/uni-network/compare/v0.24.1...v0.24.2) (2026-06-15)
+
+### Bug Fixes
+
+* malformed http urls, https://github.com/axios/axios/pull/11000 ([0098b5d](https://github.com/uni-helper/uni-network/commit/0098b5df3b4d4f7356c0e5fee46bab6258224308)) - by @
+
 ## [0.24.1](https://github.com/uni-helper/uni-network/compare/v0.24.0...v0.24.1) (2026-05-07)
 
 ### Bug Fixes
