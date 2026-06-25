@@ -11,8 +11,3 @@ pre-commit:
         - "*.jsonc"
         - "*.css"
       stage_fixed: true
-
-commit-msg:
-  parallel: true
-  jobs:
-    - run: pnpm dlx commitlint --edit {1}
