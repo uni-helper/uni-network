@@ -108,6 +108,9 @@ export const HttpStatusCode = {
   412: "PreconditionFailed",
 
   PayloadTooLarge: 413,
+  // RFC 9110 的新叫法，旧名字保留，老代码不受影响
+  // https://github.com/axios/axios/pull/11082
+  ContentTooLarge: 413,
   413: "PayloadTooLarge",
 
   UriTooLong: 414,
@@ -129,6 +132,9 @@ export const HttpStatusCode = {
   421: "MisdirectedRequest",
 
   UnprocessableEntity: 422,
+  // RFC 9110 的新叫法，旧名字保留，老代码不受影响
+  // https://github.com/axios/axios/pull/11082
+  UnprocessableContent: 422,
   422: "UnprocessableEntity",
 
   Locked: 423,
@@ -187,4 +193,9 @@ export const HttpStatusCode = {
 
   NetworkAuthenticationRequired: 511,
   511: "NetworkAuthenticationRequired",
+
+  // Cloudflare 专有的状态码
+  // https://github.com/axios/axios/pull/11067
+  WebServerReturnsAnUnknownError: 520,
+  520: "WebServerReturnsAnUnknownError",
 } as const;
