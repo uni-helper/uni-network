@@ -196,6 +196,9 @@ catalogs:
     '@vueuse/core':
       specifier: ^12.8.2
       version: 12.8.2
+    '@vueuse/shared':
+      specifier: ^12.8.2
+      version: 12.8.2
     abort-controller:
       specifier: ^3.0.0
       version: 3.0.0
@@ -377,6 +380,9 @@ importers:
         specifier: workspace:*
         version: link:../packages/core
       '@vueuse/core':
+        specifier: 'catalog:'
+        version: 12.8.2(typescript@6.0.3)
+      '@vueuse/shared':
         specifier: 'catalog:'
         version: 12.8.2(typescript@6.0.3)
       abort-controller:

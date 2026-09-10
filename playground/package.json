@@ -52,6 +52,7 @@
     "@dcloudio/uni-quickapp-webview": "catalog:",
     "@uni-helper/uni-network": "workspace:*",
     "@vueuse/core": "catalog:",
+    "@vueuse/shared": "catalog:",
     "abort-controller": "catalog:",
     "abortcontroller-polyfill": "catalog:",
     "core-js": "catalog:",
