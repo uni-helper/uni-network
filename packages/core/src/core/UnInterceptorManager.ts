@@ -38,6 +38,15 @@ export class UnInterceptorManager<V, T = V, D = UnData> {
     if (this.handlers[id]) {
       this.handlers[id] = null;
     }
+    // 删除末尾连续的空位，避免 eject 之后数组一直增长；
+    // 中间的空位不动，保证已有的 id 顺序不变
+    // https://github.com/axios/axios/pull/11087
+    while (
+      this.handlers.length > 0 &&
+      this.handlers[this.handlers.length - 1] === null
+    ) {
+      this.handlers.pop();
+    }
   }
 
   clear() {
