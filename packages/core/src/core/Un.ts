@@ -96,6 +96,7 @@ export class Un<T = UnData, D = UnData> {
     len = requestInterceptorChain.length;
 
     let newConfig = mergedConfig;
+    let recoveredPromise: Promise<any> | undefined;
 
     i = 0;
 
@@ -109,15 +110,28 @@ export class Un<T = UnData, D = UnData> {
       try {
         newConfig = onFulfilled(newConfig);
       } catch (error) {
-        onRejected.call(this, error);
+        // 同步拦截器抛错后，只有在配套的失败处理函数成功返回时才继续发请求
+        // https://github.com/axios/axios/pull/11071
+        if (typeof onRejected !== "function") {
+          return Promise.reject(error);
+        }
+        recoveredPromise = Promise.resolve().then(() =>
+          onRejected.call(this, error),
+        );
         break;
       }
     }
 
-    try {
-      promise = dispatchRequest.call(this, newConfig);
-    } catch (error) {
-      return Promise.reject(error);
+    if (recoveredPromise) {
+      promise = recoveredPromise.then((resolvedConfig) =>
+        dispatchRequest.call(this, resolvedConfig),
+      );
+    } else {
+      try {
+        promise = dispatchRequest.call(this, newConfig);
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
 
     i = 0;
