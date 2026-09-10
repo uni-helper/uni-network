@@ -6,10 +6,18 @@ import { UnError } from "../core/UnError";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildUploadConfig } from "../utils";
 
+/**
+ * 上传适配器，封装 uni.uploadFile。
+ *
+ * 逻辑和 requestAdapter 基本一致，额外把配置里的四个进度回调
+ * （onUploadProgress / onUploadProgressUpdate / onProgress / onProgressUpdate）
+ * 按优先级取第一个挂到 task 上。
+ */
 export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {
     const { onHeadersReceived, cancelToken, signal } = config;
 
+    // 四个进度回调按优先级取第一个配置了的
     const onProgressUpdate =
       config?.onUploadProgress ??
       config?.onUploadProgressUpdate ??
@@ -19,6 +27,7 @@ export const uploadAdapter = <T = UnData, D = UnData>(config: UnConfig<T, D>) =>
     const uploadConfig = buildUploadConfig(config);
 
     let onCanceled: UnCancelTokenListener;
+    // 请求结束后反注册取消监听，避免泄漏
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
       // @ts-expect-error No overload matches this call.

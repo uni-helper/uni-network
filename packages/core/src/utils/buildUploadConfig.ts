@@ -2,6 +2,10 @@ import type { UnConfig, UnData } from "../types";
 import { buildFullPath } from "./buildFullPath";
 import { buildUrl } from "./buildUrl";
 
+/**
+ * 把 UnConfig 转成 uni.uploadFile 需要的参数。
+ * 值为 null/undefined 的字段会被剔除，不传给 uni.uploadFile。
+ */
 export const buildUploadConfig = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
 ): UniApp.UploadFileOption => {
@@ -26,6 +30,7 @@ export const buildUploadConfig = <T = UnData, D = UnData>(
     formData: config.formData,
   };
 
+  // 剔除未配置的字段，避免覆盖 uni.uploadFile 内部默认值
   const entries = Object.entries(result) as [
     keyof typeof result,
     (typeof result)[keyof typeof result],

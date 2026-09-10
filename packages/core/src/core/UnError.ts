@@ -1,6 +1,11 @@
 import type { UnConfig, UnData, UnResponse, UnTask } from "../types";
 
+/**
+ * 请求错误类。网络失败、超时、状态码不在 validateStatus 范围内等
+ * 都会抛出这个错误，携带 code / config / task / response 等上下文。
+ */
 export class UnError<T = UnData, D = UnData> extends Error {
+  // 错误码常量，和 axios 保持一致，方便按 code 分支处理
   static ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS";
   static ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
   static ERR_BAD_OPTION = "ERR_BAD_OPTION";
@@ -55,6 +60,7 @@ export class UnError<T = UnData, D = UnData> extends Error {
   }
 
   toJSON() {
+    // 序列化用的对象，保留 message/stack/config/code/status 等关键信息
     return {
       message: this.message,
       name: this.name,
@@ -83,6 +89,10 @@ export class UnError<T = UnData, D = UnData> extends Error {
     };
   }
 
+  /**
+   * 把一个原生 Error 包装成 UnError，尽量保留原始错误的
+   * name、status 和 cause，方便排查根因。
+   */
   static from<TT = UnData, DD = UnData>(
     error?: Error,
     code?: string,

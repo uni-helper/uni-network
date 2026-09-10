@@ -29,6 +29,12 @@ export interface UnCancelTokenStatic<T = UnData, D = UnData> {
   source: () => UnCancelTokenSource<T, D>;
 }
 
+/**
+ * 取消令牌，用法和 axios 的 CancelToken 一致。
+ *
+ * 通过 `source()` 创建；调用 `cancel()` 后，监听该令牌的请求会被中止，
+ * 并抛出 UnCanceledError。
+ */
 export class UnCancelToken<T = UnData, D = UnData> {
   promise: Promise<UnCancel>;
   reason?: UnCancel;
@@ -53,6 +59,8 @@ export class UnCancelToken<T = UnData, D = UnData> {
       this.listeners = [];
     });
 
+    // 重写 promise.then：每次 then 都挂一个新的订阅，
+    // 并在返回的 promise 上额外提供 cancel() 来取消这次订阅
     // biome-ignore lint/suspicious/noThenProperty: Expected.
     this.promise.then = (onfulfilled) => {
       let _resolve: UnCancelTokenListener;
@@ -78,6 +86,7 @@ export class UnCancelToken<T = UnData, D = UnData> {
     });
   }
 
+  /** 已经取消过的话直接抛出取消错误，请求发出前会调用 */
   throwIfRequested() {
     if (this.reason) {
       throw this.reason;
@@ -99,6 +108,7 @@ export class UnCancelToken<T = UnData, D = UnData> {
     }
   }
 
+  /** 转换为标准的 AbortSignal，方便和 config.signal 搭配使用 */
   toAbortSignal() {
     const controller = new AbortController();
 
@@ -116,6 +126,7 @@ export class UnCancelToken<T = UnData, D = UnData> {
     };
   }
 
+  /** 创建一个令牌和配套的 cancel 函数 */
   static source<TT = UnData, DD = UnData>(): UnCancelTokenSource<TT, DD> {
     let cancel: UnCanceler<TT, DD>;
     const token = new UnCancelToken<TT, DD>((c) => {

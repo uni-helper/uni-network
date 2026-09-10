@@ -1,6 +1,10 @@
 import type { UnData, UnResponse } from "../types";
 import { UnError } from "./UnError";
 
+/**
+ * 根据响应和配置里的 validateStatus 决定 resolve 还是 reject。
+ * 4xx 抛 ERR_BAD_REQUEST，其它抛 ERR_BAD_RESPONSE。
+ */
 export const settle = <
   T = UnData,
   D = UnData,

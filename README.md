@@ -589,7 +589,7 @@ un.get("/user/12345").then((response) => {
   console.log("headers", response?.headers);
   console.log("data", response?.data);
   console.log("cookies", response?.cookies);
-  console.log("tmpFilePath", response?.tmpFilePath);
+  console.log("tempFilePath", response?.tempFilePath);
   console.log("filePath", response?.filePath);
 });
 ```

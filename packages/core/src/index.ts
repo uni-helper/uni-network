@@ -1,3 +1,8 @@
+/**
+ * 入口文件：创建默认实例 `un` 并把核心类、工具方法挂上去。
+ * 导出的 `un` 可以直接调用，也可以用 `un.create()` 建自己的实例。
+ */
+
 import { version } from "../package.json";
 import {
   HttpStatusCode,
@@ -46,50 +51,53 @@ export interface UnStatic<T = UnData, D = UnData> extends UnInstance<T, D> {
   HttpStatusCode: typeof HttpStatusCode;
 }
 
+/**
+ * 创建一个绑定到 Un 实例上的可调用函数（既是函数又带方法），
+ * 再把原型和实例上的方法拷贝过去。
+ */
 const createInstance = <T = UnData, D = UnData>(
   defaultConfig: UnConfig<T, D>,
 ) => {
   const context = new Un(defaultConfig);
   const instance = Un.prototype.request.bind(context) as UnStatic<T, D>;
 
-  // Copy ur.prototype to instance
+  // 把 Un 原型上的方法拷到实例上，并绑定 this 到 context
   extend(instance, Un.prototype, context, { allOwnKeys: true });
 
-  // Copy context to instance
+  // 把实例自身的属性（defaults、interceptors 等）也拷过去
   extend(instance, context, null, { allOwnKeys: true });
 
-  // Factory for creating new instances
+  // 工厂方法：基于当前实例的配置再创建一个新实例
   instance.create = (instanceConfig) =>
     createInstance(mergeConfig(defaultConfig, instanceConfig));
 
   return instance;
 };
 
-// Create the default instance to be exported
+// 创建默认导出的实例
 const un = createInstance(defaults);
 
-// Expose Un class to allow class inheritance
+// 暴露 Un 类，方便继承扩展
 un.Un = Un;
 
-// Expose CanceledError & CancelToken & isCancel
+// 暴露 CanceledError & CancelToken & isCancel
 un.CanceledError = UnCanceledError;
 un.CancelToken = UnCancelToken;
 un.isCancel = isUnCancel;
 
-// version
 un.VERSION = version;
 
-// Expose UnError & isUnError
+// 暴露 UnError & isUnError
 un.UnError = UnError;
 un.isUnError = isUnError;
 
-// Expose all/spread
+// 暴露 Promise.all 的别名
 un.all = (promises) => Promise.all(promises);
 
-// Expose mergeConfig
+// 暴露 mergeConfig
 un.mergeConfig = mergeConfig;
 
-// Expose HttpStatusCode
+// 暴露 HttpStatusCode
 un.HttpStatusCode = HttpStatusCode;
 
 export * from "./adapters";

@@ -17,9 +17,15 @@ export interface UnInterceptorManagerHandler<V, T = V, D = UnData>
   rejected?: UnInterceptorManagerHandlerRejected;
 }
 
+/**
+ * 拦截器管理器，分别用于请求和响应。
+ *
+ * use() 返回一个 id，用 eject(id) 可以移除对应拦截器。
+ */
 export class UnInterceptorManager<V, T = V, D = UnData> {
   private handlers: (UnInterceptorManagerHandler<V, T, D> | null)[] = [];
 
+  /** 注册拦截器，返回用于 eject 的 id */
   use(
     fulfilled?: UnInterceptorManagerHandlerFulfilled<V>,
     rejected?: UnInterceptorManagerHandlerRejected,
@@ -34,6 +40,7 @@ export class UnInterceptorManager<V, T = V, D = UnData> {
     return this.handlers.length - 1;
   }
 
+  /** 移除指定 id 的拦截器 */
   eject(id: number) {
     if (this.handlers[id]) {
       this.handlers[id] = null;
@@ -49,12 +56,14 @@ export class UnInterceptorManager<V, T = V, D = UnData> {
     }
   }
 
+  /** 移除全部拦截器 */
   clear() {
     if (this.handlers) {
       this.handlers = [];
     }
   }
 
+  /** 遍历所有有效拦截器（跳过已 eject 的空位） */
   each(fn: (handler: UnInterceptorManagerHandler<V, T, D>) => any) {
     for (const handler of this.handlers) {
       if (handler && fn) {

@@ -6,6 +6,14 @@ import { UnError } from "../core/UnError";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildRequestConfig } from "../utils";
 
+/**
+ * 普通请求适配器，封装 uni.request。
+ *
+ * 负责把 UnConfig 转成 uni.request 参数、注册取消监听和
+ * headers/chunk 事件回调，最后用 settle 决定 resolve 还是 reject。
+ * statusText 通过 statuses-es 由状态码反查，各平台字段名不一致
+ * （errMsg/errmsg、header/headers）都做了兼容。
+ */
 export const requestAdapter = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
 ) =>
@@ -15,6 +23,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
     const requestConfig = buildRequestConfig(config);
 
     let onCanceled: UnCancelTokenListener;
+    // 请求结束后反注册取消监听，避免泄漏
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
       signal?.removeEventListener?.("abort", onCanceled);
@@ -22,6 +31,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
 
     let task: UniApp.RequestTask | undefined;
 
+    // 发请求。注意 task 是同步赋值的，取消回调里能立刻拿到并 abort
     task = uni.request({
       ...requestConfig,
       success: (res) => {

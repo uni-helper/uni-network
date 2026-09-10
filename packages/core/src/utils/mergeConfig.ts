@@ -17,6 +17,10 @@ const copySymbols = (target: any, ...sources: any[]) => {
   return target;
 };
 
+/**
+ * 合并实例默认配置和请求配置，lodash.merge 处理不了数组重置等
+ * axios 特有语义，具体规则见测试用例。symbol 键由 copySymbols 手动保留。
+ */
 export function mergeConfig<T = UnData, D = UnData>(
   config1?: UnConfig<T, D>,
   config2?: UnConfig<T, D>,

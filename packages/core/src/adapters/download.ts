@@ -6,12 +6,20 @@ import { UnError } from "../core/UnError";
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildDownloadConfig } from "../utils";
 
+/**
+ * 下载适配器，封装 uni.downloadFile。
+ *
+ * 逻辑和 uploadAdapter 基本一致，进度回调按
+ * onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
+ * 的优先级取第一个。
+ */
 export const downloadAdapter = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
 ) =>
   new Promise<UnResponse<T, D>>((resolve, reject) => {
     const { onHeadersReceived, cancelToken, signal } = config;
 
+    // 四个进度回调按优先级取第一个配置了的
     const onProgressUpdate =
       config?.onDownloadProgress ??
       config?.onDownloadProgressUpdate ??
@@ -21,6 +29,7 @@ export const downloadAdapter = <T = UnData, D = UnData>(
     const downloadConfig = buildDownloadConfig(config);
 
     let onCanceled: UnCancelTokenListener;
+    // 请求结束后反注册取消监听，避免泄漏
     const done = () => {
       cancelToken?.unsubscribe(onCanceled);
       // @ts-expect-error No overload matches this call.

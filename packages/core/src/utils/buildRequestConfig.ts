@@ -2,6 +2,10 @@ import type { UnConfig, UnData } from "../types";
 import { buildFullPath } from "./buildFullPath";
 import { buildUrl } from "./buildUrl";
 
+/**
+ * 把 UnConfig 转成 uni.request 需要的参数。
+ * 值为 null/undefined 的字段会被剔除，不传给 uni.request。
+ */
 export const buildRequestConfig = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
 ): UniApp.RequestOptions => {
@@ -37,6 +41,7 @@ export const buildRequestConfig = <T = UnData, D = UnData>(
     defer: config.defer,
   };
 
+  // 剔除未配置的字段，避免覆盖 uni.request 内部默认值
   const entries = Object.entries(result) as [
     keyof typeof result,
     (typeof result)[keyof typeof result],
