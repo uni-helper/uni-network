@@ -110,7 +110,19 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.34.4",
+  "packageManager": "pnpm@12.3.4",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "26",
+      "onFail": "warn"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.3.4",
+      "onFail": "warn"
+    }
+  },
   "engines": {
     "node": ">=18"
   },

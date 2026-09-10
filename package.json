@@ -34,7 +34,6 @@
   "scripts": {
     "build": "rimraf packages/*/dist --glob && pnpm -r --filter=./packages/* run build && pnpm -r run build-post",
     "check": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true",
-    "dep-update": "taze -fw",
     "dev": "pnpm -r --filter=./packages/* --parallel run dev",
     "docs:build": "pnpm -C docs run build",
     "docs:dev": "pnpm -C docs run dev",
@@ -43,12 +42,11 @@
     "play:build:mp-weixin": "pnpm build && pnpm -C playground run build:mp-weixin",
     "play:dev:h5": "pnpm dev && pnpm -C playground run dev:h5",
     "play:dev:mp-weixin": "pnpm dev && pnpm -C playground run dev:mp-weixin",
-    "prepare": "is-ci || lefthook install",
     "prepublishOnly": "pnpm run build",
     "release": "lerna version",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "preversion": "pnpm run check"
   },
   "devDependencies": {
@@ -59,15 +57,24 @@
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "conventional-changelog-conventionalcommits": "catalog:",
-    "is-ci": "catalog:",
-    "lefthook": "catalog:",
     "rimraf": "catalog:",
-    "taze": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
-  "packageManager": "pnpm@10.34.4",
+  "packageManager": "pnpm@12.3.4",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "26",
+      "onFail": "warn"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.3.4",
+      "onFail": "warn"
+    }
+  },
   "engines": {
     "node": ">=18"
   },
