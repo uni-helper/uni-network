@@ -112,3 +112,11 @@ describe("core::UnError", () => {
     expect(err.status).toBe(400);
   });
 });
+
+it("should keep cause non-enumerable to avoid circular JSON failures", () => {
+  const inner = new Error("inner");
+  const error = UnError.from(inner);
+  expect(error.cause).toBe(inner);
+  expect(JSON.parse(JSON.stringify(error)).message).toBe("inner");
+  expect(Object.keys(error)).not.toContain("cause");
+});

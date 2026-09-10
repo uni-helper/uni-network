@@ -43,6 +43,15 @@ export class UnError<T = UnData, D = UnData> extends Error {
     }
 
     this.isUnError = true;
+
+    // cause 属性设为不可枚举：错误里套着 cause 时，JSON.stringify 会因为循环引用报错
+    // https://github.com/axios/axios/pull/10913
+    Object.defineProperty(this, "cause", {
+      value: undefined,
+      enumerable: false,
+      writable: true,
+      configurable: true,
+    });
   }
 
   toJSON() {
