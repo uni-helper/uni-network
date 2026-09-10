@@ -82,3 +82,17 @@ describe("synchronous request interceptor failure", () => {
     expect(response.data).toBe("ok");
   });
 });
+
+describe("request error stack decoration", () => {
+  it("should not throw when error.stack is not a string", async () => {
+    // https://github.com/axios/axios/pull/11109
+    const un = new Un();
+    un.interceptors.request.use(() => {
+      const error = new Error("boom");
+      Object.defineProperty(error, "stack", { value: 123, writable: true });
+      throw error;
+    });
+
+    await expect(un.request("/")).rejects.toThrow("boom");
+  });
+});

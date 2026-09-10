@@ -31,4 +31,14 @@ describe("utils::combineUrls", () => {
       "https://api.github.com/users/",
     );
   });
+
+  // https://github.com/axios/axios/pull/11038
+  it("should strip all trailing slashes from base url", () => {
+    expect(combineUrls("https://api.github.com//", "/users")).toBe(
+      "https://api.github.com/users",
+    );
+    expect(combineUrls("https://api.github.com///", "users")).toBe(
+      "https://api.github.com/users",
+    );
+  });
 });
