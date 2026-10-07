@@ -10,7 +10,7 @@ import type {
 } from "./index";
 import { UnError, un } from "./index";
 
-/** Align with v12.3.0 */
+/** Align with v14.3.0 */
 
 export interface UseUnReturn<
   T = UnData,
