@@ -32,8 +32,8 @@ instance.request({
 - `un.delete(url[, config])`
 - `un.head(url[, config])`
 - `un.options(url[, config])`
-- `un.trace(url[, config]])`
-- `un.connect(url[, config]])`
+- `un.trace(url[, config])`
+- `un.connect(url[, config])`
 - `un.post(url[, data[, config]])`
 - `un.put(url[, data[, config]])`
 - `un.patch(url[, data[, config]])`

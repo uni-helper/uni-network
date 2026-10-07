@@ -8,8 +8,8 @@
 
 | 依赖 | 版本 |
 | --- | --- |
-| Node.js | `>=18`，推荐 LTS；仓库 `.node-version` 为 `24` |
-| 包管理器 | `pnpm@10.34.4`（通过 Corepack 启用，不要混用 npm/yarn） |
+| Node.js | `>=18`，推荐 LTS；仓库 `.node-version` 为 `26` |
+| 包管理器 | `pnpm@12.9.1`（通过 Corepack 启用，不要混用 npm/yarn） |
 | Git | 配置 `core.autocrlf false`、`core.eol lf`，行尾统一为 LF |
 
 仓库使用 pnpm workspace，所有命令都基于 pnpm。
@@ -57,7 +57,7 @@ pnpm install
 | `pnpm play:dev:h5` | 构建 `packages/*` 后，以 H5 模式启动 playground |
 | `pnpm play:dev:mp-weixin` | 构建 `packages/*` 后，以微信小程序模式启动 playground |
 
-提交前请确保 `pnpm build`、`pnpm test`、`pnpm typecheck` 均通过，CI（见下文）会在这三项上跑 ubuntu/macos/windows × Node 20/22/24 的矩阵。
+提交前请确保 `pnpm build`、`pnpm test`、`pnpm typecheck` 均通过，CI（见下文）会跑 ubuntu/macos/windows × Node 22/24/26 的矩阵，除这三项外还包括 `pnpm check` 和 playground 的 H5 / 微信小程序构建。
 
 ## 代码风格
 
@@ -112,3 +112,9 @@ docs: 补充拦截器使用示例
 
 - 版本号通过 `pnpm release`（Lerna）按 Conventional Commits 自动推断，仅在 `main` 分支允许。
 - 打 tag 触发 `release.yml`：用 `changelogithub` 生成 GitHub Release，`pnpm -r publish` 发布到 npm。
+
+## 行为准则
+
+参与本项目请遵守 [组织级行为准则](https://github.com/uni-helper/.github/blob/main/CODE_OF_CONDUCT.md)。
+
+感谢你的贡献！如有疑问，欢迎在 [GitHub Issues](https://github.com/uni-helper/uni-network/issues) 中提问。

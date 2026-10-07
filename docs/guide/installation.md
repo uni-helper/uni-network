@@ -18,9 +18,9 @@ pnpm install @uni-helper/uni-network
 
 :::
 
-::: tip yarn v1+
+::: tip yarn v2 或以上版本
 
-如果你正在使用 yarn v1+，请参考 [文档](https://yarnpkg.com/configuration/yarnrc/#nodeLinker) 设置 `nodeLinker` 为 `node_modules`。
+如果你正在使用 yarn v2 或以上版本，请参考 [文档](https://yarnpkg.com/configuration/yarnrc/#nodeLinker) 设置 `nodeLinker` 为 `node_modules`。
 
 :::
 
