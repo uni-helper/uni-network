@@ -12,7 +12,7 @@ allowBuilds:
 
 catalog:
   # Root devDependencies
-  "@biomejs/biome": "^2.5.12"
+  "@biomejs/biome": "^2.5.15"
   "@dcloudio/types": "^3.4.32"
   # playground dependencies
   "@dcloudio/uni-app": "3.0.0-5000720260410001"
@@ -33,11 +33,11 @@ catalog:
   "@dcloudio/uni-quickapp-webview": "3.0.0-5000720260410001"
   "@dcloudio/uni-stacktracey": "3.0.0-5000720260410001"
   "@dcloudio/vite-plugin-uni": "3.0.0-5000720260410001"
-  "@lerna-lite/cli": "^5.6.1"
-  "@lerna-lite/version": "^5.6.1"
+  "@lerna-lite/cli": "^5.6.2"
+  "@lerna-lite/version": "^5.6.2"
   # packages/core dependencies
   "@types/lodash.merge": "^4.6.9"
-  "@types/node": "^26.5.0"
+  "@types/node": "^26.6.4"
   # packages/core devDependencies
   "@types/ungap__url-search-params": "^0.1.2"
   "@ungap/url-search-params": "^0.2.2"
@@ -46,7 +46,7 @@ catalog:
   "@vueuse/shared": "^12.8.2"
   abort-controller: "^3.0.0"
   abortcontroller-polyfill: "^1.7.8"
-  conventional-changelog-conventionalcommits: "^10.4.0"
+  conventional-changelog-conventionalcommits: "^10.4.1"
   core-js: "^3.50.0"
   fast-querystring: "^1.1.2"
   is-ci: "^4.1.0"
