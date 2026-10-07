@@ -11,7 +11,8 @@
       "!**/cache",
       "!**/package.json",
       "!**/lerna.json",
-      "!**/coverage"
+      "!**/coverage",
+      "!**/banner.svg"
     ]
   },
   "assist": {
