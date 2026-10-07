@@ -22,11 +22,11 @@
     "type": "git",
     "url": "git+https://github.com/uni-helper/uni-network.git"
   },
-  "funding": "https://github.com/sponsors/modyqyw",
+  "funding": "https://github.com/ModyQyW/sponsors",
   "license": "MIT",
   "author": {
     "name": "ModyQyW",
-    "email": "wurui-dev@foxmail.com",
+    "email": "wurui.dev@gmail.com",
     "url": "https://modyqyw.top"
   },
   "sideEffects": false,
