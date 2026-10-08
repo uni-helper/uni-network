@@ -86,7 +86,7 @@
 
   // request 使用
   // `data` 是作为请求体被发送的数据
-  // 必须是以下类型之一：string、object、ArrayBuffer、ArrayBufferView、URLSearchParams
+  // 必须是以下类型之一：string、object、ArrayBuffer
   data: {
     firstName: "Fred",
   },
