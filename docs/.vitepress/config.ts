@@ -5,7 +5,7 @@ export default defineConfig({
   description: "为 uni-app 打造的基于 Promise 的 HTTP 客户端。",
   head: [
     // icon
-    ["link", { rel: "icon", type: "image/png", href: "/logo.png" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
     // Open Graph
     ["meta", { name: "og:type", content: "website" }],
     ["meta", { name: "og:locale", content: "zh-cn" }],
@@ -36,7 +36,7 @@ export default defineConfig({
     ],
   ],
   themeConfig: {
-    logo: { src: "/logo.png", width: 24, height: 24 },
+    logo: { src: "/logo.svg", width: 24, height: 24 },
     nav: [
       { text: "指南", link: "/guide/introduction" },
       {

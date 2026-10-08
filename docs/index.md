@@ -12,8 +12,8 @@ hero:
       text: 介绍
       link: /guide/introduction
   image:
-    src: /logo.png
-    alt: Uni Helper
+    src: /logo.svg
+    alt: Uni Network
 
 features:
   - title: 📝 支持 Promise API
