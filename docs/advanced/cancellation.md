@@ -16,12 +16,13 @@ npm install abortcontroller-polyfill@^1.7.5
 yarn add abortcontroller-polyfill@^1.7.5
 ```
 
-````sh [pnpm]
+```sh [pnpm]
 pnpm add abortcontroller-polyfill@^1.7.5
+```
 
 :::
 
-在 `App.vue` 中仅可能早地导入，后续可全局使用。
+在 `App.vue` 中尽可能早地导入，后续可全局使用。
 
 ```vue
 <script setup>
@@ -36,7 +37,7 @@ import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 ```sh [npm]
 npm install abort-controller@^3.0.0
-````
+```
 
 ```sh [yarn]
 yarn add abort-controller@^3.0.0
