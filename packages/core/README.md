@@ -383,7 +383,7 @@ instance.request({
 
   // request 使用
   // `data` 是作为请求体被发送的数据
-  // 必须是以下类型之一：string、object、ArrayBuffer、ArrayBufferView、URLSearchParams
+  // 必须是以下类型之一：string、object、ArrayBuffer
   data: {
     firstName: 'Fred'
   },
@@ -566,8 +566,7 @@ instance.request({
   statusText: 'OK',
 
   // `headers` 是服务器响应头
-  // 所有的 header 名称都是小写，而且可以使用方括号语法访问
-  // 例如: `response.headers['content-type']`
+  // 可以使用方括号语法访问，例如: `response.headers['content-type']`
   headers: {},
 
   // `data` 是由服务器提供的响应数据
@@ -881,7 +880,38 @@ un.get("/user/12345").catch((error) => {
 
 #### AbortController
 
-支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 [abort-controller polyfill](https://github.com/mysticatea/abort-controller)。
+支持使用 [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) 取消请求。要使用 AbortController，请使用 Polyfill。
+
+**abortcontroller-polyfill**
+
+- npm
+
+  ```shell
+  npm install abortcontroller-polyfill@^1.7.5
+  ```
+
+- yarn
+
+  ```shell
+  yarn add abortcontroller-polyfill@^1.7.5
+  ```
+
+- pnpm
+
+  ```shell
+  pnpm add abortcontroller-polyfill@^1.7.5
+  ```
+
+在 `App.vue` 中尽可能早地导入，后续可全局使用。
+
+```vue
+<script setup>
+// 尽可能早地导入，后续可全局使用
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+</script>
+```
+
+**abort-controller**
 
 - npm
 
@@ -901,8 +931,11 @@ un.get("/user/12345").catch((error) => {
   pnpm add abort-controller@^3.0.0
   ```
 
+必须导入后使用，不可全局使用。
+
 ```typescript
 import { un } from "@uni-helper/uni-network";
+// 必须导入后使用
 import AbortController from "abort-controller/dist/abort-controller";
 // ❌ 错误做法 1
 // import AbortController from 'abort-controller';
@@ -997,7 +1030,7 @@ const response = await un({
 });
 ```
 
-这可以通过设置两个范型类型来解决，两个范型类型依次分别对应响应数据和发送数据的类型。
+这可以通过设置两个泛型类型来解决，两个泛型类型依次分别对应响应数据和发送数据的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -1039,7 +1072,7 @@ const response = await un({
 });
 ```
 
-这需要设置三个范型类型来解决，三个范型类型依次分别对应响应数据、发送数据、响应的类型。
+这需要设置三个泛型类型来解决，三个泛型类型依次分别对应响应数据、发送数据、响应的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -1064,9 +1097,9 @@ const response = await un<
 });
 ```
 
-> 如果你只想修改响应的类型，而不修改其它类型，你仍然需要书写三个范型类型。这和 `axios` 的范型类型设计不同，因为 `uni-app` 对数据类型有更严格的要求。
+> 如果你只想修改响应的类型，而不修改其它类型，你仍然需要书写三个泛型类型。这和 `axios` 的泛型类型设计不同，因为 `uni-app` 对数据类型有更严格的要求。
 
-你可以从 `@uni-helper/uni-network` 中导入 `UnData` 以保持前两个范型类型的默认值。
+你可以从 `@uni-helper/uni-network` 中导入 `UnData` 以保持前两个泛型类型的默认值。
 
 ```typescript
 import { un, type UnData } from "@uni-helper/uni-network";
@@ -1143,27 +1176,29 @@ un.interceptors.response.use(
 
 如果你还不了解组合式函数，请先阅读 [组合式 API 常见问答](https://cn.vuejs.org/guide/extras/composition-api-faq.html) 和 [组合式函数](https://cn.vuejs.org/guide/reusability/composables.html)。
 
-我们使用 [vue-demi](https://github.com/vueuse/vue-demi) 和 [vue-use](https://vueuse.org/) 来同时支持 `vue2` 和 `vue3`。请先阅读它们的使用说明。
+我们使用 [vue-demi](https://github.com/vueuse/vue-demi) 和 [@vueuse/core](https://vueuse.org/) 来同时支持 `vue2` 和 `vue3`。请先阅读它们的使用说明。
+
+组合式函数通过可选依赖使用 `@vueuse/core`，支持的版本范围是 `^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0`。
 
 - npm
 
   ```shell
-  npm install @vueuse/core@^9.13.0
+  npm install @vueuse/core
   ```
 
 - yarn
 
   ```shell
-  yarn add @vueuse/core@^9.13.0
+  yarn add @vueuse/core
   ```
 
 - pnpm
 
   ```shell
-  pnpm add @vueuse/core@^9.13.0
+  pnpm add @vueuse/core
   ```
 
-如果你希望使用 `@vueuse/core>=10`，请查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
+> 在 `uni-app` 中使用较新版本的 `@vueuse/core` 时如果遇到问题，可以查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
 
 从 `@uni-helper/uni-network/composables` 中导入组合式函数后即可使用。
 
@@ -1171,7 +1206,78 @@ un.interceptors.response.use(
 import { useUn } from "@uni-helper/uni-network/composables";
 ```
 
-`useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。这里不再赘述。
+`useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。支持以下几种调用方式：
+
+```typescript
+// 传入 url，立即（immediate 默认为 true）发起请求
+useUn(url, config?, options?);
+useUn(url, instance?, options?);
+useUn(url, config, instance, options?);
+
+// 不传 url，等待手动调用 execute
+useUn(config?, options?);
+useUn(instance?, options?);
+useUn(config, instance?, options?);
+```
+
+第二个参数是 `config` 还是实例 `un`，按对象类型自动区分；不传实例时使用全局的 `un`。
+
+选项：
+
+```typescript
+interface UseUnOptions<T> {
+  // 当 useUn 被调用时，是否自动发起请求
+  // 传入 url 字符串时默认为 true，否则默认为 false
+  immediate?: boolean;
+  // 是否使用 shallowRef，默认为 true
+  shallow?: boolean;
+  // 是否在新请求发起时中止之前的请求，默认为 true
+  abortPrevious?: boolean;
+  // 是否在执行前将请求数据重置为 initialData，默认为 false
+  resetOnExecute?: boolean;
+  // 在请求还未响应时使用的响应数据
+  initialData?: T;
+  // 发生错误时调用
+  onError?: (e: unknown) => void;
+  // 成功请求时调用
+  onSuccess?: (data: T) => void;
+  // 请求结束时调用
+  onFinish?: () => void;
+}
+```
+
+返回值：
+
+```typescript
+const {
+  // Un 响应
+  response,
+  // Un 响应数据
+  data,
+  // 发生的错误
+  error,
+  // 是否已经结束
+  isFinished,
+  // 是否正在请求
+  isLoading,
+  // 是否已经取消
+  isAborted,
+  // 取消当前请求
+  abort,
+  // 手动调用，可以传入新的 url 或 config
+  execute,
+} = useUn("/user/12345");
+```
+
+- `isCanceled` 是 `isAborted` 的别名，`cancel` 是 `abort` 的别名。
+- `execute` 返回一个 Promise，请求结束时 resolve、出错时 reject，所以返回值也可以直接 `await`：
+
+```typescript
+// 第二个参数是请求配置，选项要放在第三个参数
+const { data, execute } = useUn("/user/12345", {}, { immediate: false });
+
+await execute();
+```
 
 ## 其它
 
