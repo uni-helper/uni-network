@@ -49,8 +49,8 @@ export class Un<T = UnData, D = UnData> {
 
     const mergedConfig = mergeConfig<any, any>(this.defaults, _config);
 
-    // 收集请求拦截器。注意 unshift：请求拦截器要按注册顺序的反方向
-    // 穿过 config（先注册的最先执行），所以倒序塞进链里
+    // 收集请求拦截器。unshift 让后注册的排在链前面，
+    // 所以请求拦截器按注册顺序的反方向执行
     // runWhen 返回 false 的拦截器这次请求会被跳过
     const requestInterceptorChain: (
       | UnInterceptorManagerHandlerFulfilled<UnConfig<T, D>>
@@ -86,7 +86,7 @@ export class Un<T = UnData, D = UnData> {
       );
     });
 
-    // TODO: better types
+    // 拦截器链里每一步的返回值类型都会变化，这里用 any 放宽
     let promise: any;
     let i = 0;
     let len = 0;

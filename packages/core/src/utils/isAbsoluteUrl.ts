@@ -3,13 +3,11 @@
  * 协议名的规则来自 RFC 3986。
  */
 export const isAbsoluteUrl = (url: string) => {
-  // A URL is considered absolute if it begins with "<scheme>://".
-  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-  // by any combination of letters, digits, plus, period, or hyphen.
-  // eslint-disable-next-line regexp/no-unused-capturing-group
   if (typeof url !== "string") {
     return false;
   }
 
+  // 绝对 URL 以 "<scheme>://" 开头。RFC 3986 规定 scheme 以字母开头，
+  // 后面可以跟字母、数字、加号、点或连字符。
   return /^([a-z][\d+.a-z-]*:)\/\//i.test(url);
 };

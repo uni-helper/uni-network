@@ -3,7 +3,7 @@ import type { UnConfig } from "./config";
 import type { UnTask } from "./task";
 
 export interface UnResponse<T = UnData, D = UnData> {
-  /** 错误信息 */
+  /** 平台返回的消息，成功时通常是 request:ok、uploadFile:ok 这类状态消息 */
   errMsg?: string;
   /** 错误代码 */
   errno?: number;
@@ -17,11 +17,15 @@ export interface UnResponse<T = UnData, D = UnData> {
 
   /** 服务器响应的 HTTP 状态码 */
   status?: number;
-  /** 服务器响应的 HTTP 状态信息 */
+  /** 由状态码反查得到的 HTTP 状态信息；uni.request 不返回该字段 */
   statusText?: string;
   /** 服务器响应头 */
   headers?: UnHeaders;
-  /** 服务器响应数据 */
+  /**
+   * 服务器响应数据
+   *
+   * download 适配器会把 `{ tempFilePath, filePath }` 放进这里
+   */
   data?: T;
 
   /**

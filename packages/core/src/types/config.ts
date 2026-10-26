@@ -78,7 +78,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 允许自定义处理请求
    *
-   * 可以指定为 'request'、`upload` 和 `download` 三者之一
+   * 可以指定为 `request`、`upload` 和 `download` 三者之一
    *
    * 也可以指定为一个方法，返回一个 Promise 并提供一个有效的响应
    *
@@ -90,9 +90,7 @@ export interface UnConfig<T = UnData, D = UnData> {
   /**
    * 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
    *
-   * 如果 `validateStatus` 返回 `true`、`null` 或 `undefined`
-   *
-   * 则 promise 将会被 resolve，否则会被 reject
+   * 返回 true 时 resolve，返回 false 或 null 时 reject
    *
    * 默认为 (status) => status >= 200 && status < 300
    */

@@ -1,7 +1,5 @@
 type StringLiteralsOrString<Literals extends string> = Literals | (string & {});
 
-// T 表示响应数据
-// D 表示请求数据
 export type UnData = string | Record<string, any> | ArrayBuffer;
 
 export type UnMethod =

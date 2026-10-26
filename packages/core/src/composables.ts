@@ -10,7 +10,7 @@ import type {
 } from "./index";
 import { UnError, un } from "./index";
 
-/** Align with v14.3.0 */
+/** 返回结构与 useAxios v14.3.0 对齐 */
 
 export interface UseUnReturn<
   T = UnData,
@@ -98,6 +98,11 @@ type OverallUseUnReturn<T, R, D> =
 const isUnInstance = (val: any) =>
   !!val?.request && !!val?.download && !!val?.upload;
 
+/**
+ * 管理一次请求的响应、加载状态和取消操作，用法与 `useAxios` 接近。
+ *
+ * 传入 `url` 时默认立即发起请求；不传 `url` 时调用返回的 `execute` 手动触发。
+ */
 export function useUn<
   T = UnData,
   R = UnResponse<T>,
@@ -244,7 +249,6 @@ export function useUn<T = UnData, R = UnResponse<T>, D = UnData>(
     new Promise<OverallUseUnReturn<T, R, D>>((resolve, reject) => {
       until(isFinished)
         .toBe(true)
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         .then(() => (error.value ? reject(error.value) : resolve(result)));
     });
   const promise = {

@@ -15,16 +15,16 @@ export function forEach(
   let i: number;
   let l: number;
 
-  // Force an array if not already something iterable
+  // 不是对象时先包成数组，统一走下面的遍历
   const object = typeof obj !== "object" ? [obj] : obj;
 
   if (Array.isArray(object)) {
-    // Iterate over array values
+    // 遍历数组项
     for (i = 0, l = object.length; i < l; i++) {
       fn.call(null, object[i], i, object);
     }
   } else {
-    // Iterate over object keys
+    // 遍历对象键
     const keys = allOwnKeys
       ? Object.getOwnPropertyNames(object).filter(
           (key) => key !== "constructor" && !key.startsWith("_"),

@@ -39,7 +39,7 @@ export const requestAdapter = <T = UnData, D = UnData>(
         try {
           statusText = statuses(res?.statusCode)?.toString();
         } catch (_) {
-          /// ↑ 为支付宝小程序保留 (_)
+          // ↑ 为支付宝小程序保留 (_)
           // 当 statusCode 不合法、statuses 抛出错误时，设置 statusText 为 undefined
           statusText = undefined;
         }
