@@ -1057,7 +1057,7 @@ const response = await un<
 import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
-un.interceptors.response.use((response) => response.data);
+un.interceptors.response.use((response) => response.data as any);
 
 // response 的类型是 UnResponse<UnData, UnData>，你希望是 Record<string, any>
 // response.data 的类型是 UnData，你希望是 Record<string, any>
@@ -1078,7 +1078,7 @@ const response = await un({
 import { un } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
-un.interceptors.response.use((response) => response.data);
+un.interceptors.response.use((response) => response.data as any);
 
 // response 的类型是 Record<string, any>
 // response.data 的类型是 Record<string, any>
@@ -1097,7 +1097,7 @@ const response = await un<
 });
 ```
 
-> 如果你只想修改响应的类型，而不修改其它类型，你仍然需要书写三个泛型类型。这和 `axios` 的泛型类型设计不同，因为 `uni-app` 对数据类型有更严格的要求。
+> 如果你只想修改响应的类型，而不修改其它类型，你仍然需要书写三个泛型类型。这和 `axios` 的泛型类型设计不同，因为 `uni-app` 对数据类型有更严格的要求。同理，`as any` 的类型断言也是出于同样的原因。
 
 你可以从 `@uni-helper/uni-network` 中导入 `UnData` 以保持前两个泛型类型的默认值。
 
@@ -1105,7 +1105,7 @@ const response = await un<
 import { un, type UnData } from "@uni-helper/uni-network";
 
 // 添加响应拦截器直接返回 response.data
-un.interceptors.response.use((response) => response.data);
+un.interceptors.response.use((response) => response.data as any);
 
 // response 的类型是 Record<string, any>
 // response.data 的类型是 UnData
