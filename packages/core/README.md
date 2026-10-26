@@ -768,10 +768,10 @@ import { un } from "@uni-helper/uni-network";
 
 un.interceptors.request.use(
   (config) => {
-    config.headers.test = "I am only a header!";
+    config.headers = { ...config.headers, test: "I am only a header!" };
     return config;
   },
-  null,
+  undefined,
   { synchronous: true }
 );
 ```
@@ -781,13 +781,13 @@ un.interceptors.request.use(
 ```typescript
 import { un } from "@uni-helper/uni-network";
 
-const onGetCall = (config) => config.method.toUpperCase() === "GET";
+const onGetCall = (config) => config.method?.toUpperCase() === "GET";
 un.interceptors.request.use(
   (config) => {
-    config.headers.test = "special get headers";
+    config.headers = { ...config.headers, test: "special get headers" };
     return config;
   },
-  null,
+  undefined,
   { runWhen: onGetCall }
 );
 ```
