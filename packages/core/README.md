@@ -301,14 +301,14 @@ instance.request({
 - `un.post(url[, data[, config]])`
 - `un.put(url[, data[, config]])`
 - `un.patch(url[, data[, config]])`
-- `un.getUri([config])`
+- `un.getUri(config)`
 
 ### 请求配置
 
-以下是创建请求时可以用的配置选项。只有 `url` 是必需的。如果没有指定 `method` 且没有指定 `adapter`，请求将默认使用 `GET` 方法。
+以下是创建请求时可以用的配置选项。只有 `url` 是必需的。如果没有指定 `method`，请求会默认使用 `GET`；`adapter` 默认是 `request`。
 
 ```typescript
-{
+const config = {
   // `url` 是用于请求的服务器 URL
   url: '/user',
 
@@ -319,7 +319,7 @@ instance.request({
   // 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
   // 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
   // 当设置为 false 时，绝对值的 `url` 会始终被 `baseUrl` 前置
-  allowAbsoluteUrls?: boolean,
+  allowAbsoluteUrls: true,
 
   // 自定义请求头
   // 不能设置 Referer
@@ -332,7 +332,7 @@ instance.request({
   // 要使用 URLSearchParams 对象，请使用 core-js 提供的 polyfill
   // 可参考构建与环境支持部分的说明或该仓库提供的 playground
   params: {
-    ID: 12345
+    ID: '12345',
   },
 
   // `paramsSerializer` 是可选方法，主要用于序列化 `params`
@@ -342,7 +342,7 @@ instance.request({
   // [qs](https://github.com/ljharb/qs) v6.10.0 引入了 `get-intrinsic` 导致结合微信小程序和微信小程序插件使用时出现报错，可使用 v6.9.7
   // [query-string](https://github.com/sindresorhus/query-string) 体积性能都较好，支持完善
   // [query-string](https://github.com/sindresorhus/query-string) 基于 [decode-uri-component](https://github.com/SamVerschueren/decode-uri-component)，它使用了部分小程序（如支付宝小程序）不支持的语法（可选的 catch 参数，Optional catch Binding），需自行修改处理
-  paramsSerializer: (params) => { /* 返回一个字符串 */ }
+  paramsSerializer: (params) => { /* 返回一个字符串 */ },
 
   // `timeout` 指定请求超时的毫秒数
   // 如果请求时间超过 `timeout` 的值，则请求会被中断
@@ -358,8 +358,8 @@ instance.request({
   adapter: (config) => { /* ... */ },
 
   // `validateStatus` 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
-  // 如果 `validateStatus` 返回 `true`、`null` 或 `undefined`
-  // 则 promise 将会被 resolve，否则会被 reject
+  // 返回 true 时 promise 会被 resolve，返回 false 或 null 时会被 reject
+  // 默认只接受 2xx
   validateStatus: function (status) {
     return status >= 200 && status < 300; // 默认值
   },
@@ -383,9 +383,9 @@ instance.request({
 
   // request 使用
   // `data` 是作为请求体被发送的数据
-  // 必须是以下类型之一：string、object、ArrayBuffer
+  // 必须是以下类型之一：string、ArrayBuffer、Record<string, any>
   data: {
-    firstName: 'Fred'
+    firstName: 'Fred',
   },
   // 这也是可行的
   // data: 'Country=Brasil&City=Belo Horizonte',
@@ -453,29 +453,28 @@ instance.request({
   // request 使用
   // 监听 Transfer-Encoding Chunk Received 事件
   // 当接收到新的 chunk 时触发
-  onChunkReceived?: (response) => { /* ... */ },
+  onChunkReceived: (response) => { /* ... */ },
 
   // Request 使用
   // 是否可在 headers 中编辑 cookie
   // 默认为 false
-  enableCookie?: boolean;
+  enableCookie: false,
 
   // Request 使用
   // 是否开启云加速
-  // 默认为 false
-  cloudCache?: boolean | {
+  // 默认为 false；设为对象可以进一步配置缓存
+  cloudCache: {
     // 用于指定 query 中哪些字段不作为缓存依据
-    excludeURLQueries?: string[];
+    excludeURLQueries: [],
     // 用于表达云加速缓存的最快刷新时间
     // 单位 s
-    minRefresh?: number;
-    [key: string]: any;
-  };
+    minRefresh: 0,
+  },
 
   // Request 使用
   // 控制当前请求是否延时至首屏内容渲染后发送
   // 默认为 false
-  defer?: boolean;
+  defer: false,
 
   // upload 使用
   // 需要上传的文件列表，files 和 filePath 必填一个
@@ -504,47 +503,47 @@ instance.request({
 
   // upload 使用
   // 一个对象，会作为 HTTP 请求中其它额外的 form data
-  formData?: Record<string, any>,
+  formData: {},
 
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgress?: UnOnProgress;
+  onDownloadProgress: (response) => { /* ... */ },
 
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgressUpdate?: UnOnProgress;
+  onDownloadProgressUpdate: (response) => { /* ... */ },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgress?: UnOnProgress;
+  onUploadProgress: (response) => { /* ... */ },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgressUpdate?: UnOnProgress;
+  onUploadProgressUpdate: (response) => { /* ... */ },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgress?: UnOnProgress;
+  onProgress: (response) => { /* ... */ },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgressUpdate?: UnOnProgress;
-}
+  onProgressUpdate: (response) => { /* ... */ },
+};
 ```
 
 ### 响应结构
 
-一个请求的响应包含以下信息。
+then 的回调收到的响应对象包含以下字段。
 
 ```typescript
-{
-  // `errMsg` 是可选的错误信息
+const response = {
+  // `errMsg` 是平台返回的消息，成功时通常是 `request:ok`、`uploadFile:ok` 这类状态消息
   errMsg: '',
 
   // `errno` 是可选的错误代码
@@ -557,19 +556,20 @@ instance.request({
   config: {},
 
   // `task` 是对应的 task 信息
-  task: {}
+  task: {},
 
   // `status` 来自服务器响应的 HTTP 状态码
   status: 200,
 
-  // `statusText` 来自服务器响应的 HTTP 状态信息
+  // `statusText` 是由状态码反查得到的 HTTP 状态信息，uni.request 不返回该字段
   statusText: 'OK',
 
   // `headers` 是服务器响应头
   // 可以使用方括号语法访问，例如: `response.headers['content-type']`
   headers: {},
 
-  // `data` 是由服务器提供的响应数据
+  // `data` 是服务器提供的响应数据
+  // download 适配器会把 `{ tempFilePath, filePath }` 放进 `data`
   data: {},
 
   // request 特有
@@ -585,10 +585,10 @@ instance.request({
   // 用户本地文件路径
   // 传入 filePath 时会返回，跟传入的 filePath 一致
   filePath: '',
-}
+};
 ```
 
-当使用 then 时，你将接收如下响应：
+当使用 then 时，回调会收到这样的响应：
 
 ```typescript
 un.get("/user/12345").then((response) => {
@@ -1209,25 +1209,25 @@ import { useUn } from "@uni-helper/uni-network/composables";
 `useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。支持以下几种调用方式：
 
 ```typescript
-// 传入 url，立即（immediate 默认为 true）发起请求
+// 传入 url，默认立即发起请求（immediate 默认为 true）
 useUn(url, config?, options?);
 useUn(url, instance?, options?);
 useUn(url, config, instance, options?);
 
 // 不传 url，等待手动调用 execute
-useUn(config?, options?);
-useUn(instance?, options?);
-useUn(config, instance?, options?);
+useUn(config?);
+useUn(instance?);
+useUn(config, instance?);
 ```
 
-第二个参数是 `config` 还是实例 `un`，按对象类型自动区分；不传实例时使用全局的 `un`。
+传 `url` 时，第二个参数是 `config` 还是实例 `un`，按对象类型自动区分；不传 `url` 时看第一个参数。没有传实例时使用全局的 `un`。不传 `url` 的形式在类型声明里没有 `options` 参数，需要选项时用传 `url` 的形式，把 `immediate` 设为 `false`，再用 `execute` 手动触发。
 
 选项：
 
 ```typescript
 interface UseUnOptions<T> {
   // 当 useUn 被调用时，是否自动发起请求
-  // 传入 url 字符串时默认为 true，否则默认为 false
+  // 不传 options 且传入 url 时默认为 true，其余情况默认为 false
   immediate?: boolean;
   // 是否使用 shallowRef，默认为 true
   shallow?: boolean;
@@ -1245,6 +1245,8 @@ interface UseUnOptions<T> {
   onFinish?: () => void;
 }
 ```
+
+传了 `options` 但没写 `immediate` 时，即使传入 `url` 也不会自动发起请求，需要自动请求就显式写 `immediate: true`。
 
 返回值：
 

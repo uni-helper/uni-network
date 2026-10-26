@@ -1,10 +1,10 @@
 # 响应结构
 
-一个请求的响应包应含以下信息。
+then 的回调收到的响应对象包含以下字段。
 
 ```typescript
 const response = {
-  // `errMsg` 是可选的错误信息
+  // `errMsg` 是平台返回的消息，成功时通常是 `request:ok`、`uploadFile:ok` 这类状态消息
   errMsg: "",
 
   // `errno` 是可选的错误代码
@@ -22,14 +22,15 @@ const response = {
   // `status` 来自服务器响应的 HTTP 状态码
   status: 200,
 
-  // `statusText` 来自服务器响应的 HTTP 状态信息
+  // `statusText` 是由状态码反查得到的 HTTP 状态信息，uni.request 不返回该字段
   statusText: "OK",
 
   // `headers` 是服务器响应头
   // 可以使用方括号语法访问，例如: `response.headers['content-type']`
   headers: {},
 
-  // `data` 是由服务器提供的响应数据
+  // `data` 是服务器提供的响应数据
+  // download 适配器会把 `{ tempFilePath, filePath }` 放进 `data`
   data: {},
 
   // request 特有
@@ -48,7 +49,7 @@ const response = {
 };
 ```
 
-当使用 then 时，你将接收如下响应：
+当使用 then 时，回调会收到这样的响应：
 
 ```typescript
 un.get("/user/12345").then((response) => {

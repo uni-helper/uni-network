@@ -1,9 +1,9 @@
 # 请求配置
 
-以下是创建请求时可以用的配置选项。只有 `url` 是必需的。如果没有指定 `method` 且没有指定 `adapter`，请求将默认使用 `GET` 方法。
+以下是创建请求时可以用的配置选项。只有 `url` 是必需的。如果没有指定 `method`，请求会默认使用 `GET`；`adapter` 默认是 `request`。
 
 ```typescript
-{
+const config = {
   // `url` 是用于请求的服务器 URL
   url: "/user",
 
@@ -14,7 +14,7 @@
   // 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
   // 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
   // 当设置为 false 时，绝对值的 `url` 会始终被 `baseUrl` 前置
-  allowAbsoluteUrls?: boolean,
+  allowAbsoluteUrls: true,
 
   // 自定义请求头
   // 不能设置 Referer
@@ -57,8 +57,8 @@
   },
 
   // `validateStatus` 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
-  // 如果 `validateStatus` 返回 `true`、`null` 或 `undefined`
-  // 则 promise 将会被 resolve，否则会被 reject
+  // 返回 true 时 promise 会被 resolve，返回 false 或 null 时会被 reject
+  // 默认只接受 2xx
   validateStatus: function (status) {
     return status >= 200 && status < 300; // 默认值
   },
@@ -86,7 +86,7 @@
 
   // request 使用
   // `data` 是作为请求体被发送的数据
-  // 必须是以下类型之一：string、object、ArrayBuffer
+  // 必须是以下类型之一：string、ArrayBuffer、Record<string, any>
   data: {
     firstName: "Fred",
   },
@@ -163,24 +163,23 @@
   // Request 使用
   // 是否可在 headers 中编辑 cookie
   // 默认为 false
-  enableCookie?: boolean;
+  enableCookie: false,
 
   // Request 使用
   // 是否开启云加速
-  // 默认为 false
-  cloudCache?: boolean | {
+  // 默认为 false；设为对象可以进一步配置缓存
+  cloudCache: {
     // 用于指定 query 中哪些字段不作为缓存依据
-    excludeURLQueries?: string[];
+    excludeURLQueries: [],
     // 用于表达云加速缓存的最快刷新时间
     // 单位 s
-    minRefresh?: number;
-    [key: string]: any;
-  };
+    minRefresh: 0,
+  },
 
   // Request 使用
   // 控制当前请求是否延时至首屏内容渲染后发送
   // 默认为 false
-  defer?: boolean;
+  defer: false,
 
   // upload 使用
   // 需要上传的文件列表，files 和 filePath 必填一个
@@ -209,36 +208,48 @@
 
   // upload 使用
   // 一个对象，会作为 HTTP 请求中其它额外的 form data
-  formData: Record<string, any>,
+  formData: {},
 
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgress: UnOnProgress,
+  onDownloadProgress: (response) => {
+    /* ... */
+  },
 
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgressUpdate: UnOnProgress,
+  onDownloadProgressUpdate: (response) => {
+    /* ... */
+  },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgress: UnOnProgress,
+  onUploadProgress: (response) => {
+    /* ... */
+  },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgressUpdate: UnOnProgress,
+  onUploadProgressUpdate: (response) => {
+    /* ... */
+  },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgress: UnOnProgress,
+  onProgress: (response) => {
+    /* ... */
+  },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgressUpdate: UnOnProgress,
+  onProgressUpdate: (response) => {
+    /* ... */
+  },
 };
 ```

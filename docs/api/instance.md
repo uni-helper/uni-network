@@ -37,4 +37,4 @@ instance.request({
 - `un.post(url[, data[, config]])`
 - `un.put(url[, data[, config]])`
 - `un.patch(url[, data[, config]])`
-- `un.getUri([config])`
+- `un.getUri(config)`

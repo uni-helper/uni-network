@@ -35,25 +35,25 @@ import { useUn } from "@uni-helper/uni-network/composables";
 `useUn` 的用法和 [useAxios](https://vueuse.org/integrations/useaxios/) 几乎完全一致。支持以下几种调用方式：
 
 ```typescript
-// 传入 url，立即（immediate 默认为 true）发起请求
+// 传入 url，默认立即发起请求（immediate 默认为 true）
 useUn(url, config?, options?);
 useUn(url, instance?, options?);
 useUn(url, config, instance, options?);
 
 // 不传 url，等待手动调用 execute
-useUn(config?, options?);
-useUn(instance?, options?);
-useUn(config, instance?, options?);
+useUn(config?);
+useUn(instance?);
+useUn(config, instance?);
 ```
 
-第二个参数是 `config` 还是实例 `un`，按对象类型自动区分；不传实例时使用全局的 `un`。
+传 `url` 时，第二个参数是 `config` 还是实例 `un`，按对象类型自动区分；不传 `url` 时看第一个参数。没有传实例时使用全局的 `un`。不传 `url` 的形式在类型声明里没有 `options` 参数，需要选项时用传 `url` 的形式，把 `immediate` 设为 `false`，再用 `execute` 手动触发。
 
 ### 选项
 
 ```typescript
 interface UseUnOptions<T> {
   // 当 useUn 被调用时，是否自动发起请求
-  // 传入 url 字符串时默认为 true，否则默认为 false
+  // 不传 options 且传入 url 时默认为 true，其余情况默认为 false
   immediate?: boolean;
   // 是否使用 shallowRef，默认为 true
   shallow?: boolean;
@@ -71,6 +71,8 @@ interface UseUnOptions<T> {
   onFinish?: () => void;
 }
 ```
+
+传了 `options` 但没写 `immediate` 时，即使传入 `url` 也不会自动发起请求，需要自动请求就显式写 `immediate: true`。
 
 ### 返回值
 
