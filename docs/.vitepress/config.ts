@@ -41,7 +41,7 @@ export default defineConfig({
       { text: "指南", link: "/guide/introduction" },
       {
         text: "更新日志",
-        link: "https://github.com/uni-helper/uni-network/tree/main/CHANGELOG.md",
+        link: "https://github.com/uni-helper/uni-network/blob/main/CHANGELOG.md",
       },
     ],
     sidebar: [

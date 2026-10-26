@@ -13,7 +13,7 @@ yarn add @uni-helper/uni-network
 ```
 
 ```shell [pnpm]
-pnpm install @uni-helper/uni-network
+pnpm add @uni-helper/uni-network
 ```
 
 :::

@@ -1,13 +1,13 @@
 # 错误处理
 
-默认把每一个返回的状态代码不在 `2xx` 范围内的响应视为错误。
+状态码不在 `2xx` 范围内的响应会被视为错误。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
 
 un.get("/user/12345").catch((error) => {
   if (error.response) {
-    // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+    // 请求已发出并收到响应，但状态码不在 2xx 范围内
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
@@ -23,7 +23,7 @@ un.get("/user/12345").catch((error) => {
 });
 ```
 
-使用 `validateStatus` 配置选项，可以自定义抛出错误的 HTTP code。
+使用 `validateStatus` 可以自定义哪些状态码会被视为错误。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";

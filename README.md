@@ -51,7 +51,7 @@ un.get("/user?ID=12345").then((response) => {
 
 ## 关联项目
 
-- [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter) — 坚持 `axios` 时的 `adapter` 方案
+- [@uni-helper/axios-adapter](https://github.com/uni-helper/axios-adapter)：坚持用 `axios` 时的 `adapter` 方案
 
 ## 包
 

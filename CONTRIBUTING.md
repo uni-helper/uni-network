@@ -63,7 +63,7 @@ pnpm install
 
 - 格式化与 lint 由 [Biome](./biome.json) 统一管理，缩进 2 空格、行尾 LF（见 `.editorconfig`）。
 - 新增代码请补类型；对外 API 使用 JSDoc 说明用途、参数与边界情况。
-- 修复 bug 或新增能力时，优先补对应的单元测试（与 `src` 同级、`*.test.ts` 命名）。
+- 修复 bug 或新增能力时，优先补对应的单元测试（放在对应源码旁边、`*.test.ts` 命名）。
 
 ## 提交规范
 

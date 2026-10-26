@@ -24,8 +24,7 @@ const config = {
 
   // `params` 是与请求一起发送的 URL 参数
   // 必须是一个普通对象或一个 URLSearchParams 对象
-  // 要使用 URLSearchParams 对象，请使用 core-js 提供的 polyfill
-  // 可参考构建与环境支持部分的说明或该仓库提供的 playground
+  // 小程序环境通常没有 URLSearchParams，需要自行注入 polyfill，例如 core-js
   params: {
     ID: "12345",
   },

@@ -329,8 +329,7 @@ const config = {
 
   // `params` 是与请求一起发送的 URL 参数
   // 必须是一个普通对象或一个 URLSearchParams 对象
-  // 要使用 URLSearchParams 对象，请使用 core-js 提供的 polyfill
-  // 可参考构建与环境支持部分的说明或该仓库提供的 playground
+  // 小程序环境通常没有 URLSearchParams，需要自行注入 polyfill，例如 core-js
   params: {
     ID: '12345',
   },
@@ -806,14 +805,14 @@ un.interceptors.request.use(
 
 ### 错误处理
 
-默认把每一个返回的状态代码不在 2xx 范围内的响应视为错误。
+状态码不在 `2xx` 范围内的响应会被视为错误。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
 
 un.get("/user/12345").catch((error) => {
   if (error.response) {
-    // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+    // 请求已发出并收到响应，但状态码不在 2xx 范围内
     console.log(error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
@@ -829,7 +828,7 @@ un.get("/user/12345").catch((error) => {
 });
 ```
 
-使用 `validateStatus` 配置选项，可以自定义抛出错误的 HTTP code。
+使用 `validateStatus` 可以自定义哪些状态码会被视为错误。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -965,9 +964,9 @@ const source = CancelToken.source();
 
 un.get("/user/12345", {
   cancelToken: source.token,
-}).catch(function (thrown) {
-  if (un.isCancel(thrown)) {
-    console.log("Request canceled", thrown.message);
+}).catch(function (error) {
+  if (un.isCancel(error)) {
+    console.log("Request canceled", error.message);
   } else {
     // 处理错误
   }
@@ -1012,7 +1011,7 @@ cancel();
 
 `@uni-helper/uni-network` 使用 TypeScript 编写，你可以享受到完整的 TypeScript 支持。
 
-最常见的一个类型问题是，调用 API 时得不到响应数据和发送数据的类型。
+最常见的一个类型问题是，调用 API 时得不到响应数据和请求数据的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -1030,7 +1029,7 @@ const response = await un({
 });
 ```
 
-这可以通过设置两个泛型类型来解决，两个泛型类型依次分别对应响应数据和发送数据的类型。
+这可以通过设置两个泛型类型来解决，两个泛型类型依次分别对应响应数据和请求数据的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -1072,7 +1071,7 @@ const response = await un({
 });
 ```
 
-这需要设置三个泛型类型来解决，三个泛型类型依次分别对应响应数据、发送数据、响应的类型。
+这需要设置三个泛型类型来解决，三个泛型类型依次分别对应响应数据、请求数据、响应的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -1285,7 +1284,7 @@ await execute();
 
 ### 构建与环境支持
 
-目前 `@uni-helper/uni-network` 会使用 `tsdown` 将语法 Syntax 转译到 `ES2017`（即 `ES8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理，其它 API 需要根据实际情况手动注入 Polyfill。
+目前 `@uni-helper/uni-network` 会使用 `tsdown` 把语法转译到 `ES2017`（即 `ES8`）。`uni` API 需要在项目构建时由 `uni-app` 官方提供的插件处理，其它 API 需要根据实际情况手动注入 Polyfill。
 
 如果你希望提供更好的兼容性，请参考 [这里](https://vitesse-docs.netlify.app/getting-started/deployment#%E5%85%BC%E5%AE%B9%E6%80%A7)。
 
@@ -1334,7 +1333,7 @@ await execute();
 
 ## 资源
 
-- [改动日志](https://github.com/uni-helper/uni-network/tree/main/CHANGELOG.md)
+- [改动日志](https://github.com/uni-helper/uni-network/blob/main/CHANGELOG.md)
 
 ## 致谢
 
@@ -1348,7 +1347,7 @@ await execute();
 - [swrv](https://docs-swrv.netlify.app/)
 - [uni-ajax](https://uniajax.ponjs.com/)
 - [vue-request](https://www.attojs.com/)
-- [vue-use](https://vueuse.org/)
+- [VueUse](https://vueuse.org/)
 
 ## 参与贡献
 

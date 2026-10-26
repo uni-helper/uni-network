@@ -17,17 +17,17 @@ hero:
 
 features:
   - title: 📝 支持 Promise API
-    details: 默认支持 Promise API，可直接使用 async/await，更加简洁明了
+    details: 所有请求都返回 Promise，可以直接用 async/await 处理
   - title: 🛠 请求响应拦截器
-    details: 可配置请求和响应拦截器，自定义处理数据
+    details: 请求和响应都能挂拦截器，统一加 header、改数据或处理错误
   - title: 🔌 取消请求
-    details: 可扩展请求取消，完全可控请求状态
+    details: 支持 AbortController 和 CancelToken，随时中止进行中的请求
   - title: 🦾 TypeScript 支持
-    details: 基于 TypeScript 开发，默认支持 TypeScript，安全可控
+    details: 内置类型定义，响应数据和请求数据都可以用泛型指定
   - title: 🧱 组合式函数
-    details: 提供组合式函数，更加方便地使用 Uni Network
+    details: 提供 useUn，在 Vue 2/3 里直接管理请求状态
   - title: 📤 支持上传下载
-    details: 基于 uni.request、uni.uploadFile、uni.downloadFile 封装，支持普通请求、上传、下载
+    details: 同一套配置覆盖 uni.request、uni.uploadFile 和 uni.downloadFile
 ---
 
 <!-- markdownlint-disable -->

@@ -2,7 +2,7 @@
 
 `@uni-helper/uni-network` 使用 TypeScript 编写，你可以享受到完整的 TypeScript 支持。
 
-调用 API 时得不到响应数据和请求数据的类型是最常见的类型问题之一。
+最常见的一个类型问题是，调用 API 时得不到响应数据和请求数据的类型。
 
 ```typescript
 import { un } from "@uni-helper/uni-network";
@@ -87,7 +87,7 @@ const response = await un<
 });
 ```
 
-::: tip 范型类型设计
+::: tip 泛型类型设计
 
 如果你只想修改响应的类型，而不修改其它类型，你仍然需要书写三个泛型类型。这和 `axios` 的泛型类型设计不同，因为 `uni-app` 对数据类型有更严格的要求。同理，`as any` 的类型断言也是出于同样的原因。
 

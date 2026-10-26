@@ -10,4 +10,4 @@
 - [swrv](https://docs-swrv.netlify.app/)
 - [uni-ajax](https://uniajax.ponjs.com/)
 - [vue-request](https://www.attojs.com/)
-- [vue-use](https://vueuse.org/)
+- [VueUse](https://vueuse.org/)
