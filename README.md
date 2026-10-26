@@ -1,4 +1,4 @@
-<a href="https://uni-network.netlify.app"><img src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/banner.svg" alt="banner" width="100%"/></a>
+<a href="https://uni-helper.js.org/uni-network"><img src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/banner.svg" alt="banner" width="100%"/></a>
 
 # @uni-helper/uni-network
 
@@ -19,6 +19,8 @@
 
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
 
+在线文档：[uni-network.netlify.app](https://uni-network.netlify.app) · [uni-network.pages.dev](https://uni-network.pages.dev) · [uni-helper.js.org/uni-network](https://uni-helper.js.org/uni-network)
+
 不想看文档？直接问 AI 🤖 <a href="https://deepwiki.com/uni-helper/uni-network"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
 > **请考虑持续[赞助](https://github.com/ModyQyW/sponsors)以维持该项目的持续健康发展，非常感谢！🙏**
@@ -29,7 +31,7 @@
 npm install @uni-helper/uni-network
 ```
 
-也可以使用 `yarn add @uni-helper/uni-network` 或 `pnpm add @uni-helper/uni-network`，各包管理器的注意事项见[在线文档](https://uni-network.netlify.app)。
+也可以使用 `yarn add @uni-helper/uni-network` 或 `pnpm add @uni-helper/uni-network`，各包管理器的注意事项见[在线文档](https://uni-helper.js.org/uni-network)。
 
 ## 使用
 
@@ -41,7 +43,7 @@ un.get("/user?ID=12345").then((response) => {
 });
 ```
 
-完整的安装说明、API 参考、拦截器、取消请求、TypeScript 支持和组合式函数文档，请阅读[在线文档](https://uni-network.netlify.app)或 [packages/core/README.md](./packages/core/README.md)。
+完整的安装说明、API 参考、拦截器、取消请求、TypeScript 支持和组合式函数文档，请阅读[在线文档](https://uni-helper.js.org/uni-network)或 [packages/core/README.md](./packages/core/README.md)。
 
 ## 感谢
 

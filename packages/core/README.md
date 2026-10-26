@@ -17,7 +17,7 @@
 
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
 
-[VitePress 在线文档](https://uni-network.netlify.app)
+[VitePress 在线文档](https://uni-helper.js.org/uni-network)
 
 不想看文档？直接问 AI 🤖 <a href="https://deepwiki.com/uni-helper/uni-network"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 

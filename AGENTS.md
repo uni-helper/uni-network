@@ -7,7 +7,7 @@ Promise-based HTTP client for uni-app (`@uni-helper/uni-network`), modeled on ax
 - TypeScript ~6.0.3, ESM-first, build target ES2017. Dev machines pin Node via `.node-version` (26, mirrored in `devEngines.runtime`, warn-only); the published `engines` is `node>=18` — consumer-facing. Keep the two in sync when either changes.
 - pnpm@12.9.1 via `packageManager` / `devEngines.packageManager` (enable corepack). Dependency versions are centralized in the `pnpm-workspace.yaml` `catalog:` — manifests reference `catalog:` instead of real ranges.
 - Toolchain: tsdown (build, ESM+CJS+dts), Biome (lint + format), Vitest (test), lerna-lite (versioning + changelog).
-- Workspace members: `packages/core` (published package), `docs` (VitePress site, deployed on Netlify), `playground` (H5 + WeChat mini-program).
+- Workspace members: `packages/core` (published package), `docs` (VitePress site, deployed on Netlify and Cloudflare Pages, also at https://uni-helper.js.org/uni-network), `playground` (H5 + WeChat mini-program).
 - Package entry points: `.` and `./composables`, each in ESM/CJS/dts variants; `files: ["dist"]`.
 
 ## Commands
