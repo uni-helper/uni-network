@@ -34,7 +34,7 @@ un.interceptors.response.use(
   (response) => response,
   // 直接返回错误，不再需要使用 catch 来捕获
   // 需要注意返回值可能是 UnError 类型
-  (error) => error
+  (error) => error,
 );
 ```
 

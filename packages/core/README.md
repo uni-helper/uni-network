@@ -1,18 +1,53 @@
 # @uni-helper/uni-network
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/logo.svg" alt="logo" width="256" height="256" />
+  <img
+    src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/logo.svg"
+    alt="logo"
+    width="256"
+    height="256"
+  >
 </p>
 
 <p align="center">
-  <a href="https://github.com/uni-helper/uni-network/blob/main/LICENSE"><img src="https://img.shields.io/github/license/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="License"></a>
-  <a href="https://github.com/uni-helper/uni-network/stargazers"><img src="https://img.shields.io/github/stars/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="GitHub Stars"></a>
-  <a href="https://npmx.dev/package/@uni-helper/uni-network"><img src="https://img.shields.io/npm/v/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="NPM version"></a>
-  <a href="https://npmx.dev/package/@uni-helper/uni-network"><img src="https://img.shields.io/npm/dm/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="npm downloads"></a>
-  <a href="https://app.netlify.com/sites/uni-network/deploys"><img src="https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status" alt="Netlify"></a>
+  <a href="https://github.com/uni-helper/uni-network/blob/main/LICENSE"
+    ><img
+      src="https://img.shields.io/github/license/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="License"
+    ></a
+  >
+  <a href="https://github.com/uni-helper/uni-network/stargazers"
+    ><img
+      src="https://img.shields.io/github/stars/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="GitHub Stars"
+    ></a
+  >
+  <a href="https://npmx.dev/package/@uni-helper/uni-network"
+    ><img
+      src="https://img.shields.io/npm/v/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="NPM version"
+    ></a
+  >
+  <a href="https://npmx.dev/package/@uni-helper/uni-network"
+    ><img
+      src="https://img.shields.io/npm/dm/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="npm downloads"
+    ></a
+  >
+  <a href="https://app.netlify.com/sites/uni-network/deploys"
+    ><img
+      src="https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status"
+      alt="Netlify"
+    ></a
+  >
 </p>
 <p align="center">
-  <a href="https://github.com/ModyQyW"><img src="https://img.shields.io/badge/Author%20%26%20Maintainer-ModyQyW-blue?style=for-the-badge" alt="Author & Maintainer"></a>
+  <a href="https://github.com/ModyQyW"
+    ><img
+      src="https://img.shields.io/badge/Author%20%26%20Maintainer-ModyQyW-blue?style=for-the-badge"
+      alt="Author & Maintainer"
+    ></a
+  >
 </p>
 
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
@@ -120,7 +155,6 @@
   ```
 
   > 如果你正在使用 pnpm，请参考 [文档](https://pnpm.io/npmrc#shamefully-hoist) 设置 `shamefully-hoist` 为 `true`。
-
 > 目前不支持 `uni_modules`，也没有人力、精力和时间支持 `uni_modules`，但欢迎 PR 贡献！🫡
 
 ### 基本用例
@@ -376,11 +410,11 @@ instance.request({
 ```typescript
 const config = {
   // `url` 是用于请求的服务器 URL
-  url: '/user',
+  url: "/user",
 
   // `baseUrl` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL 且选项 `allowAbsoluteUrls` 为 true
   // 设置一个 `baseUrl` 便于为实例方法传递相对 URL
-  baseUrl: 'https://some-domain.com/api/',
+  baseUrl: "https://some-domain.com/api/",
 
   // 决定是否允许绝对 URL 覆盖配置的 `baseUrl`
   // 当设置为 true（默认）时，绝对值的 `url` 会覆盖 `baseUrl`
@@ -390,7 +424,7 @@ const config = {
   // 自定义请求头
   // 不能设置 Referer
   headers: {
-    'content-type': 'application/json',
+    "content-type": "application/json",
   },
 
   // `params` 是与请求一起发送的 URL 参数
@@ -398,7 +432,7 @@ const config = {
   // 小程序环境通常没有 URLSearchParams，需要自行注入 polyfill，例如 core-js
   // 不能有循环引用，序列化前会检查并抛出 ERR_BAD_OPTION_VALUE，自定义 paramsSerializer 也一样
   params: {
-    ID: '12345',
+    ID: "12345",
   },
 
   // `paramsSerializer` 是可选方法，主要用于序列化 `params`
@@ -408,7 +442,9 @@ const config = {
   // [qs](https://github.com/ljharb/qs) v6.10.0 引入了 `get-intrinsic` 导致结合微信小程序和微信小程序插件使用时出现报错，可使用 v6.9.7
   // [query-string](https://github.com/sindresorhus/query-string) 体积性能都较好，支持完善
   // [query-string](https://github.com/sindresorhus/query-string) 基于 [decode-uri-component](https://github.com/SamVerschueren/decode-uri-component)，它使用了部分小程序（如支付宝小程序）不支持的语法（可选的 catch 参数，Optional catch Binding），需自行修改处理
-  paramsSerializer: (params) => { /* 返回一个字符串 */ },
+  paramsSerializer: (params) => {
+    /* 返回一个字符串 */
+  },
 
   // `timeout` 指定请求超时的毫秒数
   // 如果请求时间超过 `timeout` 的值，则请求会被中断
@@ -421,7 +457,9 @@ const config = {
   // 也可以指定为一个方法，返回一个 Promise 并提供一个有效的响应
   // 如果你正在使用 un.request、un.download、un.upload、un.get 等别名方法，则无需再指定该键的值
   // 默认值是 'request'
-  adapter: (config) => { /* ... */ },
+  adapter: (config) => {
+    /* ... */
+  },
 
   // `validateStatus` 定义了对于给定的 HTTP 状态码该 resolve 还是 reject
   // 返回 true 时 promise 会被 resolve，返回 false 或 null 时会被 reject
@@ -436,22 +474,26 @@ const config = {
 
   // 用于取消请求
   // 可参考取消请求部分的说明
-  cancelToken: new CancelToken(function (cancel) { /* ... */ }),
+  cancelToken: new CancelToken(function (cancel) {
+    /* ... */
+  }),
 
   // 监听 HTTP Response Header 事件
   // 会比请求完成事件更早
-  onHeadersReceived: (result) => { /* ... */ },
+  onHeadersReceived: (result) => {
+    /* ... */
+  },
 
   // request 使用
   // 创建请求时使用的方法
   // 默认值是 'GET'
-  method: 'GET',
+  method: "GET",
 
   // request 使用
   // `data` 是作为请求体被发送的数据
   // 必须是以下类型之一：string、ArrayBuffer、Record<string, any>
   data: {
-    firstName: 'Fred',
+    firstName: "Fred",
   },
   // 这也是可行的
   // data: 'Country=Brasil&City=Belo Horizonte',
@@ -460,12 +502,12 @@ const config = {
   // 返回的数据类型
   // 如果设置为 json，会尝试对返回的数据做一次 JSON.parse
   // 默认值是 'json'
-  dataType: 'json',
+  dataType: "json",
 
   // request 使用
   // 响应的数据类型，选项包括 'text' 和 'arraybuffer'
   // 默认值是 'text'
-  responseType: 'text',
+  responseType: "text",
 
   // request 使用
   // 是否验证 ssl 证书
@@ -504,7 +546,7 @@ const config = {
 
   // request 使用
   // HttpDNS 服务商 Id
-  httpDNSServiceId: '',
+  httpDNSServiceId: "",
 
   // request 使用
   // 是否开启 transfer-encoding chunked
@@ -519,7 +561,9 @@ const config = {
   // request 使用
   // 监听 Transfer-Encoding Chunk Received 事件
   // 当接收到新的 chunk 时触发
-  onChunkReceived: (response) => { /* ... */ },
+  onChunkReceived: (response) => {
+    /* ... */
+  },
 
   // Request 使用
   // 是否可在 headers 中编辑 cookie
@@ -550,7 +594,7 @@ const config = {
 
   // upload 使用
   // 文件类型
-  fileType: 'image', // image, video, audio
+  fileType: "image", // image, video, audio
 
   // upload 使用
   // 文件对象
@@ -561,11 +605,11 @@ const config = {
   //
   // download 使用
   // 文件下载后存储的本地路径
-  filePath: '/fake/path',
+  filePath: "/fake/path",
 
   // upload 使用
   // 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
-  name: 'file',
+  name: "file",
 
   // upload 使用
   // 一个对象，会作为 HTTP 请求中其它额外的 form data
@@ -574,32 +618,44 @@ const config = {
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgress: (response) => { /* ... */ },
+  onDownloadProgress: (response) => {
+    /* ... */
+  },
 
   // download 使用
   // 下载进度变化时触发
   // 优先级 onDownloadProgress > onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onDownloadProgressUpdate: (response) => { /* ... */ },
+  onDownloadProgressUpdate: (response) => {
+    /* ... */
+  },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgress: (response) => { /* ... */ },
+  onUploadProgress: (response) => {
+    /* ... */
+  },
 
   // upload 使用
   // 上传进度变化时触发
   // 优先级 onUploadProgress > onUploadProgressUpdate > onProgress > onProgressUpdate
-  onUploadProgressUpdate: (response) => { /* ... */ },
+  onUploadProgressUpdate: (response) => {
+    /* ... */
+  },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgress: (response) => { /* ... */ },
+  onProgress: (response) => {
+    /* ... */
+  },
 
   // upload / download 使用
   // 上传/下载进度变化时触发
   // 优先级 onUploadProgress / onDownloadProgress > onUploadProgressUpdate / onDownloadProgressUpdate > onProgress > onProgressUpdate
-  onProgressUpdate: (response) => { /* ... */ },
+  onProgressUpdate: (response) => {
+    /* ... */
+  },
 };
 ```
 
@@ -616,7 +672,7 @@ then 的回调收到的响应对象包含以下字段。
 ```typescript
 const response = {
   // `errMsg` 是平台返回的消息，成功时通常是 `request:ok`、`uploadFile:ok` 这类状态消息
-  errMsg: '',
+  errMsg: "",
 
   // `errno` 是可选的错误代码
   errno: 0,
@@ -634,7 +690,7 @@ const response = {
   status: 200,
 
   // `statusText` 是由状态码反查得到的 HTTP 状态信息，uni.request 不返回该字段
-  statusText: 'OK',
+  statusText: "OK",
 
   // `headers` 是服务器响应头
   // 可以使用方括号语法访问，例如: `response.headers['content-type']`
@@ -658,12 +714,12 @@ const response = {
   // download 特有
   // 临时本地文件路径
   // 没传入 filePath 指定文件存储路径时会返回，下载后的文件会存储到一个临时文件
-  tempFilePath: '',
+  tempFilePath: "",
 
   // download 特有
   // 用户本地文件路径
   // 传入 filePath 时会返回，跟传入的 filePath 一致
-  filePath: '',
+  filePath: "",
 };
 ```
 
@@ -756,7 +812,7 @@ un.interceptors.request.use(
   function (error) {
     // 对请求错误做些什么
     return Promise.reject(error);
-  }
+  },
 );
 
 // 添加响应拦截器
@@ -770,7 +826,7 @@ un.interceptors.response.use(
     // 超出 2xx 范围的状态码都会触发该函数
     // 对响应错误做点什么
     return Promise.reject(error);
-  }
+  },
 );
 ```
 
@@ -855,7 +911,7 @@ un.interceptors.request.use(
     return config;
   },
   undefined,
-  { synchronous: true }
+  { synchronous: true },
 );
 ```
 
@@ -871,7 +927,7 @@ un.interceptors.request.use(
     return config;
   },
   undefined,
-  { runWhen: onGetCall }
+  { runWhen: onGetCall },
 );
 ```
 
@@ -965,15 +1021,15 @@ un.get("/user/12345").catch((error) => {
 
 `UnError` 的 `code` 字段标出错误来源，可以在 `catch` 里按它分支。
 
-| `code` | 场景 |
-| --- | --- |
-| `ERR_NETWORK` | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
-| `ETIMEDOUT` | 请求超时，`errMsg` 为 `request:fail timeout` |
-| `ERR_CANCELED` | 主动取消，`errMsg` 为 `request:fail abort` |
-| `ERR_BAD_REQUEST` | 状态码 4xx，且 `validateStatus` 返回 `false` |
-| `ERR_BAD_RESPONSE` | 其它状态码（5xx 等），且 `validateStatus` 返回 `false` |
-| `ERR_INVALID_URL` | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式 |
-| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错（新增于 v1.1.0） |
+| `code`                 | 场景                                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| `ERR_NETWORK`          | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
+| `ETIMEDOUT`            | 请求超时，`errMsg` 为 `request:fail timeout`                                                   |
+| `ERR_CANCELED`         | 主动取消，`errMsg` 为 `request:fail abort`                                                     |
+| `ERR_BAD_REQUEST`      | 状态码 4xx，且 `validateStatus` 返回 `false`                                                   |
+| `ERR_BAD_RESPONSE`     | 其它状态码（5xx 等），且 `validateStatus` 返回 `false`                                         |
+| `ERR_INVALID_URL`      | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式                                        |
+| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错（新增于 v1.1.0）                                       |
 
 这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出，其中 `ECONNREFUSED` 从 v0.24.0 起提供。
 
@@ -1087,7 +1143,7 @@ un.post(
   },
   {
     cancelToken: source.token,
-  }
+  },
 );
 // 取消请求（信息是可选的）
 source.cancel("Operation canceled by the user.");
@@ -1263,7 +1319,7 @@ un.interceptors.response.use(
   (response) => response,
   // 直接返回错误，不再需要使用 catch 来捕获
   // 需要注意返回值可能是 UnError 类型
-  (error) => error
+  (error) => error,
 );
 ```
 

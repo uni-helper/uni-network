@@ -6,11 +6,11 @@
 
 ## 环境要求
 
-| 依赖 | 版本 |
-| --- | --- |
-| Node.js | `>=18`，推荐 LTS；仓库 `.node-version` 为 `26` |
-| 包管理器 | `pnpm@12.9.1`（通过 Corepack 启用，不要混用 npm/yarn） |
-| Git | 配置 `core.autocrlf false`、`core.eol lf`，行尾统一为 LF |
+| 依赖     | 版本                                                     |
+| -------- | -------------------------------------------------------- |
+| Node.js  | `>=18`，推荐 LTS；仓库 `.node-version` 为 `26`           |
+| 包管理器 | `pnpm@12.16.1`（通过 Corepack 启用，不要混用 npm/yarn）  |
+| Git      | 配置 `core.autocrlf false`、`core.eol lf`，行尾统一为 LF |
 
 仓库使用 pnpm workspace，所有命令都基于 pnpm。
 
@@ -44,17 +44,17 @@ pnpm install
 
 ## 常用脚本
 
-| 命令 | 说明 |
-| --- | --- |
-| `pnpm dev` | 以 watch 模式构建 `packages/*`，便于联调 |
-| `pnpm build` | 构建全部子包 |
-| `pnpm test` | 运行单元测试（Vitest） |
-| `pnpm test:coverage` | 运行测试并输出覆盖率 |
-| `pnpm typecheck` | TypeScript 类型检查（`tsc --noEmit`） |
-| `pnpm check` | 用 Biome 检查并自动修复格式与 lint 问题 |
-| `pnpm docs:dev` | 本地启动文档站点 |
-| `pnpm docs:build` | 构建文档站点 |
-| `pnpm play:dev:h5` | 构建 `packages/*` 后，以 H5 模式启动 playground |
+| 命令                      | 说明                                                  |
+| ------------------------- | ----------------------------------------------------- |
+| `pnpm dev`                | 以 watch 模式构建 `packages/*`，便于联调              |
+| `pnpm build`              | 构建全部子包                                          |
+| `pnpm test`               | 运行单元测试（Vitest）                                |
+| `pnpm test:coverage`      | 运行测试并输出覆盖率                                  |
+| `pnpm typecheck`          | TypeScript 类型检查（`tsc --noEmit`）                 |
+| `pnpm check`              | 用 Biome 检查并自动修复格式与 lint 问题               |
+| `pnpm docs:dev`           | 本地启动文档站点                                      |
+| `pnpm docs:build`         | 构建文档站点                                          |
+| `pnpm play:dev:h5`        | 构建 `packages/*` 后，以 H5 模式启动 playground       |
 | `pnpm play:dev:mp-weixin` | 构建 `packages/*` 后，以微信小程序模式启动 playground |
 
 提交前请确保 `pnpm build`、`pnpm test`、`pnpm typecheck` 均通过，CI（见下文）会跑 ubuntu/macos/windows × Node 22/24/26 的矩阵，除这三项外还包括 `pnpm check` 和 playground 的 H5 / 微信小程序构建。

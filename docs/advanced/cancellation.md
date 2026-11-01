@@ -98,7 +98,7 @@ un.post(
   },
   {
     cancelToken: source.token,
-  }
+  },
 );
 // 取消请求（信息是可选的）
 source.cancel("Operation canceled by the user.");

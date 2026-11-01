@@ -76,15 +76,15 @@ un.get("/user/12345").catch((error) => {
 
 `UnError` 的 `code` 字段标出错误来源，可以在 `catch` 里按它分支。
 
-| `code` | 场景 |
-| --- | --- |
-| `ERR_NETWORK` | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
-| `ETIMEDOUT` | 请求超时，`errMsg` 为 `request:fail timeout` |
-| `ERR_CANCELED` | 主动取消，`errMsg` 为 `request:fail abort` |
-| `ERR_BAD_REQUEST` | 状态码 4xx，且 `validateStatus` 返回 `false` |
-| `ERR_BAD_RESPONSE` | 其它状态码（5xx 等），且 `validateStatus` 返回 `false` |
-| `ERR_INVALID_URL` | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式 |
-| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错（新增于 <Badge text="v1.1.0" type="info" />） |
+| `code`                 | 场景                                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| `ERR_NETWORK`          | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
+| `ETIMEDOUT`            | 请求超时，`errMsg` 为 `request:fail timeout`                                                   |
+| `ERR_CANCELED`         | 主动取消，`errMsg` 为 `request:fail abort`                                                     |
+| `ERR_BAD_REQUEST`      | 状态码 4xx，且 `validateStatus` 返回 `false`                                                   |
+| `ERR_BAD_RESPONSE`     | 其它状态码（5xx 等），且 `validateStatus` 返回 `false`                                         |
+| `ERR_INVALID_URL`      | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式                                        |
+| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错（新增于 <Badge text="v1.1.0" type="info" />）          |
 
 这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出，其中 `ECONNREFUSED` 从 <Badge text="v0.24.0" type="info" /> 起提供。
 

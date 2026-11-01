@@ -3,18 +3,53 @@
 # @uni-helper/uni-network
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/logo.svg" alt="logo" width="256" height="256" />
+  <img
+    src="https://cdn.jsdelivr.net/gh/uni-helper/uni-network@main/logo.svg"
+    alt="logo"
+    width="256"
+    height="256"
+  >
 </p>
 
 <p align="center">
-  <a href="https://github.com/uni-helper/uni-network/blob/main/LICENSE"><img src="https://img.shields.io/github/license/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="License"></a>
-  <a href="https://github.com/uni-helper/uni-network/stargazers"><img src="https://img.shields.io/github/stars/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="GitHub Stars"></a>
-  <a href="https://npmx.dev/package/@uni-helper/uni-network"><img src="https://img.shields.io/npm/v/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="NPM version"></a>
-  <a href="https://npmx.dev/package/@uni-helper/uni-network"><img src="https://img.shields.io/npm/dm/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee" alt="npm downloads"></a>
-  <a href="https://app.netlify.com/sites/uni-network/deploys"><img src="https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status" alt="Netlify"></a>
+  <a href="https://github.com/uni-helper/uni-network/blob/main/LICENSE"
+    ><img
+      src="https://img.shields.io/github/license/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="License"
+    ></a
+  >
+  <a href="https://github.com/uni-helper/uni-network/stargazers"
+    ><img
+      src="https://img.shields.io/github/stars/uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="GitHub Stars"
+    ></a
+  >
+  <a href="https://npmx.dev/package/@uni-helper/uni-network"
+    ><img
+      src="https://img.shields.io/npm/v/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="NPM version"
+    ></a
+  >
+  <a href="https://npmx.dev/package/@uni-helper/uni-network"
+    ><img
+      src="https://img.shields.io/npm/dm/@uni-helper/uni-network?style=for-the-badge&labelColor=005947&color=eee"
+      alt="npm downloads"
+    ></a
+  >
+  <a href="https://app.netlify.com/sites/uni-network/deploys"
+    ><img
+      src="https://api.netlify.com/api/v1/badges/a00f6b6f-9d1d-4788-aa78-a7db02bac5f0/deploy-status"
+      alt="Netlify"
+    ></a
+  >
 </p>
 <p align="center">
-  <a href="https://github.com/ModyQyW"><img src="https://img.shields.io/badge/Author%20%26%20Maintainer-ModyQyW-blue?style=for-the-badge" alt="Author & Maintainer"></a>
+  <a href="https://github.com/ModyQyW"
+    ><img
+      src="https://img.shields.io/badge/Author%20%26%20Maintainer-ModyQyW-blue?style=for-the-badge"
+      alt="Author & Maintainer"
+    ></a
+  >
 </p>
 
 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端。要求 `node>=18`。
@@ -55,8 +90,8 @@ un.get("/user?ID=12345").then((response) => {
 
 ## 包
 
-| 包名 | 说明 |
-| --- | --- |
+| 包名                                                                        | 说明                                             |
+| --------------------------------------------------------------------------- | ------------------------------------------------ |
 | [@uni-helper/uni-network](https://npmx.dev/package/@uni-helper/uni-network) | 为 `uni-app` 打造的基于 `Promise` 的 HTTP 客户端 |
 
 ## 参与贡献

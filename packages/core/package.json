@@ -110,7 +110,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@12.9.1",
+  "packageManager": "pnpm@12.16.1",
   "devEngines": {
     "runtime": {
       "name": "node",
@@ -119,7 +119,7 @@
     },
     "packageManager": {
       "name": "pnpm",
-      "version": "12.9.1",
+      "version": "12.16.1",
       "onFail": "warn"
     }
   },

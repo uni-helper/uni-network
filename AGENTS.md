@@ -5,7 +5,7 @@
 ## 项目概况
 
 - TypeScript ~6.0.3，ESM 优先，构建目标 ES2017。开发机用 `.node-version` 固定 Node 26，同一个版本写在 `devEngines.runtime`，不匹配只警告；发布包的 `engines` 是 `node>=18`，面向使用者。改其中一个时把另一个一起改。
-- pnpm@12.9.1 由 `packageManager` / `devEngines.packageManager` 固定，先跑 `corepack enable`。依赖版本集中在 `pnpm-workspace.yaml` 的 `catalog:`，各 package.json 引用 `catalog:`，不写具体范围。
+- pnpm@12.16.1 由 `packageManager` / `devEngines.packageManager` 固定，先跑 `corepack enable`。依赖版本集中在 `pnpm-workspace.yaml` 的 `catalog:`，各 package.json 引用 `catalog:`，不写具体范围。
 - 工具链：tsdown 负责构建（ESM + CJS + dts），Biome 管 lint 和格式化，Vitest 跑测试，lerna-lite 管版本和 CHANGELOG。
 - 工作区成员：`packages/core` 是发布的包；`docs` 是 VitePress 站点，部署在 Netlify 和 Cloudflare Pages，另有 https://uni-helper.js.org/uni-network；`playground` 是 H5 和微信小程序的调试工程。
 - 包入口：`.` 和 `./composables`，各带 ESM / CJS / dts 三套产物，发布内容为 `files: ["dist"]`。
@@ -34,20 +34,20 @@ pnpm release               # lerna-lite 按 Conventional Commits 定版本，只
 
 源码全在 `packages/core/src`：
 
-| 模块 | 职责 |
-| --- | --- |
-| `index.ts` | 创建默认实例 `un`，挂上 `CancelToken` / `isCancel` / `UnError` / `isUnError` / `HttpStatusCode` / `mergeConfig` / `all` / `VERSION` 等静态属性，并重新导出所有内容 |
-| `core/Un.ts` | 实例类：`request`、各方法别名（`get` / `post` / …）、`create()`、`getUri`；`download` / `upload` 别名强制 `adapter: "download"` / `"upload"` |
-| `core/dispatchRequest.ts` | 按 config 选适配器并派发，成功响应和带响应的失败都写上 `duration` |
-| `core/settle.ts` | 按 `validateStatus` 决定 resolve 还是 reject |
-| `core/UnInterceptorManager.ts` | 请求 / 响应拦截器（`use` / `eject` / `clear`，`synchronous` 与 `runWhen` 选项）；id 自增不复用 |
-| `core/UnCancelToken.ts`、`core/UnCanceledError.ts` | CancelToken 取消 |
-| `core/UnError.ts`、`core/isUnError.ts`、`core/isUnCancel.ts` | 错误类型与类型守卫；`UnError.from` 会把被包装错误的堆栈接在 `Caused by: ` 后面，拼装逻辑在 `core/causeStack.ts`（内部模块，不从入口导出） |
-| `adapters/request.ts`、`adapters/upload.ts`、`adapters/download.ts` | 把 `uni.request` / `uni.uploadFile` / `uni.downloadFile` 包成 Promise 响应 |
-| `defaults/index.ts` | 内置默认配置（`adapter: "request"`） |
-| `utils/` | `buildUrl` / `buildFullPath`、各适配器的配置构造器（`buildRequestConfig` 等）、`extend` / `forEach` / `mergeConfig`；`assertParamsAcyclic` 只在库内使用，不从入口导出 |
-| `types/` | `UnConfig` / `UnResponse` / `UnTask` 等全部公开类型 |
-| `composables.ts` | `useUn`，用 vue-demi 同时支持 vue2 和 vue3，`@vueuse/core` 是可选依赖 |
+| 模块                                                                | 职责                                                                                                                                                                  |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index.ts`                                                          | 创建默认实例 `un`，挂上 `CancelToken` / `isCancel` / `UnError` / `isUnError` / `HttpStatusCode` / `mergeConfig` / `all` / `VERSION` 等静态属性，并重新导出所有内容    |
+| `core/Un.ts`                                                        | 实例类：`request`、各方法别名（`get` / `post` / …）、`create()`、`getUri`；`download` / `upload` 别名强制 `adapter: "download"` / `"upload"`                          |
+| `core/dispatchRequest.ts`                                           | 按 config 选适配器并派发，成功响应和带响应的失败都写上 `duration`                                                                                                     |
+| `core/settle.ts`                                                    | 按 `validateStatus` 决定 resolve 还是 reject                                                                                                                          |
+| `core/UnInterceptorManager.ts`                                      | 请求 / 响应拦截器（`use` / `eject` / `clear`，`synchronous` 与 `runWhen` 选项）；id 自增不复用                                                                        |
+| `core/UnCancelToken.ts`、`core/UnCanceledError.ts`                  | CancelToken 取消                                                                                                                                                      |
+| `core/UnError.ts`、`core/isUnError.ts`、`core/isUnCancel.ts`        | 错误类型与类型守卫；`UnError.from` 会把被包装错误的堆栈接在 `Caused by: ` 后面，拼装逻辑在 `core/causeStack.ts`（内部模块，不从入口导出）                             |
+| `adapters/request.ts`、`adapters/upload.ts`、`adapters/download.ts` | 把 `uni.request` / `uni.uploadFile` / `uni.downloadFile` 包成 Promise 响应                                                                                            |
+| `defaults/index.ts`                                                 | 内置默认配置（`adapter: "request"`）                                                                                                                                  |
+| `utils/`                                                            | `buildUrl` / `buildFullPath`、各适配器的配置构造器（`buildRequestConfig` 等）、`extend` / `forEach` / `mergeConfig`；`assertParamsAcyclic` 只在库内使用，不从入口导出 |
+| `types/`                                                            | `UnConfig` / `UnResponse` / `UnTask` 等全部公开类型                                                                                                                   |
+| `composables.ts`                                                    | `useUn`，用 vue-demi 同时支持 vue2 和 vue3，`@vueuse/core` 是可选依赖                                                                                                 |
 
 测试和源码放在一起（`*.test.ts` 紧挨着对应源码），在仓库根目录跑；vitest 配置只设了 `clearMocks: true`。
 
@@ -57,16 +57,16 @@ pnpm release               # lerna-lite 按 Conventional Commits 定版本，只
 
 每个页面都有一个对应的源码出处：
 
-| 文档页 | 对应源码 |
-| --- | --- |
-| `docs/api/request-config.md` | `types/config.ts` 和三个 `utils/build*Config.ts` 构造器 |
-| `docs/api/response-schema.md` | `types/response.ts`，以及各适配器拼出来的 `response` 对象 |
-| `docs/api/config-defaults.md` | `defaults/index.ts` 和 `index.ts` 里的 `createInstance` |
-| `docs/api/introduction.md`、`docs/api/instance.md` | `core/Un.ts` 的方法和 `index.ts` 挂上去的静态属性 |
-| `docs/advanced/handling-errors.md` | `core/UnError.ts`、`core/settle.ts`，以及各适配器的 `fail` 分支 |
-| `docs/advanced/cancellation.md` | `core/UnCancelToken.ts`、`core/dispatchRequest.ts`，以及各适配器的取消处理 |
-| `docs/advanced/composition-api.md` | `composables.ts` |
-| `docs/other/build.md` | `packages/core/tsdown.config.ts` |
+| 文档页                                             | 对应源码                                                                   |
+| -------------------------------------------------- | -------------------------------------------------------------------------- |
+| `docs/api/request-config.md`                       | `types/config.ts` 和三个 `utils/build*Config.ts` 构造器                    |
+| `docs/api/response-schema.md`                      | `types/response.ts`，以及各适配器拼出来的 `response` 对象                  |
+| `docs/api/config-defaults.md`                      | `defaults/index.ts` 和 `index.ts` 里的 `createInstance`                    |
+| `docs/api/introduction.md`、`docs/api/instance.md` | `core/Un.ts` 的方法和 `index.ts` 挂上去的静态属性                          |
+| `docs/advanced/handling-errors.md`                 | `core/UnError.ts`、`core/settle.ts`，以及各适配器的 `fail` 分支            |
+| `docs/advanced/cancellation.md`                    | `core/UnCancelToken.ts`、`core/dispatchRequest.ts`，以及各适配器的取消处理 |
+| `docs/advanced/composition-api.md`                 | `composables.ts`                                                           |
+| `docs/other/build.md`                              | `packages/core/tsdown.config.ts`                                           |
 
 ## 约定
 
