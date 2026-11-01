@@ -28,4 +28,31 @@ describe("core::UnInterceptorManager", () => {
     expect((manager as any).handlers).toHaveLength(2);
     expect((manager as any).handlers[0]).toBeNull();
   });
+
+  it("should not reuse an id after trailing handlers are trimmed", () => {
+    // https://github.com/axios/axios/pull/11139
+    const manager = new UnInterceptorManager<string>();
+    const first = manager.use((value) => value);
+    manager.eject(first);
+
+    const second = manager.use((value) => value);
+    expect(second).not.toBe(first);
+
+    // 拿旧 id 再 eject 一次,不能误删新拦截器
+    manager.eject(first);
+    let called = 0;
+    manager.each(() => {
+      called += 1;
+    });
+    expect(called).toBe(1);
+  });
+
+  it("should eject by a numeric string id from untyped callers", () => {
+    const manager = new UnInterceptorManager<string>();
+    const id = manager.use((value) => value);
+
+    manager.eject(String(id) as any);
+
+    expect((manager as any).handlers).toHaveLength(0);
+  });
 });
