@@ -1,4 +1,5 @@
 import type { UnConfig, UnData, UnResponse, UnTask } from "../types";
+import { appendCauseStack } from "./causeStack";
 
 /**
  * 请求错误类。网络失败、超时、状态码不在 validateStatus 范围内等
@@ -111,6 +112,8 @@ export class UnError<T = UnData, D = UnData> extends Error {
     );
     if (error && unError.cause == null) {
       unError.cause = error;
+      // 只读 stack 的上报工具靠这一段才能看到根因
+      appendCauseStack(unError, error);
     }
     unError.name = error?.name ?? "Error";
     // @ts-expect-error no types

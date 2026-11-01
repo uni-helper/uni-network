@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CAUSED_BY_SEPARATOR, getCauseStackIndex } from "./causeStack";
 import { UnError } from "./UnError";
 
 describe("core::UnError", () => {
@@ -119,4 +120,25 @@ it("should keep cause non-enumerable to avoid circular JSON failures", () => {
   expect(error.cause).toBe(inner);
   expect(JSON.parse(JSON.stringify(error)).message).toBe("inner");
   expect(Object.keys(error)).not.toContain("cause");
+});
+
+it("should append the wrapped error stack under a Caused by marker", () => {
+  const inner = new Error("inner");
+  const causeSection = CAUSED_BY_SEPARATOR + inner.stack;
+
+  const error = UnError.from(inner);
+  const stack = error.stack as string;
+
+  expect(stack.endsWith(causeSection)).toBe(true);
+  expect(getCauseStackIndex(error, stack)).toBe(
+    stack.length - causeSection.length,
+  );
+});
+
+it("should not treat a stack without the appended section as a cause section", () => {
+  const error = UnError.from(new Error("inner"));
+
+  // 用户改写过的 stack 里可能出现相同字样，只认自己拼进去的那一段
+  const rewritten = `UnError: inner${CAUSED_BY_SEPARATOR}something else`;
+  expect(getCauseStackIndex(error, rewritten)).toBe(-1);
 });

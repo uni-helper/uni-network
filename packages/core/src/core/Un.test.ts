@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { CAUSED_BY_SEPARATOR } from "./causeStack";
 import { Un } from "./Un";
+import { UnError } from "./UnError";
 
 describe("Axios", () => {
   it("should not throw if the config argument is omitted", () => {
@@ -94,5 +96,24 @@ describe("request error stack decoration", () => {
     });
 
     await expect(un.request("/")).rejects.toThrow("boom");
+  });
+
+  it("should put caller frames ahead of the inlined cause stack", async () => {
+    // https://github.com/axios/axios/pull/11142
+    const un = new Un();
+    const inner = new Error("inner cause");
+    const causeSection = CAUSED_BY_SEPARATOR + inner.stack;
+
+    const error = await un
+      .request({
+        url: "https://example.com",
+        adapter: async () => {
+          throw UnError.from(inner);
+        },
+      } as any)
+      .catch((reason) => reason);
+
+    expect(error.stack.endsWith(causeSection)).toBe(true);
+    expect(error.stack.split(CAUSED_BY_SEPARATOR)).toHaveLength(2);
   });
 });

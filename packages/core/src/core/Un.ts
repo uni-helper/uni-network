@@ -1,5 +1,6 @@
 import type { UnConfig, UnData, UnResponse } from "../types";
 import { buildFullPath, buildUrl, mergeConfig } from "../utils";
+import { getCauseStackIndex } from "./causeStack";
 import { dispatchRequest } from "./dispatchRequest";
 import {
   UnInterceptorManager,
@@ -207,8 +208,18 @@ export class Un<T = UnData, D = UnData> {
               secondNewlineIndex === -1
                 ? ""
                 : stack.slice(secondNewlineIndex + 1);
-            if (!String(error.stack).endsWith(stackWithoutTwoTopLines)) {
-              error.stack += `\n${stack}`;
+            // UnError.from 可能已经把被包装错误的 stack 拼在末尾，
+            // 调用点堆栈要插在它前面，否则只读 stack 的监控会把根因当成调用位置
+            const currentStack = String(error.stack);
+            const causeIndex = getCauseStackIndex(error, currentStack);
+            const stackHead =
+              causeIndex === -1
+                ? currentStack
+                : currentStack.slice(0, causeIndex);
+            const causeSection =
+              causeIndex === -1 ? "" : currentStack.slice(causeIndex);
+            if (!stackHead.endsWith(stackWithoutTwoTopLines)) {
+              error.stack = `${stackHead}\n${stack}${causeSection}`;
             }
           }
         } catch (_) {
