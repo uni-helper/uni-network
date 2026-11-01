@@ -56,7 +56,7 @@ const response = {
 };
 ```
 
-`duration` 是 <Badge text="v1.1.0" type="info" /> 新增的字段，当前未发布。
+`duration` 是 <Badge text="v1.1.0" type="info" /> 新增的字段。
 
 当使用 then 时，回调会收到这样的响应：
 
