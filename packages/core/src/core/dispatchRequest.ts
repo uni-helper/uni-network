@@ -16,11 +16,16 @@ const throwIfCancellationRequested = <T = UnData, D = UnData>(
   }
 };
 
+// 系统时间中途回拨会让差值为负，夹到 0
+const elapsedSince = (start: number) => Math.max(0, Date.now() - start);
+
 /**
  * 拦截器链的最后一环：选好适配器真正发请求。
  *
  * 请求前和响应后都会再检查一次取消状态；如果是请求期间被取消，
  * 就直接抛 UnCanceledError，不再抛底层 API 的原始错误。
+ *
+ * 成功响应和带响应的失败都会写上 duration，用来评估适配器本身的耗时。
  */
 export const dispatchRequest = <T = UnData, D = UnData>(
   config: UnConfig<T, D>,
@@ -34,14 +39,23 @@ export const dispatchRequest = <T = UnData, D = UnData>(
     adapter = config.adapter;
   }
 
+  const start = Date.now();
+
   return adapter(config).then(
     (response) => {
       throwIfCancellationRequested(config);
+
+      response.duration = elapsedSince(start);
+
       return response;
     },
     (error) => {
       if (!isUnCancel(error)) {
         throwIfCancellationRequested(config);
+
+        if (error?.response) {
+          error.response.duration = elapsedSince(start);
+        }
       }
       throw error;
     },

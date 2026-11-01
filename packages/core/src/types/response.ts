@@ -29,6 +29,14 @@ export interface UnResponse<T = UnData, D = UnData> {
   data?: T;
 
   /**
+   * 适配器执行耗时，单位毫秒
+   *
+   * 只统计适配器执行期间，不含拦截器和后处理。请求失败但拿到了响应时，
+   * 在 `error.response.duration` 上也能读到
+   */
+  duration?: number;
+
+  /**
    * Request 特有
    *
    * 服务器提供的 cookies 数据
