@@ -65,6 +65,14 @@ pnpm install
 - 新增代码请补类型；对外 API 使用 JSDoc 说明用途、参数与边界情况。
 - 修复 bug 或新增能力时，优先补对应的单元测试（放在对应源码旁边、`*.test.ts` 命名）。
 
+## 文档
+
+- 文档站在 `docs/`，左侧导航在 `docs/.vitepress/config.ts` 里手动维护，新增页面要同时加进 `sidebar`。
+- 描述以源码为准：请求配置看 `packages/core/src/types/config.ts`，响应结构看 `packages/core/src/types/response.ts`，默认值看 `packages/core/src/defaults/index.ts`，错误码看 `packages/core/src/core/UnError.ts` 与各自适配器。
+- `packages/core/README.md` 和 `docs/` 覆盖同一批内容，改动用户可见行为时两边一起改。
+- 文档改动请本地跑 `pnpm docs:build`，确认页面能构建。
+- 不要手改 `CHANGELOG.md` 和版本号，[Lerna](./lerna.json) 在发布时根据提交信息生成。
+
 ## 提交规范
 
 仓库基于 [Conventional Commits](https://www.conventionalcommits.org/zh-hans/) 生成 CHANGELOG 与版本发布，提交信息必须遵循：
@@ -102,7 +110,7 @@ docs: 补充拦截器使用示例
 1. 基于 `main` 创建特性分支：`feat/xxx`、`fix/xxx`、`docs/xxx`。
 2. 保持改动聚焦，一个 PR 只解决一件事；较大的改动先在 issue 中达成共识。
 3. 确保本地 `pnpm check`、`pnpm test`、`pnpm typecheck`、`pnpm build` 均通过。
-4. 如改动用户可见行为，更新 `docs/` 下相关文档。
+4. 如改动用户可见行为，同时更新 `docs/` 和 `packages/core/README.md`。
 5. PR 描述写清「改了什么 / 为什么改 / 如何验证」，关联相关 issue（如 `Closes #123`）。
 6. 等待 CI 通过与维护者 review，按反馈在原分支上继续提交。
 
