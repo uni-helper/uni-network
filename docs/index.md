@@ -7,14 +7,14 @@ name: 'Uni Network'
 tagline: 为 uni-app 打造的基于 Promise 的 HTTP 客户端。
 actions:
 - theme: brand
-text: 起步 →
-link: /guide/installation
+  text: 起步 →
+  link: /guide/installation
 - theme: alt
-text: 介绍
-link: /guide/introduction
-image:
-src: /logo.svg
-alt: Uni Network
+  text: 介绍
+  link: /guide/introduction
+  image:
+  src: /logo.svg
+  alt: Uni Network
 
 features:
 - title: 📝 支持 Promise API
