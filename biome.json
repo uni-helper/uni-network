@@ -12,7 +12,8 @@
       "!**/package.json",
       "!**/lerna.json",
       "!**/coverage",
-      "!**/banner.svg"
+      "!**/banner.svg",
+      "!**/index.md"
     ]
   },
   "assist": {
