@@ -31,12 +31,15 @@
       - [GET 请求](#get-请求)
       - [使用 async/await 的 GET 请求](#使用-asyncawait-的-get-请求)
       - [POST 请求](#post-请求)
+      - [上传文件](#上传文件)
+      - [下载文件](#下载文件)
       - [并发请求](#并发请求)
   - [API](#api)
     - [API](#api-1)
       - [`un(config)`](#unconfig)
       - [`un(url[, config])`](#unurl-config)
       - [请求别名](#请求别名)
+    - [挂载在 `un` 上的属性](#挂载在-un-上的属性)
     - [实例](#实例)
       - [`un.create([config])`](#uncreateconfig)
       - [实例方法](#实例方法)
@@ -53,6 +56,8 @@
       - [拦截器选项](#拦截器选项)
       - [多个拦截器](#多个拦截器)
     - [错误处理](#错误处理)
+      - [错误码](#错误码)
+      - [响应耗时与堆栈](#响应耗时与堆栈)
     - [取消请求](#取消请求)
       - [AbortController](#abortcontroller)
       - [CancelToken](#canceltoken)
@@ -79,7 +84,7 @@
 
 `@uni-helper/uni-network` 是一个为 [uni-app](https://uniapp.dcloud.net.cn/) 打造的 [基于 Promise](https://javascript.info/promise-basics) 的 HTTP 客户端。
 
-`@uni-helper/uni-network` 灵感和代码绝大部分源于 `axios@0.27.2`，功能包括：
+`@uni-helper/uni-network` 最初的灵感和代码绝大部分源于 `axios@0.27.2`，功能包括：
 
 - 默认请求使用 [uni.request](https://uniapp.dcloud.net.cn/api/request/request.html)
 - 上传文件使用 [uni.uploadFile](https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile)
@@ -106,7 +111,7 @@
   yarn add @uni-helper/uni-network
   ```
 
-  > 如果你正在使用 yarn v2+，请参考 [文档](https://yarnpkg.com/configuration/yarnrc/#nodeLinker) 设置 `nodeLinker` 为 `node_modules`。
+  > 如果你正在使用 yarn v2 或以上版本，请参考 [文档](https://yarnpkg.com/configuration/yarnrc/#nodeLinker) 设置 `nodeLinker` 为 `node_modules`。
 
 - pnpm
 
@@ -191,6 +196,54 @@ un.post("/user", {
   .finally(() => {});
 ```
 
+#### 上传文件
+
+`un.upload` 走 `uni.uploadFile`。`filePath` 和 `files` 必填一个（`files` 不支持小程序），`name` 是服务器读取文件的 key。
+
+```typescript
+import { un } from "@uni-helper/uni-network";
+
+uni.chooseImage({
+  success: (res) => {
+    un.upload("https://example.com/upload", {
+      filePath: res.tempFilePaths[0],
+      name: "file",
+      // 会作为额外的 form data 一起提交
+      formData: { userId: "12345" },
+    })
+      .then((response) => {
+        // upload 适配器的 data 是服务器返回的字符串
+        console.log(response.status, response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+});
+```
+
+#### 下载文件
+
+`un.download` 走 `uni.downloadFile`。不传 `filePath` 时文件存到临时路径，路径在 `response.tempFilePath`；传了 `filePath` 则原样返回在 `response.filePath`。
+
+```typescript
+import { un } from "@uni-helper/uni-network";
+
+// 下载到临时路径
+un.download("https://example.com/file.pdf").then((response) => {
+  console.log(response.tempFilePath);
+});
+
+// 下载到指定路径
+un.download("https://example.com/file.pdf", {
+  filePath: "/user/downloads/file.pdf",
+}).then((response) => {
+  console.log(response.filePath);
+});
+```
+
+上传和下载都可以在配置里传进度回调，见[请求配置](#请求配置)。
+
 #### 并发请求
 
 ```typescript
@@ -259,6 +312,19 @@ un("/user/12345");
 - `un.post(url[, data[, config]])`
 - `un.put(url[, data[, config]])`
 - `un.patch(url[, data[, config]])`
+
+#### 挂载在 `un` 上的属性
+
+下面这些不用额外导入，直接从 `un` 上取：
+
+- `un.create(config)`：创建实例，见[实例](#实例)
+- `un.all(promises)`：`Promise.all` 的别名
+- `un.VERSION`：当前版本号，来自包的 `package.json`
+- `un.Un`：实例类，需要继承时使用
+- `un.mergeConfig(config1, config2)`：合并两份配置，用的就是发请求时合并实例默认配置和请求配置的规则
+- `un.UnError` / `un.isUnError`：错误类和类型守卫，见[错误处理](#错误处理)
+- `un.CanceledError` / `un.CancelToken` / `un.isCancel`：取消相关，见[取消请求](#取消请求)
+- `un.HttpStatusCode`：HTTP 状态码常量
 
 ### 实例
 
@@ -330,6 +396,7 @@ const config = {
   // `params` 是与请求一起发送的 URL 参数
   // 必须是一个普通对象或一个 URLSearchParams 对象
   // 小程序环境通常没有 URLSearchParams，需要自行注入 polyfill，例如 core-js
+  // 不能有循环引用，序列化前会检查并抛出 ERR_BAD_OPTION_VALUE，自定义 paramsSerializer 也一样
   params: {
     ID: '12345',
   },
@@ -548,7 +615,7 @@ const response = {
   // `errno` 是可选的错误代码
   errno: 0,
 
-  // `profile` 是可选的调试信息
+  // `profile` 是可选的调试信息，由 request 和 download 适配器透传，内容由平台决定
   profile: {},
 
   // `config` 是 `un` 请求的配置信息
@@ -567,8 +634,15 @@ const response = {
   // 可以使用方括号语法访问，例如: `response.headers['content-type']`
   headers: {},
 
+  // 适配器执行耗时，单位毫秒
+  // 只统计适配器执行期间，不含拦截器和后处理
+  // 请求失败但拿到了响应时，在 `error.response.duration` 上也能读到
+  duration: 0,
+
   // `data` 是服务器提供的响应数据
-  // download 适配器会把 `{ tempFilePath, filePath }` 放进 `data`
+  // request 适配器是 uni.request 返回的 data，类型受 dataType、responseType 影响
+  // upload 适配器是服务器返回的字符串
+  // download 适配器会把 `{ tempFilePath, filePath }` 放进这里
   data: {},
 
   // request 特有
@@ -733,6 +807,8 @@ const responseInterceptor = un.interceptors.response.use(() => {
 un.interceptors.response.eject(responseInterceptor);
 ```
 
+`use` 返回的 id 由自增计数器分配，不会复用。移除拦截器后，之前拿到的 id 仍然只对应原来那个拦截器，不会误删新注册的拦截器。
+
 也可以移除所有请求或响应的拦截器。
 
 ```typescript
@@ -874,6 +950,27 @@ un.get("/user/12345").catch((error) => {
   }
 });
 ```
+
+#### 错误码
+
+`UnError` 的 `code` 字段标出错误来源，可以在 `catch` 里按它分支。
+
+| `code` | 场景 |
+| --- | --- |
+| `ERR_NETWORK` | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
+| `ETIMEDOUT` | 请求超时，`errMsg` 为 `request:fail timeout` |
+| `ERR_CANCELED` | 主动取消，`errMsg` 为 `request:fail abort` |
+| `ERR_BAD_REQUEST` | 状态码 4xx，且 `validateStatus` 返回 `false` |
+| `ERR_BAD_RESPONSE` | 其它状态码（5xx 等），且 `validateStatus` 返回 `false` |
+| `ERR_INVALID_URL` | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式 |
+| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错 |
+
+这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出。
+
+#### 响应耗时与堆栈
+
+- 成功响应和带响应的错误都有 `duration`，单位毫秒，只统计适配器执行期间，不含拦截器和后处理。
+- 用 `UnError.from` 包装原始错误时，原始错误的堆栈会接在 `error.stack` 末尾并加 `Caused by: ` 前缀，原始错误本身在 `error.cause`，只读 `stack` 的上报工具也能看到根因。
 
 ### 取消请求
 
@@ -1270,7 +1367,7 @@ const {
 } = useUn("/user/12345");
 ```
 
-- `isCanceled` 是 `isAborted` 的别名，`cancel` 是 `abort` 的别名。
+- `isCanceled` 是 `isAborted` 的别名，`cancel` 是 `abort` 的别名，`finished`、`loading`、`canceled`、`aborted` 也一并返回。
 - `execute` 返回一个 Promise，请求结束时 resolve、出错时 reject，所以返回值也可以直接 `await`：
 
 ```typescript
@@ -1318,7 +1415,7 @@ await execute();
 | 请求转换 `transformRequest`  | √                                                                                                                                                                    | ×                                                                                                                                                                                                | ×                                                                                                                                                                                | ×                                                                                                                                                                                                                                            |
 | 响应说明                     | √                                                                                                                                                                    | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
 | 响应转换 `transformResponse` | √                                                                                                                                                                    | ×                                                                                                                                                                                                | ×                                                                                                                                                                                | ×                                                                                                                                                                                                                                            |
-| 任务说明                     | ×（没有考虑 `uni-app`  任务）                                                                                                                                        | ×                                                                                                                                                                                                | √（只有 `requestTask`  说明）                                                                                                                                                    | √（只有简单说明）                                                                                                                                                                                                                            |
+| 任务说明                     | ×（没有考虑 `uni-app`  任务）                                                                                                                                        | ×                                                                                                                                                                                                | √（只有 `requestTask`  说明）                                                                                                                                                    | √（只有简单说明）                                                                                                                                                                                                                            |
 | 适配器                       | √（内置 `xhr` 和 `http`）                                                                                                                                            | ×                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
 | `uni.request`                | ×（自行开发，还需要覆写类型）                                                                                                                                        | √                                                                                                                                                                                                | √                                                                                                                                                                                | √                                                                                                                                                                                                                                            |
 | `uni.downloadFile`           | ×（自行开发，还需要覆写类型）                                                                                                                                        | √                                                                                                                                                                                                | ×（自行开发，还需要覆写类型）                                                                                                                                                    | √                                                                                                                                                                                                                                            |

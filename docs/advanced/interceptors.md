@@ -77,6 +77,8 @@ const responseInterceptor = un.interceptors.response.use(() => {
 un.interceptors.response.eject(responseInterceptor);
 ```
 
+`use` 返回的 id 由自增计数器分配，不会复用。移除拦截器后，之前拿到的 id 仍然只对应原来那个拦截器，不会误删新注册的拦截器。
+
 也可以移除所有请求或响应的拦截器。
 
 ```typescript

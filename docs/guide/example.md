@@ -75,6 +75,54 @@ un.post("/user", {
   .finally(() => {});
 ```
 
+## 上传文件
+
+`un.upload` 走 `uni.uploadFile`。`filePath` 和 `files` 必填一个（`files` 不支持小程序），`name` 是服务器读取文件的 key。
+
+```typescript
+import { un } from "@uni-helper/uni-network";
+
+uni.chooseImage({
+  success: (res) => {
+    un.upload("https://example.com/upload", {
+      filePath: res.tempFilePaths[0],
+      name: "file",
+      // 会作为额外的 form data 一起提交
+      formData: { userId: "12345" },
+    })
+      .then((response) => {
+        // upload 适配器的 data 是服务器返回的字符串
+        console.log(response.status, response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+});
+```
+
+## 下载文件
+
+`un.download` 走 `uni.downloadFile`。不传 `filePath` 时文件存到临时路径，路径在 `response.tempFilePath`；传了 `filePath` 则原样返回在 `response.filePath`。
+
+```typescript
+import { un } from "@uni-helper/uni-network";
+
+// 下载到临时路径
+un.download("https://example.com/file.pdf").then((response) => {
+  console.log(response.tempFilePath);
+});
+
+// 下载到指定路径
+un.download("https://example.com/file.pdf", {
+  filePath: "/user/downloads/file.pdf",
+}).then((response) => {
+  console.log(response.filePath);
+});
+```
+
+上传和下载都可以在配置里传进度回调，见[请求配置](../api/request-config.md)。
+
 ## 并发请求
 
 ```typescript

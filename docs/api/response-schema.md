@@ -10,7 +10,7 @@ const response = {
   // `errno` 是可选的错误代码
   errno: 0,
 
-  // `profile` 是可选的调试信息
+  // `profile` 是可选的调试信息，由 request 和 download 适配器透传，内容由平台决定
   profile: {},
 
   // `config` 是 `un` 请求的配置信息
@@ -29,8 +29,15 @@ const response = {
   // 可以使用方括号语法访问，例如: `response.headers['content-type']`
   headers: {},
 
+  // 适配器执行耗时，单位毫秒
+  // 只统计适配器执行期间，不含拦截器和后处理
+  // 请求失败但拿到了响应时，在 `error.response.duration` 上也能读到
+  duration: 0,
+
   // `data` 是服务器提供的响应数据
-  // download 适配器会把 `{ tempFilePath, filePath }` 放进 `data`
+  // request 适配器是 uni.request 返回的 data，类型受 dataType、responseType 影响
+  // upload 适配器是服务器返回的字符串
+  // download 适配器会把 `{ tempFilePath, filePath }` 放进这里
   data: {},
 
   // request 特有

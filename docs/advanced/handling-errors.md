@@ -69,3 +69,24 @@ un.get("/user/12345").catch((error) => {
   }
 });
 ```
+
+## 错误码
+
+`UnError` 的 `code` 字段标出错误来源，可以在 `catch` 里按它分支。
+
+| `code` | 场景 |
+| --- | --- |
+| `ERR_NETWORK` | `uni.request` / `uni.uploadFile` / `uni.downloadFile` 的 `fail` 回调，且 `errMsg` 不是下面两种 |
+| `ETIMEDOUT` | 请求超时，`errMsg` 为 `request:fail timeout` |
+| `ERR_CANCELED` | 主动取消，`errMsg` 为 `request:fail abort` |
+| `ERR_BAD_REQUEST` | 状态码 4xx，且 `validateStatus` 返回 `false` |
+| `ERR_BAD_RESPONSE` | 其它状态码（5xx 等），且 `validateStatus` 返回 `false` |
+| `ERR_INVALID_URL` | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式 |
+| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错 |
+
+这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出。
+
+## 响应耗时与堆栈
+
+- 成功响应和带响应的错误都有 `duration`，单位毫秒，只统计适配器执行期间，不含拦截器和后处理。
+- 用 `UnError.from` 包装原始错误时，原始错误的堆栈会接在 `error.stack` 末尾并加 `Caused by: ` 前缀，原始错误本身在 `error.cause`，只读 `stack` 的上报工具也能看到根因。

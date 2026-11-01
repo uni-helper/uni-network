@@ -25,6 +25,7 @@ const config = {
   // `params` 是与请求一起发送的 URL 参数
   // 必须是一个普通对象或一个 URLSearchParams 对象
   // 小程序环境通常没有 URLSearchParams，需要自行注入 polyfill，例如 core-js
+  // 不能有循环引用，序列化前会检查并抛出 ERR_BAD_OPTION_VALUE，自定义 paramsSerializer 也一样
   params: {
     ID: "12345",
   },

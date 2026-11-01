@@ -2,7 +2,7 @@
 
 `@uni-helper/uni-network` 是一个为 [uni-app](https://uniapp.dcloud.net.cn/) 打造的 [基于 Promise](https://javascript.info/promise-basics) 的 HTTP 客户端。
 
-`@uni-helper/uni-network` 灵感和代码绝大部分源于 `axios@0.27.2`，功能包括：
+`@uni-helper/uni-network` 最初的灵感和代码绝大部分源于 `axios@0.27.2`，功能包括：
 
 - 默认请求使用 [uni.request](https://uniapp.dcloud.net.cn/api/request/request.html)
 - 上传文件使用 [uni.uploadFile](https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile)

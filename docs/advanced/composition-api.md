@@ -97,7 +97,7 @@ const {
 } = useUn("/user/12345");
 ```
 
-- `isCanceled` 是 `isAborted` 的别名，`cancel` 是 `abort` 的别名。
+- `isCanceled` 是 `isAborted` 的别名，`cancel` 是 `abort` 的别名，`finished`、`loading`、`canceled`、`aborted` 也一并返回。
 - `execute` 返回一个 Promise，请求结束时 resolve、出错时 reject，所以返回值也可以直接 `await`：
 
 ```typescript
