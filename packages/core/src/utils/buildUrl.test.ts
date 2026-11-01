@@ -1,5 +1,6 @@
 import URLSearchParams from "@ungap/url-search-params";
 import { describe, expect, it } from "vitest";
+import { UnError } from "../core/UnError";
 import { buildUrl } from "./buildUrl";
 
 describe("utils::buildUrl", () => {
@@ -87,6 +88,30 @@ describe("utils::buildUrl", () => {
   it("should support URLSearchParams", () => {
     expect(buildUrl("/foo", new URLSearchParams("bar=baz"))).toEqual(
       "/foo?bar=baz",
+    );
+  });
+
+  it("should reject circular params", () => {
+    // 序列化器碰到循环嵌套会静默输出空值，拼出来的 URL 会少参数
+    const params: any = { foo: {} };
+    params.foo.self = params.foo;
+
+    let thrown: any;
+    try {
+      buildUrl("/foo", params);
+    } catch (error) {
+      thrown = error;
+    }
+
+    expect(thrown).toBeInstanceOf(UnError);
+    expect(thrown.code).toBe(UnError.ERR_BAD_OPTION_VALUE);
+  });
+
+  it("should accept the same object appearing in more than one branch", () => {
+    const shared = { bar: "baz" };
+
+    expect(buildUrl("/foo", { first: shared, second: shared })).toEqual(
+      "/foo?first=&second=",
     );
   });
 });

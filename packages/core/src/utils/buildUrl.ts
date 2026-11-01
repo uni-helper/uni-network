@@ -1,5 +1,6 @@
 import qs from "fast-querystring";
 import type { UnParams, UnParamsSerializer } from "../types";
+import { assertParamsAcyclic } from "./assertParamsAcyclic";
 
 /**
  * 把 params 序列化后拼到 url 上。
@@ -7,6 +8,7 @@ import type { UnParams, UnParamsSerializer } from "../types";
  * 优先用自定义的 paramsSerializer；params 是 URLSearchParams 时
  * 直接 toString；否则用 fast-querystring。
  * url 里的 hash 部分会被丢弃，查询串里已有的 ? 会用 & 继续。
+ * 序列化前先查循环引用，循环嵌套会让序列化器静默丢参数。
  */
 export const buildUrl = (
   url: string,
@@ -16,6 +18,8 @@ export const buildUrl = (
   if (!params) {
     return url;
   }
+
+  assertParamsAcyclic(params);
 
   let newUrl = url;
   // hash 部分不需要发给服务器，先截掉
