@@ -58,20 +58,35 @@ export default defineConfig({
         items: [
           { text: "API", link: "/api/introduction" },
           { text: "实例", link: "/api/instance" },
-          { text: "请求配置", link: "/api/request-config" },
-          { text: "响应结构", link: "/api/response-schema" },
+          {
+            text: `请求配置 <span class="VPBadge info">v0.21.0+</span>`,
+            link: "/api/request-config",
+          },
+          {
+            text: `响应结构 <span class="VPBadge info">v1.1.0+</span>`,
+            link: "/api/response-schema",
+          },
           { text: "默认配置", link: "/api/config-defaults" },
         ],
       },
       {
         text: "进阶",
         items: [
-          { text: "拦截器", link: "/advanced/interceptors" },
-          { text: "错误处理", link: "/advanced/handling-errors" },
+          {
+            text: `拦截器 <span class="VPBadge info">v1.1.0+</span>`,
+            link: "/advanced/interceptors",
+          },
+          {
+            text: `错误处理 <span class="VPBadge info">v0.24.0+</span>`,
+            link: "/advanced/handling-errors",
+          },
           { text: "取消请求", link: "/advanced/cancellation" },
           { text: "TypeScript 支持", link: "/advanced/typescript-support" },
           { text: "高级功能", link: "/advanced/enhancements" },
-          { text: "组合式函数", link: "/advanced/composition-api" },
+          {
+            text: `组合式函数 <span class="VPBadge info">v0.14.0+</span>`,
+            link: "/advanced/composition-api",
+          },
         ],
       },
       {

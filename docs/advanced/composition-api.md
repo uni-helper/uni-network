@@ -1,5 +1,12 @@
 # 组合式函数
 
+::: tip 版本
+
+- <Badge text="v0.14.0" type="info" /> 新增组合式函数
+- <Badge text="v0.15.0" type="info" /> 新增 `initialData`、`resetOnExecute`、`onFinish` 选项，`error` 类型改为 `unknown`
+
+:::
+
 如果你还不了解组合式函数，请先阅读 [组合式 API 常见问答](https://cn.vuejs.org/guide/extras/composition-api-faq.html) 和 [组合式函数](https://cn.vuejs.org/guide/reusability/composables.html)。
 
 我们使用 [vue-demi](https://github.com/vueuse/vue-demi) 和 [@vueuse/core](https://vueuse.org/) 来同时支持 `vue2` 和 `vue3`。请先阅读它们的使用说明。

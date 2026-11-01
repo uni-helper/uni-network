@@ -71,6 +71,9 @@ pnpm install
 - 描述以源码为准：请求配置看 `packages/core/src/types/config.ts`，响应结构看 `packages/core/src/types/response.ts`，默认值看 `packages/core/src/defaults/index.ts`，错误码看 `packages/core/src/core/UnError.ts` 与各自适配器。
 - `packages/core/README.md` 和 `docs/` 覆盖同一批内容，改动用户可见行为时两边一起改。
 - 文档改动请本地跑 `pnpm docs:build`，确认页面能构建。
+- 新增或调整功能时用 VitePress 的 `Badge` 组件标记版本：`<Badge text="vX.Y.Z" type="info" />` 表示新增，`type="warning"` 表示行为调整。代码块里放不了组件，版本列在块后的 `::: tip 版本` 列表里。
+- `docs/.vitepress/config.ts` 的侧边栏 badge 写该页最早的标记版本加 `+`，正文列全部版本；`packages/core/README.md` 没有组件，用同样的文案写成纯文本。
+- 发布版本后去掉标记里的“未发布”，换成正式版本号。
 - 不要手改 `CHANGELOG.md` 和版本号，[Lerna](./lerna.json) 在发布时根据提交信息生成。
 
 ## 提交规范

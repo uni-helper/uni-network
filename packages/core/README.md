@@ -43,19 +43,19 @@
     - [实例](#实例)
       - [`un.create([config])`](#uncreateconfig)
       - [实例方法](#实例方法)
-    - [请求配置](#请求配置)
-    - [响应结构](#响应结构)
+    - [请求配置](#请求配置)（v0.21.0+）
+    - [响应结构](#响应结构)（v1.1.0+）
     - [默认配置](#默认配置)
       - [全局配置默认值](#全局配置默认值)
       - [自定义实例默认值](#自定义实例默认值)
       - [配置的优先级](#配置的优先级)
   - [进阶](#进阶)
-    - [拦截器](#拦截器)
+    - [拦截器](#拦截器)（v1.1.0+）
       - [添加拦截器](#添加拦截器)
       - [移除拦截器](#移除拦截器)
       - [拦截器选项](#拦截器选项)
       - [多个拦截器](#多个拦截器)
-    - [错误处理](#错误处理)
+    - [错误处理](#错误处理)（v0.24.0+）
       - [错误码](#错误码)
       - [响应耗时与堆栈](#响应耗时与堆栈)
     - [取消请求](#取消请求)
@@ -69,7 +69,7 @@
       - [响应失败不抛出错误](#响应失败不抛出错误)
       - [无感刷新登录态](#无感刷新登录态)
       - [全局请求加载](#全局请求加载)
-    - [组合式函数](#组合式函数)
+    - [组合式函数](#组合式函数)（v0.14.0+）
   - [其它](#其它)
     - [构建与环境支持](#构建与环境支持)
     - [比较](#比较)
@@ -603,6 +603,12 @@ const config = {
 };
 ```
 
+> 版本：
+>
+> - v0.21.0 新增 `allowAbsoluteUrls`
+> - v0.23.0 新增 `enableCookie`、`cloudCache`、`defer`
+> - v1.1.0（未发布）`params` 出现循环引用时在序列化前抛出 `ERR_BAD_OPTION_VALUE`，自定义 `paramsSerializer` 同样会被拦下
+
 ### 响应结构
 
 then 的回调收到的响应对象包含以下字段。
@@ -660,6 +666,8 @@ const response = {
   filePath: '',
 };
 ```
+
+`duration` 是 v1.1.0 新增的字段，当前未发布。
 
 当使用 then 时，回调会收到这样的响应：
 
@@ -807,7 +815,7 @@ const responseInterceptor = un.interceptors.response.use(() => {
 un.interceptors.response.eject(responseInterceptor);
 ```
 
-`use` 返回的 id 由自增计数器分配，不会复用。移除拦截器后，之前拿到的 id 仍然只对应原来那个拦截器，不会误删新注册的拦截器。
+从 v1.1.0 起（未发布），`use` 返回的 id 由自增计数器分配，不会复用。移除拦截器后，之前拿到的 id 仍然只对应原来那个拦截器，不会误删新注册的拦截器。
 
 也可以移除所有请求或响应的拦截器。
 
@@ -918,6 +926,8 @@ un.get("/user/12345", {
 
 如果你追求语义化，可以使用导出的和挂载的状态码、[statuses-es](https://github.com/esm-ts/statuses-es)、[http-status-codes](https://github.com/prettymuchbryce/http-status-codes) 或 [node-http-status](https://github.com/adaltas/node-http-status)。
 
+`HttpStatusCode` 里的 `WebServerReturnsAnUnknownError`（520）以及 413、422 的 RFC 9110 别名从 v1.0.0 起提供。
+
 ```typescript
 import { un, HttpStatusCode } from "@uni-helper/uni-network";
 
@@ -963,14 +973,15 @@ un.get("/user/12345").catch((error) => {
 | `ERR_BAD_REQUEST` | 状态码 4xx，且 `validateStatus` 返回 `false` |
 | `ERR_BAD_RESPONSE` | 其它状态码（5xx 等），且 `validateStatus` 返回 `false` |
 | `ERR_INVALID_URL` | `url` 或 `baseUrl` 写成 `http:foo` 这种缺少 `//` 的形式 |
-| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错 |
+| `ERR_BAD_OPTION_VALUE` | `params` 里有循环引用，序列化前就会报错（v1.1.0 新增，未发布） |
 
-这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出。
+这些值也挂在 `UnError` 上，比如 `UnError.ERR_NETWORK`。`ERR_FR_TOO_MANY_REDIRECTS`、`ERR_BAD_OPTION`、`ERR_DEPRECATED`、`ERR_NOT_SUPPORT`、`ECONNABORTED`、`ECONNREFUSED` 是为对齐 `axios` 保留的常量，本库不会主动抛出，其中 `ECONNREFUSED` 从 v0.24.0 起提供。
 
 #### 响应耗时与堆栈
 
-- 成功响应和带响应的错误都有 `duration`，单位毫秒，只统计适配器执行期间，不含拦截器和后处理。
-- 用 `UnError.from` 包装原始错误时，原始错误的堆栈会接在 `error.stack` 末尾并加 `Caused by: ` 前缀，原始错误本身在 `error.cause`，只读 `stack` 的上报工具也能看到根因。
+- 成功响应和带响应的错误都有 `duration`（v1.1.0 新增，未发布），单位毫秒，只统计适配器执行期间，不含拦截器和后处理。
+- 从 v1.1.0 起（未发布），用 `UnError.from` 包装原始错误时，原始错误的堆栈会接在 `error.stack` 末尾并加 `Caused by: ` 前缀，原始错误本身在 `error.cause`，只读 `stack` 的上报工具也能看到根因。
+- `error.cause` 从 v1.0.0 起是不可枚举属性，`JSON.stringify` 不会因为循环引用报错。
 
 ### 取消请求
 
@@ -1295,6 +1306,11 @@ un.interceptors.response.use(
   ```
 
 > 在 `uni-app` 中使用较新版本的 `@vueuse/core` 时如果遇到问题，可以查看 [dcloudio/uni-app#4604](https://github.com/dcloudio/uni-app/issues/4604) 内提供的解决方案。
+
+> 版本：
+>
+> - v0.14.0 新增组合式函数
+> - v0.15.0 新增 `initialData`、`resetOnExecute`、`onFinish` 选项，`error` 类型改为 `unknown`
 
 从 `@uni-helper/uni-network/composables` 中导入组合式函数后即可使用。
 

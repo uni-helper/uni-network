@@ -253,3 +253,11 @@ const config = {
   },
 };
 ```
+
+::: tip 版本
+
+- <Badge text="v0.21.0" type="info" /> 新增 `allowAbsoluteUrls`
+- <Badge text="v0.23.0" type="info" /> 新增 `enableCookie`、`cloudCache`、`defer`
+- <Badge text="v1.1.0" type="info" /> 未发布，`params` 出现循环引用时在序列化前抛出 `ERR_BAD_OPTION_VALUE`，自定义 `paramsSerializer` 同样会被拦下
+
+:::
