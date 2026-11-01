@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/uni-helper/uni-network/compare/v1.0.2...v1.1.0) (2026-11-01)
+
+### Features
+
+* **core:** 新增 response.duration 记录适配器耗时, sync https://github.com/axios/axios/pull/11214 ([e0218c8](https://github.com/uni-helper/uni-network/commit/e0218c84058182281df171a42c081718aa1c3a39)) - by @ModyQyW
+
+### Bug Fixes
+
+* **core:** params 有循环引用时提前抛出 ERR_BAD_OPTION_VALUE, sync https://github.com/axios/axios/pull/11242 ([5102691](https://github.com/uni-helper/uni-network/commit/510269154dbd379f8e90ffe47d74690d89c73447)) - by @ModyQyW
+* **core:** 把被包装错误的堆栈拼进 error.stack, sync https://github.com/axios/axios/pull/11132 https://github.com/axios/axios/pull/11142 ([20d7055](https://github.com/uni-helper/uni-network/commit/20d705595e395ccc985779975cfe9d4a2ebe7a86)) - by @ModyQyW
+* **core:** 拦截器 id 不再复用, 并接受规范数字字符串, sync https://github.com/axios/axios/pull/11139 ([e7d94bf](https://github.com/uni-helper/uni-network/commit/e7d94bfe1f9585a4d6abb99d5c0d2151ad4df3ec)) - by @ModyQyW
+
 ## [1.0.2](https://github.com/uni-helper/uni-network/compare/v1.0.1...v1.0.2) (2026-10-26)
 
 **Note:** Version bump only for package @monorepo/uni-network
